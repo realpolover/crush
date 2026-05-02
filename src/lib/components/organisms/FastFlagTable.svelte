@@ -40,27 +40,14 @@
     }
 
     function handleDelete(name: string) {
-        const { [name]: _, ...rest } = flags
-        flags = rest
         dispatch('delete', name)
     }
 
     function handleUpdate(name: string, raw: string) {
-        const type = detectType(flags[name])
-        if (!validateValue(raw, type)) return
-        flags = { ...flags, [name]: raw }
         dispatch('update', { name, value: raw })
     }
 
     function handleAdd() {
-        addError = ''
-        if (!newFlagName.trim() || !newFlagValue.trim()) return
-        const type = detectType(newFlagValue.trim())
-        if (!validateValue(newFlagValue.trim(), type)) {
-            addError = 'Value does not match detected type.'
-            return
-        }
-        flags = { ...flags, [newFlagName.trim()]: newFlagValue.trim() }
         dispatch('add', {
             name: newFlagName.trim(),
             value: newFlagValue.trim(),
@@ -93,7 +80,6 @@
                 for (const [k, v] of Object.entries(parsed)) {
                     imported[k] = String(v)
                 }
-                flags = { ...flags, ...imported }
                 dispatch('import', imported)
             } catch {
                 addError = 'Invalid JSON file.'

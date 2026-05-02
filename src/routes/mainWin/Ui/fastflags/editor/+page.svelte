@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import FastFlagTable from '$lib/components/organisms/FastFlagTable.svelte'
-    import { getLatestVersion } from '$lib/downloadRoblox'
+    import { getLatestVersion, getCurrentInstallation } from '$lib/downloadRoblox'
     import {
         getFastFlags,
         saveFastFlags,
@@ -9,41 +9,62 @@
     import { invoke } from '@tauri-apps/api/core'
     import { _ } from 'svelte-i18n'
     import { goto } from '$app/navigation'
+    import { get } from 'svelte/store'
+    import { launchAppType } from '$lib/stores/launchAppType'
+    import type { AppType } from '$lib/types'
     import Button from '$lib/components/atoms/Button.svelte'
 
     let flags: Record<string, string> = {}
     let version = ''
+    let appType: AppType = 'player'
 
     onMount(async () => {
+        appType = (get(launchAppType) as AppType) || 'player'
+        
+        const installation = await getCurrentInstallation(appType)
+        if (installation && installation.exists) {
+            version = installation.version
+            console.log('[Editor] Detected installed version:', version)
+        } else {
+            version = await getLatestVersion(appType)
+            console.log('[Editor] No verified installation, falling back to latest in store:', version)
+        }
+
+        flags = await getFastFlags(version, appType)
+
+        console.log('Current fast flags:', flags)
+
         await invoke('set_rpc', {
             details: $_('rpc.general'),
             stateText: $_('rpc.fastflag'),
         })
-        version = await getLatestVersion()
-        flags = await getFastFlags(version)
+
     })
 
     async function handleDelete(event: CustomEvent<string>) {
-        const { [event.detail]: _, ...rest } = flags
+        const latestFlags = await getFastFlags(version, appType)
+        const { [event.detail]: _, ...rest } = latestFlags
         flags = rest
-        await saveFastFlags(version, flags)
+        await saveFastFlags(version, flags, appType)
     }
 
     async function handleAdd(
         event: CustomEvent<{ name: string; value: string }>
     ) {
         const { name, value } = event.detail
-        if (name in flags) return
-        flags = { ...flags, [name]: value }
-        await saveFastFlags(version, flags)
+        const latestFlags = await getFastFlags(version, appType)
+        if (name in latestFlags) return
+        flags = { ...latestFlags, [name]: value }
+        await saveFastFlags(version, flags, appType)
     }
 
     async function handleUpdate(
         event: CustomEvent<{ name: string; value: string }>
     ) {
         const { name, value } = event.detail
-        flags = { ...flags, [name]: value }
-        await saveFastFlags(version, flags)
+        const latestFlags = await getFastFlags(version, appType)
+        flags = { ...latestFlags, [name]: value }
+        await saveFastFlags(version, flags, appType)
     }
 
     function handleSearch(event: CustomEvent<string>) {

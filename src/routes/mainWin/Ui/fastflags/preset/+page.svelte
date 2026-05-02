@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { getLatestVersion } from '$lib/downloadRoblox'
+console.log('component module loaded')
+    import { onMount, tick } from 'svelte'
+    import { getLatestVersion, getCurrentInstallation } from '$lib/downloadRoblox'
     import {
         getFastFlags,
         saveFastFlags,
@@ -8,14 +9,19 @@
     import { invoke } from '@tauri-apps/api/core'
     import { _ } from 'svelte-i18n'
     import { goto } from '$app/navigation'
+    import { get } from 'svelte/store'
+    import { launchAppType } from '$lib/stores/launchAppType'
+    import type { AppType } from '$lib/types'
     import Button from '$lib/components/atoms/Button.svelte'
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
     import Textbox from '$lib/components/atoms/Textbox.svelte'
+    import { RefreshCw, Save } from '@lucide/svelte'
 
     let flags: Record<string, string> = {}
     let version = ''
+    let appType: AppType = 'player'
     let loaded = false
 
     let msaaValue: string = '0'
@@ -23,11 +29,12 @@
     let pauseVoxelizer: boolean = false
     let wavingGrass: string = '0'
     let lowMeshQuality: boolean = false
-
+    let graySky: boolean = false
     const MSAA_KEY = 'FIntDebugForceMSAASamples'
     const TEXTURE_KEY = 'DFIntTextureQualityOverride'
     const VOXELIZER_KEY = 'DFFlagDebugPauseVoxelizer'
     const GRASS_KEY = 'FIntGrassMovementReducedMotionFactor'
+    const GRAY_SKY = 'FFlagDebugSkyGray'
     const LOW_MESH_KEYS = [
         'DFIntCSGLevelOfDetailSwitchingDistance',
         'DFIntCSGLevelOfDetailSwitchingDistanceL12',
@@ -57,42 +64,68 @@
         { value: '4', label: '4' },
     ]
 
-    onMount(async () => {
-        await invoke('set_rpc', {
-            details: $_('rpc.general'),
-            stateText: $_('rpc.fastflag'),
-        })
-        version = await getLatestVersion()
-        flags = await getFastFlags(version)
+    async function loadState() {
+        loaded = false
+        appType = (get(launchAppType) as AppType) || 'player'
+        
+        const installation = await getCurrentInstallation(appType)
+        if (installation && installation.exists) {
+            version = installation.version
+        } else {
+            version = await getLatestVersion(appType)
+        }
+        
+        flags = await getFastFlags(version, appType)
 
         msaaValue = flags[MSAA_KEY] ?? '0'
         textureQuality = flags[TEXTURE_KEY] ?? '-1'
         pauseVoxelizer = flags[VOXELIZER_KEY] === 'true'
         wavingGrass = flags[GRASS_KEY] ?? '0'
-        lowMeshQuality = LOW_MESH_KEYS.every((k) => flags[k] === '0')
+        lowMeshQuality = LOW_MESH_KEYS.every((k) => flags[k] === '0') && LOW_MESH_KEYS.some(k => k in flags)
+        graySky = flags[GRAY_SKY] === 'true'
 
         loaded = true
-    })
-
-    async function setFlag(key: string, value: string | null) {
-        if (value === null) {
-            const { [key]: _, ...rest } = flags
-            flags = rest
-        } else {
-            flags = { ...flags, [key]: value }
-        }
-        await saveFastFlags(version, flags)
     }
 
-    $: if (loaded) setFlag(MSAA_KEY, msaaValue === '0' ? null : msaaValue)
-    $: if (loaded)
-        setFlag(TEXTURE_KEY, textureQuality === '-1' ? null : textureQuality)
-    $: if (loaded) setFlag(VOXELIZER_KEY, pauseVoxelizer ? 'true' : null)
-    $: if (loaded) setFlag(GRASS_KEY, wavingGrass === '0' ? null : wavingGrass)
-    $: if (loaded) {
-        for (const key of LOW_MESH_KEYS) {
-            setFlag(key, lowMeshQuality ? '0' : null)
-        }
+    onMount(async () => {
+        await loadState()
+        await invoke('set_rpc', {
+            details: $_('rpc.general'),
+            stateText: $_('rpc.fastflag'),
+        })
+    })
+
+    let saveQueue: Promise<void> = Promise.resolve()
+    async function save() {
+        if (!loaded) return
+        
+        saveQueue = saveQueue.then(async () => {
+            try {
+                await tick()
+                console.log('[Preset] Saving state:', { msaaValue, textureQuality, pauseVoxelizer, wavingGrass, lowMeshQuality, graySky })
+                
+                const latestFlags = await getFastFlags(version, appType)
+                const newFlags = { ...latestFlags }
+
+                newFlags[MSAA_KEY] = msaaValue
+                newFlags[TEXTURE_KEY] = textureQuality
+                newFlags[VOXELIZER_KEY] = pauseVoxelizer ? 'true' : 'false'
+                newFlags[GRASS_KEY] = wavingGrass
+                newFlags[GRAY_SKY] = graySky ? 'true' : 'false'
+                
+                for (const key of LOW_MESH_KEYS) {
+                    newFlags[key] = lowMeshQuality ? '0' : '1000' // 1000 is a safe "normal" distance
+                }
+
+                flags = newFlags
+                await saveFastFlags(version, flags, appType)
+                console.log('[Preset] Save successful')
+            } catch (e) {
+                console.error('[Preset] Save failed:', e)
+            }
+        })
+        
+        await saveQueue
     }
 </script>
 
@@ -107,6 +140,10 @@
             </p>
         </div>
         <div class="flex items-center gap-2">
+            <Button variant="secondary" on:click={loadState}>
+                <RefreshCw class="h-4 w-4 mr-2" />
+                <span>Refresh</span>
+            </Button>
             <Button variant="secondary" onclick={() => goto('../fastflags')}>
                 {$_('pages.fastflag.generalBack')}
             </Button>
@@ -120,8 +157,9 @@
         >
             <Dropdown
                 slot="action"
-                bind:value={msaaValue}
+                value={msaaValue}
                 options={msaaItems}
+                on:change={(e) => { msaaValue = e.detail; save(); }}
             />
         </SettingCard>
 
@@ -131,7 +169,7 @@
                 'pages.fastflag.preset.pauseVoxelizerCard.description'
             )}
         >
-            <Switch slot="action" bind:checked={pauseVoxelizer} />
+            <Switch slot="action" checked={pauseVoxelizer} on:change={(e) => { pauseVoxelizer = e.detail; save(); }}/>
         </SettingCard>
 
         <SettingCard
@@ -141,7 +179,7 @@
             )}
         >
             <div slot="action" class="w-50">
-                <Textbox bind:value={wavingGrass} />
+                <Textbox value={wavingGrass} on:change={(e) => { wavingGrass = e.detail; save(); }} on:enter={(e) => { wavingGrass = e.detail; save(); }} />
             </div>
         </SettingCard>
 
@@ -155,8 +193,9 @@
         >
             <Dropdown
                 slot="action"
-                bind:value={textureQuality}
+                value={textureQuality}
                 options={textureQualityItems}
+                on:change={(e) => { textureQuality = e.detail; save(); }}
             />
         </SettingCard>
 
@@ -166,7 +205,14 @@
                 'pages.fastflag.preset.lowMeshQualityCard.description'
             )}
         >
-            <Switch slot="action" bind:checked={lowMeshQuality} />
+            <Switch slot="action" checked={lowMeshQuality} on:change={(e) => { lowMeshQuality = e.detail; save(); }} />
+        </SettingCard>
+
+        <SettingCard
+            title={$_('pages.fastflag.preset.graySkyCard.title')}
+            description={$_('pages.fastflag.preset.graySkyCard.description')}
+        >
+            <Switch slot="action" checked={graySky} on:change={(e) => { graySky = e.detail; save(); }} />
         </SettingCard>
     </div>
 </div>
