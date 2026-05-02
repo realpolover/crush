@@ -212,6 +212,11 @@
                 "lowMeshQualityCard" : {
                     "title" : "Enable Low Quality Meshes",
                     "description" : "May improves performance."
+                },
+
+                "graySkyCard" : {
+                    "title" : "Gray Sky",
+                    "description" : "Change the sky to gray, may improve performance."
                 }
             }
         },

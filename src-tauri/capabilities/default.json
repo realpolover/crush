@@ -73,102 +73,87 @@
         {
             "identifier": "fs:allow-mkdir",
             "allow": [
-                {
-                    "path": "$APPDATA/**"
-                }
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" },
+                { "path": "$CACHE/**" }
             ]
         },
         {
             "identifier": "fs:allow-copy-file",
             "allow": [
-                {
-                    "path": "$APPDATA/**"
-                }
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" },
+                { "path": "$CACHE/**" }
             ]
         },
         {
             "identifier": "fs:allow-remove",
             "allow": [
-                {
-                    "path": "$APPDATA/**"
-                }
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" },
+                { "path": "$CACHE/**" }
             ]
         },
         {
             "identifier": "fs:allow-read-file",
             "allow": [
-                {
-                    "path": "$APPDATA/**"
-                },
-                {
-                    "path": "$HOME/**"
-                },
-                {
-                    "path": "$DOCUMENT/**"
-                },
-                {
-                    "path": "$DOWNLOAD/**"
-                },
-                {
-                    "path": "$DESKTOP/**"
-                },
-                {
-                    "path": "**"
-                }
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" },
+                { "path": "$CACHE/**" },
+                { "path": "$HOME/**" },
+                { "path": "$DOCUMENT/**" },
+                { "path": "$DOWNLOAD/**" },
+                { "path": "$DESKTOP/**" },
+                { "path": "**" }
             ]
         },
         {
             "identifier": "fs:allow-read-text-file",
             "allow": [
-                {
-                    "path": "$APPDATA/**"
-                },
-                {
-                    "path": "$RESOURCE/**"
-                }
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" },
+                { "path": "$CACHE/**" },
+                { "path": "$RESOURCE/**" }
             ]
         },
         {
             "identifier": "fs:allow-write-text-file",
             "allow": [
-                {
-                    "path": "$APPDATA/**"
-                }
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" },
+                { "path": "$CACHE/**" }
             ]
         },
         {
             "identifier": "fs:allow-write-file",
             "allow": [
-                {
-                    "path": "$APPDATA/**"
-                }
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" },
+                { "path": "$CACHE/**" }
             ]
         },
         {
             "identifier": "opener:allow-open-path",
             "allow": [
-                {
-                    "path": "$APPDATA/**"
-                }
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" }
             ]
         },
         {
             "identifier": "fs:allow-exists",
             "allow": [
-                {
-                    "path": "$APPDATA/**"
-                },
-                {
-                    "path": "**"
-                }
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" },
+                { "path": "$CACHE/**" },
+                { "path": "**" }
             ]
         },
         {
             "identifier": "fs:allow-read-dir",
             "allow": [
-                {
-                    "path": "$APPDATA/**"
-                }
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" },
+                { "path": "$CACHE/**" }
             ]
         },
         "notification:default"

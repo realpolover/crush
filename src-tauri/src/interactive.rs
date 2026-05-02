@@ -1,6 +1,6 @@
 use windows::{
     core::{PSTR, PCSTR},
-    Win32::Foundation::{BOOL, COLORREF, HWND, LPARAM, RECT},
+    Win32::Foundation::{COLORREF, HWND, LPARAM, RECT},
     Win32::UI::WindowsAndMessaging::{
         EnumWindows, GetWindowTextA, GetWindowRect, IsWindowVisible,
         SetForegroundWindow, SetWindowPos, ShowWindow,
@@ -31,16 +31,16 @@ pub fn find_windows_by_title(keyword: &str) -> Vec<HWND> {
         results: *mut Vec<HWND>,
     }
 
-    unsafe extern "system" fn enum_windows(hwnd: HWND, lparam: LPARAM) -> BOOL {
+    unsafe extern "system" fn enum_windows(hwnd: HWND, lparam: LPARAM) ->  windows_result::BOOL {
         let data = &mut *(lparam.0 as *mut SearchData);
 
         if !IsWindowVisible(hwnd).as_bool() {
-            return BOOL(1);
+            return windows_result::BOOL(1);
         }
 
         let mut buffer = [0u8; 512];
         let len = GetWindowTextA(hwnd, &mut buffer);
-
+        
         if len > 0 {
             let title = String::from_utf8_lossy(&buffer[..len as usize]);
             if title.to_lowercase().contains(&data.keyword) {
@@ -50,7 +50,7 @@ pub fn find_windows_by_title(keyword: &str) -> Vec<HWND> {
             }
         }
 
-        BOOL(1)
+        windows_result::BOOL(1)
     }
 
     let mut data = SearchData {
@@ -72,7 +72,7 @@ pub fn move_window(hwnd: HWND, x: i32, y: i32, width: i32, height: i32) {
     unsafe {
         SetWindowPos(
             hwnd,
-            HWND(0),
+            Some(HWND(std::ptr::null_mut())),
             x,
             y,
             width,
@@ -149,7 +149,7 @@ pub fn set_borderless(hwnd: HWND, enabled: bool) {
 
         SetWindowPos(
             hwnd,
-            HWND(0),
+                Some(HWND(std::ptr::null_mut())),
             0,
             0,
             0,

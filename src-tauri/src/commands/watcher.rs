@@ -119,18 +119,20 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
         log::warn!("ignoring duplicate watch_logs call");
         return Ok(());
     }
+    
     tauri::async_runtime::spawn(async move {
-        if let Err(e) = run_watcher(app).await {
+        if let Err(e) = run_watcher(app) {
             log::error!("watcher error: {}", e);
             WATCHER_RUNNING.store(false, Ordering::SeqCst);
         }
     });
+
     Ok(())
 }
 
 // loop
 
-async fn run_watcher(app: AppHandle) -> Result<(), String> {
+fn run_watcher(app: AppHandle) -> Result<(), String> {
     let mut state = WatcherState::default();
     let mut system = System::new();
     let mut was_running = false;
@@ -140,27 +142,35 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
         let running = is_roblox_running(&mut system);
 
         if was_running && !running {
-            // send StopWindow before fully resetting if we had a window session
             if state.window_started {
                 if let Some(hwnd) = state.roblox_hwnd {
                     send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
                 }
             }
             state.reset_fully();
-            let _ = kill_rpc(&app.state::<RpcState>()).await;
+
+            tauri::async_runtime::block_on(
+                kill_rpc(&app.state::<RpcState>())
+            ).ok();
         }
+
         was_running = running;
 
         if running {
             if let Some(path) = get_latest_log() {
-                maybe_switch_log_file(&app, &mut state, path, &store).await;
+                tauri::async_runtime::block_on(
+                    maybe_switch_log_file(&app, &mut state, path, &store)
+                );
             }
+
             if state.current_file.is_some() {
-                read_new_lines(&app, &mut state, &store).await;
+                tauri::async_runtime::block_on(
+                    read_new_lines(&app, &mut state, &store)
+                );
             }
         }
 
-        tokio::time::sleep(Duration::from_millis(16)).await;
+        std::thread::sleep(Duration::from_millis(16));
     }
 }
 
