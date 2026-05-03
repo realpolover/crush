@@ -76,6 +76,11 @@
                 "description": "최근에 플레이한 게임을 보고 플레이하세요.",
                 "button": "보기"
             },
+            "windowManipulationCard": {
+                "title": "Window manipulation (Perviously Interactive API)",
+                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "button": "Open"
+            },
             "roValraCard": {
                 "title": "로발라와 함께 더 나은 매치 만들기",
                 "description": "Crush에는 매치가 내장되어 있어 인터그레이션이 가능합니다. RoValra의 개인 정보 보호 정책이 적용됩니다.",
@@ -100,6 +105,64 @@
                     "lastPlayed": "마지막 플레이",
                     "play": "재생",
                     "deeplink": "딥링크 복사"
+                }
+            },
+            "windowManipulation": {
+                "title": "Window manipulation settings",
+                "description": "Configure how Window manipulation should act.",
+                "enableCard": {
+                    "title": "Enable",
+                    "description": "Choose whether or not to enable Window Manipulation."
+                },
+                "advanced": {
+                    "title": "Advanced",
+                    "description": "Deeply configure Window Manipulation.",
+                    "scopes": {
+                        "title": "Scopes",
+                        "minimizeCard": {
+                            "title": "Minimize",
+                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                        },
+                        "maximizeCard": {
+                            "title": "Maximize",
+                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                        },
+                        "focusCard": {
+                            "title": "Focus",
+                            "description": "Whenther or not enable focus control via Window Manipulation."
+                        },
+                        "moveWindowCard": {
+                            "title": "Move Window",
+                            "description": "Whenther or not enable move window control via Window Manipulation."
+                        },
+                        "restoreCard": {
+                            "title": "Restore",
+                            "description": "Whenther or not enable restore control via Window Manipulation."
+                        },
+                        "setWindowTitleCard": {
+                            "title": "Set window title",
+                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                        },
+                        "setBorderless": {
+                            "title": "Set borderless",
+                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                        }
+                    },
+                    "transparencySettings": {
+                        "title": "Transparency Settings",
+                        "enableCard": {
+                            "title": "Enable",
+                            "description": "Whenther or not transparency control via Interactive API."
+                        },
+                        "minTransparency": {
+                            "title": "Min transparency",
+                            "description": "The minimum of how transparency of your window would get."
+                        },
+                        "maxTransparency": {
+                            "title": "Max transparency",
+                            "description": "The maximum of how transparency of your window would get."
+                        }
+                    }
                 }
             }
         },
@@ -171,6 +234,10 @@
                 "lowMeshQualityCard": {
                     "title": "저품질 메시 활성화",
                     "description": "성능을 향상시킬 수 있음."
+                },
+                "graySkyCard": {
+                    "title": "Gray Sky",
+                    "description": "Change the sky to gray, may improve performance."
                 }
             }
         },
@@ -214,7 +281,7 @@
                     "description": "커뮤니티에서 만든 모드를 살펴보세요.",
                     "notice": {
                         "title": "아직 모드 없음",
-                        "description": "아직 커뮤니티 개조 부품이 없습니다. 가장 먼저 기여하고 컬렉션을 성장시킬 수 있도록 도와주세요!",
+                        "description": "아직 커뮤니티 개조 부품이 없습니다. 가장 먼저 참여하여 컬렉션을 성장시킬 수 있도록 도와주세요!",
                         "submissionButton": "모드 제출"
                     }
                 }

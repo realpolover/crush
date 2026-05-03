@@ -76,6 +76,11 @@
                 "description": "Legutóbb játszott játékok megtekintése és lejátszása.",
                 "button": "Megtekintés"
             },
+            "windowManipulationCard": {
+                "title": "Window manipulation (Perviously Interactive API)",
+                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "button": "Open"
+            },
             "roValraCard": {
                 "title": "Jobb párosítás a RoValra-val",
                 "description": "A Crush beépített egyezés-készítő intergrációval rendelkezik. A RoValra adatvédelmi irányelvei érvényesek.",
@@ -100,6 +105,64 @@
                     "lastPlayed": "Utoljára lejátszva:",
                     "play": "Játék",
                     "deeplink": "DeepLink másolása"
+                }
+            },
+            "windowManipulation": {
+                "title": "Window manipulation settings",
+                "description": "Configure how Window manipulation should act.",
+                "enableCard": {
+                    "title": "Enable",
+                    "description": "Choose whether or not to enable Window Manipulation."
+                },
+                "advanced": {
+                    "title": "Advanced",
+                    "description": "Deeply configure Window Manipulation.",
+                    "scopes": {
+                        "title": "Scopes",
+                        "minimizeCard": {
+                            "title": "Minimize",
+                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                        },
+                        "maximizeCard": {
+                            "title": "Maximize",
+                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                        },
+                        "focusCard": {
+                            "title": "Focus",
+                            "description": "Whenther or not enable focus control via Window Manipulation."
+                        },
+                        "moveWindowCard": {
+                            "title": "Move Window",
+                            "description": "Whenther or not enable move window control via Window Manipulation."
+                        },
+                        "restoreCard": {
+                            "title": "Restore",
+                            "description": "Whenther or not enable restore control via Window Manipulation."
+                        },
+                        "setWindowTitleCard": {
+                            "title": "Set window title",
+                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                        },
+                        "setBorderless": {
+                            "title": "Set borderless",
+                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                        }
+                    },
+                    "transparencySettings": {
+                        "title": "Transparency Settings",
+                        "enableCard": {
+                            "title": "Enable",
+                            "description": "Whenther or not transparency control via Interactive API."
+                        },
+                        "minTransparency": {
+                            "title": "Min transparency",
+                            "description": "The minimum of how transparency of your window would get."
+                        },
+                        "maxTransparency": {
+                            "title": "Max transparency",
+                            "description": "The maximum of how transparency of your window would get."
+                        }
+                    }
                 }
             }
         },
@@ -171,6 +234,10 @@
                 "lowMeshQualityCard": {
                     "title": "Gyenge minőségű hálók engedélyezése",
                     "description": "Javíthatja a teljesítményt."
+                },
+                "graySkyCard": {
+                    "title": "Gray Sky",
+                    "description": "Change the sky to gray, may improve performance."
                 }
             }
         },
