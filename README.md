@@ -7,7 +7,7 @@
 [![TailwindCSS][tailwindcssBadge]][tailwindcss]
 [![Jules][julesBadge]][jules]
 
-> **Note**
+> [!NOTE]
 > A Gitea mirror is available from my homelab: https://git.mally.qzz.io/Mally/crush
 
 Crush is a Roblox bootstrapper written from scratch, inspired by many other bootstrappers.
@@ -36,7 +36,6 @@ Built with **Tauri + Svelte**.
 Crush is faster than Bloxstrap!
 See benchmark results here: [tests/speed.md](./tests/speed.md)
 
-## Badges
 
 [discordBadge]: https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white
 [rustBadge]: https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white
@@ -45,7 +44,6 @@ See benchmark results here: [tests/speed.md](./tests/speed.md)
 [tauriBadge]: https://img.shields.io/badge/tauri-%2324C8DB.svg?style=for-the-badge&logo=tauri&logoColor=%23FFFFFF
 [julesBadge]: https://img.shields.io/badge/jules-purple?style=for-the-badge&logo=googlejules
 
-## Links
 
 [tailwindcss]: https://tailwindcss.com/
 [tauri]: https://tauri.app/
