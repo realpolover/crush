@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "Robloxin bootrapperi, joka on kirjoitettu tyhjästä",
-        "integrations": "Intergraatioreitillä",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "Asennusreitillä",
-        "fastflag": "Fastflag-reitillä",
+        "fastflag": "In Fast Flags Route",
         "mod": "Mod-reitillä",
         "appearance": "Ulkonäöltään reitti",
         "rust": {
             "watcher": {
-                "general": "Robloxin pelaaminen",
+                "general": "Playing Roblox",
                 "idle": "Ei pelissä",
                 "playing": "In"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "Vaikutelma",
             "description": "Mukauta Roblox-boottrapperin ulkonäköä ja tuntumaa.",
-            "boostrapThemeCard": {
-                "title": "Bootstrapper-teema",
-                "description": "Valitse Crush-oletusteema tai mukautettu XML-teema.",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "Oletus (murskaus)",
-                    "custom": "Mukautettu"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "Tuo uusi",
-                    "noThemes": "Mukautettuja teemoja ei ole vielä tuotu.",
-                    "missingAssets": "Puuttuvat teeman materiaalit"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "Integroinnit",
-            "description": "Konfig. laajennukset robloxin ulkopuolella",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "Palvelimen sijainti-ilmoittaja",
-                "description": "Saa ilmoitus, kun asiakas muodostaa yhteyden palvelimeen."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (murskaus)",
-                "description": "Korvaa Roblox Rich Presence Crushin",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Anna ihmisten liittyä peliisi",
-                "option2": "Näytä tilisi, kun pelaat robloxia"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "Pelihistoriasi",
@@ -77,20 +77,20 @@
                 "button": "Näytä"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "Parempi yhteensopivuus RoValran kanssa",
-                "description": "Crushilla on sisäänrakennettu yhteensopivuus, joka tekee intergraation. RoValran tietosuojakäytäntöä sovelletaan.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "Avaa"
             },
             "roValra": {
                 "description": "Määritys",
                 "joinServerForYouCard": {
-                    "title": "Anna Crushin liittyä palvelimeen puolestasi",
-                    "description": "Robloxin tulitikkujen tekemisen sijaan käytämme Rovalra API: a ja löydämme parhaan palvelimen."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "Laitokset",
             "customVersion": {
                 "title": "Asenna mukautettu Roblox-versio",
-                "description": "Ohita päivitystarkistus ja lataa versio. Oletusarvo on uusin. Virheellistä versiota ei ladata ja se siirtyy uusimpaan versioon."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Pakota Robloxin uudelleenasennus",
-                "description": "Asenna roblox uudelleen aina, kun käynnistät sen."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Älä päivitä Robloxia",
-                "description": "Ohita Robloxin päivitys ja käynnistä välittömästi"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "Nopeat liput",
-            "description": "Lisää/poista Roblox Fastflags -merkintöjä ja -kokoonpanoja.",
-            "generalBack": "Takaisin fastflagiin",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "Valitse toiminto.",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Esiasetus",
-                    "description": "Käytä sisäänrakennettua Feature Flag Preset -asetusta."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "Lipun nimi",
                     "texboxFlagValue": "Arvo:",
                     "buttonAdd": "Lisää",
-                    "search": "Hae kaikista hipaisulipuista...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "Hakuasi vastaavia merkintöjä ei löytynyt.",
                     "flagCol": {
                         "deleteNote": "Poista merkintä",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "Esiasetukset",
-                "description": "Käytä sisäänrakennettua nopean lipun esiasetustamme",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "Liukenemista estävä laatu (MSAA)",
                     "description": "Pehmentää rosoiset reunat. Suuremmat arvot näyttävät paremmilta, mutta voivat heikentää suorituskykyä."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pysäytä vokseli",
-                    "description": "Pysäyttää vokselisaation suorituskyvyn parantamiseksi"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "Ruohoa heiluttava animaatio",
-                    "description": "Säätää ruohon liikkeen voimakkuutta. (0 ei ole vähennys, 999 tai suurempi luku jäädyttää ruohon, 0 & 1 hieman vähentynyt liike ja arvo, joka on suurempi kuin 1, on voimakkaasti vähentynyt liike, lähestyy hiljaisuutta)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Korvaa tekstuurin laatutaso",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Ota käyttöön heikkolaatuiset verkot",
-                    "description": "Saattaa parantaa suorituskykyä."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Modin hallinta",
-                    "description": "Hallinnoi modifikaatioitasi Roblox-modit.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "Lisää modi",
                     "noModsFound": "Täältä ei löytynyt modeja, Jupit.",
                     "noModsFoundCreateButton": "Luo ensimmäinen modisi",
@@ -256,7 +256,7 @@
                         "renameNote": "Nimeä modi uudelleen",
                         "openFolderNote": "Avaa Mod-kansio",
                         "deleteNote": "Poista modi",
-                        "layoutNote": "Modien asettelu, joka on saanut inspiraationsa Frostrapin modien hallinnasta",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Ota mod-lataus käyttöön ja aseta mod-kansion sijainti."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "Oma fontti",
-                        "description": "Vaihda roblox-fonttisi mihin haluat.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "Muuta fonttia"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "Yhteisötilat",
                     "description": "Tutustu yhteisön luomiin modeihin.",
                     "notice": {
-                        "title": "Ei vielä modia",
+                        "title": "No mods yet",
                         "description": "Meillä ei ole vielä yhteisömodeja. Osallistu ensimmäisenä ja auta meitä kasvattamaan kokoelmaa!",
                         "submissionButton": "Lähetä modi"
                     }
@@ -291,20 +291,20 @@
             "settings": "Asetukset",
             "aboutCard": {
                 "title": "Tietoa",
-                "description": "Tietoja tästä murskauskokoonpanosta",
-                "note": "Muista! Crush on ilmainen käyttää. Jos joku yrittää ihailla sitä uudelleen ja myydä sitä, kerro siitä meille Discord-palvelimellamme!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "Rakennettu:  {date}",
                 "commitHash": "Tee hash-tunniste:  {hash}",
                 "version": "Versio:"
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Pakottaa sinut liittymään uudelleen.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "Nollaa"
             },
             "languageCard": {
                 "title": "Kieli",
-                "description": "Valitse haluamasi ihastuskieli."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "Ikkunoiden eloisuus",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "Valitse, haluatko näyttää, mitä teet Discord RPC: llä. Uudelleenkäynnistys on suositeltavaa."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "Lahjoita",
-                "description": "Rakastatko ihastumista? Lahjoita Mallylle tukeaksesi hänen työtään!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Lahjoita"
             }
         }

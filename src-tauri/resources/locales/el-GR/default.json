@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "Ένα roblox bootrapper γραμμένο από την αρχή",
-        "integrations": "Σε Διαδρομή Ενσωματώσεων",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "Διαδρομή σε εγκαταστάσεις",
-        "fastflag": "Σε διαδρομή Fastflag",
+        "fastflag": "In Fast Flags Route",
         "mod": "Στη διαδρομή Mod",
         "appearance": "Διαδρομή εμφάνισης",
         "rust": {
             "watcher": {
-                "general": "Παίζοντας roblox",
+                "general": "Playing Roblox",
                 "idle": "Όχι σε παιχνίδι",
                 "playing": "Στα"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "Εμφάνιση",
             "description": "Προσαρμόστε την εμφάνιση και την αίσθηση του bootstrapper Roblox.",
-            "boostrapThemeCard": {
-                "title": "Θέμα Bootstrapper",
-                "description": "Επιλέξτε μεταξύ του προεπιλεγμένου θέματος Crush ή ενός προσαρμοσμένου θέματος XML.",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "Προεπιλογή (Crush)",
-                    "custom": "Προσαρμοσμένος"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "εισάγετε νέα γραμματοσειρά",
-                    "noThemes": "Δεν έχουν εισαχθεί ακόμα προσαρμοσμένα θέματα.",
-                    "missingAssets": "Λείπουν στοιχεία θέματος"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "Ενσωματώσεις",
-            "description": "Διαμορφώστε τις ενσωματώσεις έξω από το roblox",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "Ειδοποίηση τοποθεσίας διακομιστή",
-                "description": "Λάβετε ειδοποίηση όταν ο πελάτης συνδεθεί σε έναν διακομιστή."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (Σύνθλιψη)",
-                "description": "Αντικαταστήστε το Roblox Rich Presence με το Crush's",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Επιτρέψτε στους ανθρώπους να συμμετάσχουν στο παιχνίδι σας",
-                "option2": "Εμφάνιση του λογαριασμού σας όταν παίζετε roblox"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "Το ιστορικό του παιχνιδιού σας",
@@ -77,20 +77,20 @@
                 "button": "Εμφάνιση μηνυμάτων"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "Καλύτερη αντιστοίχιση με τη RoValra",
-                "description": "Το Crush έχει ένα ενσωματωμένο ταίριασμα που κάνει την ολοκλήρωση. Ισχύει η Πολιτική Απορρήτου της RoValra.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "Άνοιγμα"
             },
             "roValra": {
                 "description": "Ρύθμιση",
                 "joinServerForYouCard": {
-                    "title": "Αφήστε το Crush να συμμετάσχει στον διακομιστή για εσάς",
-                    "description": "Αντί για αντιστοίχιση Roblox, θα χρησιμοποιήσουμε το Rovalra API και θα βρούμε τον καλύτερο διακομιστή."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "Εγκαταστάσεις",
             "customVersion": {
                 "title": "Εγκαταστήστε μια προσαρμοσμένη έκδοση Roblox",
-                "description": "Παράλειψη ελέγχου ενημέρωσης και λήψη της έκδοσης. Η προεπιλεγμένη τιμή είναι η πιο πρόσφατη. Η μη έγκυρη έκδοση δεν θα ληφθεί και θα επιστρέψει στην πιο πρόσφατη έκδοση."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Αναγκαστική επανεγκατάσταση του Roblox",
-                "description": "Επανεγκαταστήστε το roblox κάθε φορά που το εκκινείτε."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Μην ενημερώνετε το Roblox",
-                "description": "Παράλειψη ενημέρωσης Roblox και άμεση εκκίνηση"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "Γρήγορες επισημάνσεις",
-            "description": "Προσθήκη/Αφαίρεση Roblox Fastflags και διαμορφώσεων.",
-            "generalBack": "Επιστροφή στο fastflag",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "Επιλέξτε μια ενέργεια!",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Προεπιλογή",
-                    "description": "Χρησιμοποιήστε την Προεπιλογή Σημαίας Λειτουργίας που είναι ενσωματωμένη στο Crush."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "Όνομα σημαίας",
                     "texboxFlagValue": "Αξία",
                     "buttonAdd": "Προσθήκη",
-                    "search": "Αναζήτηση σε όλες τις σημαίες f...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "Δεν βρέθηκαν επισημάνσεις που να ταιριάζουν με την αναζήτησή σας.",
                     "flagCol": {
                         "deleteNote": "Διαγραφή σημαίας",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "Προκαθορισμένες ρυθμίσεις",
-                "description": "Χρησιμοποιήστε την ενσωματωμένη μας προεπιλογή ταχείας επισήμανσης",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "Anti-Aliasing Quality (MSAA)",
                     "description": "Λειαίνει τις οδοντωτές άκρες. Οι υψηλότερες τιμές φαίνονται καλύτερες, αλλά μπορεί να μειώσουν την απόδοση."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Παύση Voxelier",
-                    "description": "Διακοπή της voxelization για βελτίωση της απόδοσης"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "Κινούμενα σχέδια κυματισμού γρασιδιού",
-                    "description": "Ρυθμίζει την ένταση της κίνησης του γρασιδιού. (το 0 δεν είναι μείωση, το 999 ή οποιοσδήποτε υψηλότερος αριθμός θα παγώσει το γρασίδι, το 0 & 1 ελαφρώς μειωμένη κίνηση και η τιμή που είναι μεγαλύτερη από το 1 είναι έντονα μειωμένη κίνηση, πλησιάζοντας την ακινησία)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Αντικατάσταση επιπέδου ποιότητας υφής",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Ενεργοποίηση Πλέγματος Χαμηλής Ποιότητας",
-                    "description": "Μπορεί να βελτιώσει την απόδοση."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Διαχείριση Mod",
-                    "description": "Διαχειριστείτε τα mods σας Roblox mods.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "Προσθέστε ένα Mod",
                     "noModsFound": "Δεν βρήκαμε mods εδώ, Yuppies.",
                     "noModsFoundCreateButton": "Δημιουργήστε το πρώτο σας mod",
@@ -256,7 +256,7 @@
                         "renameNote": "Μετονομασία Mod",
                         "openFolderNote": "Άνοιγμα φακέλου Mod",
                         "deleteNote": "Διαγραφή Mod",
-                        "layoutNote": "Διάταξη Mods εμπνευσμένη από τον διαχειριστή Mods της Frostrap",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Ενεργοποιήστε τη φόρτωση του Mod και ορίστε τη θέση του φακέλου Mod."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "Προσαρμοσμένη γραμματοσειρά",
-                        "description": "Αλλάξτε τη γραμματοσειρά roblox σε ό, τι θέλετε.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "Αλλαγή Γραμματοσειράς"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "Λειτουργίες κοινότητας",
                     "description": "Εξερευνήστε mods που δημιουργήθηκαν από την κοινότητα.",
                     "notice": {
-                        "title": "Δεν υπάρχει mod ακόμα",
+                        "title": "No mods yet",
                         "description": "Δεν έχουμε ακόμα τροποποιήσεις κοινότητας. Γίνετε ο πρώτος που θα συνεισφέρει και θα μας βοηθήσει να μεγαλώσουμε τη συλλογή!",
                         "submissionButton": "Υποβάλετε ένα mod"
                     }
@@ -291,20 +291,20 @@
             "settings": "Ρυθμίσεις",
             "aboutCard": {
                 "title": "Σχετικά με την",
-                "description": "Πληροφορίες σχετικά με αυτήν την κατασκευή σύνθλιψης",
-                "note": "Θυμηθείτε! το crush είναι δωρεάν για χρήση, όποιος προσπαθεί να το μεταπωλήσει και να το πουλήσει, παρακαλώ πείτε μας στον διακομιστή Discord!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "(κατασκευασμένο στο )",
                 "commitHash": "Υποβολή κατακερματισμού:  {hash}",
                 "version": "Έκδοση: "
             },
             "onBoardCard": {
                 "title": "Crush Γεια σας",
-                "description": "Σας αναγκάζουμε να επιβιβαστείτε ξανά.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "Επαναφορά"
             },
             "languageCard": {
                 "title": "Language",
-                "description": "Επιλέξτε τη γλώσσα που προτιμάτε για συντριβή."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "Δόνηση παραθύρου",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "Επιλέξτε αν θα εμφανίζεται αυτό που κάνετε χρησιμοποιώντας το Discord RPC. Συνιστάται επανεκκίνηση."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "Δωρεά",
-                "description": "Αγαπάτε τον έρωτα; Κάντε μια δωρεά στη Mally για να υποστηρίξετε το έργο του!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Δωρεά"
             }
         }

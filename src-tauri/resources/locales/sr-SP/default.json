@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "Roblox skidač čizama napisan ispočetka",
-        "integrations": "In Intergrations Route",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "In Installations Route",
-        "fastflag": "Na ruti Fastflag",
+        "fastflag": "In Fast Flags Route",
         "mod": "U mod. ruti",
         "appearance": "Putanja u izgledu",
         "rust": {
             "watcher": {
-                "general": "Igranje robloksa",
+                "general": "Playing Roblox",
                 "idle": "Nije u igri",
                 "playing": "U"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "Izgled",
             "description": "Prilagodite izgled i osećaj Roblox bootstrappera.",
-            "boostrapThemeCard": {
-                "title": "Tema bootstrappera",
-                "description": "Izaberite podrazumevanu Crush temu ili prilagođenu XML temu.",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "Podrazumevano (simpatija)",
-                    "custom": "Prilagođena"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "Uvezi novo",
-                    "noThemes": "Još nema uvezenih prilagođenih tema.",
-                    "missingAssets": "Nedostajuća sredstva teme"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "Integracije",
-            "description": "Konfigurišite intergracije izvan robloxa",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "Obaveštavač o lokaciji servera",
-                "description": "Primajte obaveštenja kada se klijent poveže sa serverom."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Zamenite Roblox Rich Presence sa Crush's",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Omogućite ljudima da se pridruže vašoj igri",
-                "option2": "Prikažite svoj nalog kada igrate roblox"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "Istorija vaše igre",
@@ -77,20 +77,20 @@
                 "button": "Pogledaj"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "Bolje povezivanje sa kompanijom RoValra",
-                "description": "Crush ima ugrađenu integraciju podudaranja. Primenjuju se Pravila privatnosti kompanije RoValra.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "Otvorena"
             },
             "roValra": {
                 "description": "Konfiguracija",
                 "joinServerForYouCard": {
-                    "title": "Neka se Crush pridruži serveru umesto vas",
-                    "description": "Umesto Roblox podudaranja, koristićemo Rovalra API i pronaći najbolji server."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "Instalacije",
             "customVersion": {
                 "title": "Instalirajte prilagođenu Roblox verziju",
-                "description": "Preskočite proveru ažuriranja i preuzmite verziju. Podrazumevana vrednost je najnovija. Nevažeća verzija se neće preuzeti i biće vraćena u najnoviju verziju."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Prinudno ponovo instalirajte Roblox",
-                "description": "Ponovo instalirajte roblox svaki put kada ga pokrenete."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Nemojte ažurirati Roblox",
-                "description": "Preskoči Roblox ažuriranje i pokreni odmah"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "Brze zastavice",
-            "description": "Dodajte/uklonite Roblox Fastflags i konfiguracije.",
-            "generalBack": "Nazad na brzu zastavicu",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "Izaberite radnju.",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Unapred određeno",
-                    "description": "Koristite unapred podešenu oznaku funkcije ugrađenu u simpatiju."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "Назив заставе",
                     "texboxFlagValue": "Vrednost",
                     "buttonAdd": "Dodaj",
-                    "search": "Pretraži sve zastavice...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "Nije pronađena nijedna zastavica koja odgovara vašoj pretrazi.",
                     "flagCol": {
                         "deleteNote": "Izbriši zastavicu",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "Predefinisana podešavanja",
-                "description": "Koristite naše ugrađeno unapred podešavanje brze zastavice",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "Kvalitet protiv lizinga (MSAA)",
                     "description": "Izglađuje nazubljene ivice. Više vrednosti izgledaju bolje, ali mogu smanjiti performanse."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pauziraj Voxelier",
-                    "description": "Zaustavlja vokelizaciju radi poboljšanja performansi"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "Animacija mahanja travom",
-                    "description": "Podešava intenzitet kretanja trave. (0 nije smanjenje, 999 ili bilo koji veći broj će zamrznuti travu, 0 & 1 neznatno smanjeno kretanje i vrednost koja je veća od 1 je snažno smanjeno kretanje, približavanje miru)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Prepisati nivo kvaliteta teksture",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Omogućite mrežice niskog kvaliteta",
-                    "description": "Može poboljšati performanse."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Menadžment moda",
-                    "description": "Upravljajte svojim modovima Roblox mods.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "Dodajte mod",
                     "noModsFound": "Ovde nismo našli modove, Yuppies.",
                     "noModsFoundCreateButton": "Kreirajte svoj prvi mod",
@@ -256,7 +256,7 @@
                         "renameNote": "Preimenuj mod",
                         "openFolderNote": "Otvori fasciklu mod",
                         "deleteNote": "Izbriši mod",
-                        "layoutNote": "Raspored modova inspirisan Frostrapovim menadžerom modova",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Omogućite učitavanje moda i podesite lokaciju fascikle moda."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "Прилагођен Фонт",
-                        "description": "Promenite svoj roblox font u šta god želite.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "Promenite font"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "Modovi zajednice",
                     "description": "Istražite modove koje je kreirala zajednica.",
                     "notice": {
-                        "title": "Još uvek nema moda",
+                        "title": "No mods yet",
                         "description": "Još uvek nemamo nijednu izmenu za zajednicu. Budite prvi koji će doprineti i pomoći nam da povećamo kolekciju!",
                         "submissionButton": "Pošaljite mod"
                     }
@@ -291,20 +291,20 @@
             "settings": "Podešavanja",
             "aboutCard": {
                 "title": "O studiji",
-                "description": "Informacije o ovoj drobljenoj konstrukciji",
-                "note": "Zapamtite! simpatija je besplatna za korišćenje, svako ko pokušava da je reskinuje i proda recite nam na našem Discord serveru!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "Izgrađeno na:  {date}",
                 "commitHash": "Izvrši heš:  {hash}",
                 "version": "Verzija:"
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Prisiliti vas da se ponovo uključite.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "Reset"
             },
             "languageCard": {
                 "title": "Jezik",
-                "description": "Izaberite željeni jezik za simpatije."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "Živahnost prozora",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "Uključite opciju da li želite da prikažete šta radite koristeći Discord RPC. Preporučuje se ponovno pokretanje."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "Донирајте",
-                "description": "Zaljubljeni ste? Donirajte Meliju da biste podržali njegov rad!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Донирајте"
             }
         }

@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "ゼロから書かれたrobloxブートラッパー",
-        "integrations": "統合ルート内",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "インストールルート内",
-        "fastflag": "Fastflagルート内",
+        "fastflag": "In Fast Flags Route",
         "mod": "モッドルート中",
         "appearance": "外観ルート",
         "rust": {
             "watcher": {
-                "general": "Robloxをプレイする",
+                "general": "Playing Roblox",
                 "idle": "はない、",
                 "playing": "コレクション内にある"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "Appearance",
             "description": "Robloxブートストラッパーの外観をカスタマイズします。",
-            "boostrapThemeCard": {
-                "title": "ブートストラッパーのテーマ",
-                "description": "デフォルトのクラッシュテーマまたはカスタムXMLテーマのいずれかを選択します。",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "デフォルト（クラッシュ）",
-                    "custom": "カスタム"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "新規インポート",
-                    "noThemes": "カスタムテーマはまだインポートされていません。",
-                    "missingAssets": "不足しているテーマアセット"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "統合",
-            "description": "Robloxの外部で統合を構成する",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "サーバー位置通知",
-                "description": "クライアントがサーバーに接続したときに通知を取得します。"
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC （クラッシュ）",
-                "description": "Roblox Rich PresenceをCrushの",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "他の人にあなたのゲームに参加してもらう",
-                "option2": "Robloxをプレイするときにアカウントを表示する"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "ゲーム履歴",
@@ -77,20 +77,20 @@
                 "button": "表示"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "RoValraでマッチング体験",
-                "description": "Crushにはマッチングが組み込まれており、統合が可能です。RoValraのプライバシーポリシーが適用されます。",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "開く"
             },
             "roValra": {
                 "description": "構成",
                 "joinServerForYouCard": {
-                    "title": "Crushをサーバーに参加させましょう",
-                    "description": "Robloxのマッチングの代わりに、Rovalra APIを使用して最適なサーバーを見つけます。"
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "インストール",
             "customVersion": {
                 "title": "カスタムRobloxバージョンをインストールする",
-                "description": "更新チェックをスキップして、バージョンをダウンロードします。デフォルト値はlatestです。無効なバージョンはダウンロードされず、最新バージョンにフォールバックされます。"
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Robloxを強制的に再インストールする",
-                "description": "Robloxを起動するたびに再インストールしてください。"
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Robloxを更新しない",
-                "description": "Robloxの更新をスキップしてすぐに起動"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "高速フラグ",
-            "description": "Roblox Fastflagsと設定を追加/削除します。",
-            "generalBack": "Fastflagに戻る",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "アクションを選択してください",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "プリセット",
-                    "description": "クラッシュに組み込まれた機能フラグプリセットを使用します。"
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "フラグ名",
                     "texboxFlagValue": "値",
                     "buttonAdd": "追加",
-                    "search": "すべてのフラグを検索...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "検索に一致するフラグは見つかりませんでした。",
                     "flagCol": {
                         "deleteNote": "フラグを削除します:",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "プリセット",
-                "description": "組み込みの高速フラグプリセットを使用する",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "アンチエイリアシングの品質",
                     "description": "ギザギザのエッジを滑らかにします。値が高いほど見栄えは良くなりますが、パフォーマンスが低下する可能性があります。"
                 },
                 "pauseVoxelizerCard": {
-                    "title": "ボクセリエを一時停止",
-                    "description": "パフォーマンスを向上させるためにボクセリゼーションを停止します"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "草を振るアニメーション",
-                    "description": "草の動きの強さを調整します。（ 0は減少なし、999以上の数字は草を凍らせ、0と1はわずかに減少し、1より大きい値は静止に近づいて強く減少した動きです）"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "テクスチャ品質レベルを上書きする",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "低品質のメッシュを有効にする",
-                    "description": "パフォーマンスを向上させる可能性がある。"
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "モッド管理",
-                    "description": "モッドRobloxモッドを管理します。",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "モッドを追加",
                     "noModsFound": "ここにモッドは見つかりませんでした、ヤッピー。",
                     "noModsFoundCreateButton": "最初のモッドを作成する",
@@ -256,7 +256,7 @@
                         "renameNote": "モッドの名前を変更",
                         "openFolderNote": "Modフォルダーを開く",
                         "deleteNote": "モッドを削除",
-                        "layoutNote": "フロストラップのモッドマネージャーにインスパイアされたモッドレイアウト",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "MODの読み込みを有効にし、MODフォルダーの場所を設定します。"
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "カスタム フォント",
-                        "description": "Robloxフォントを好きなように変更します。",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "フォントを変更"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "コミュニティモッド",
                     "description": "コミュニティが作成したモッドをご覧ください。",
                     "notice": {
-                        "title": "まだモッドがありません",
+                        "title": "No mods yet",
                         "description": "コミュニティモッドはまだありません。最初に貢献して、私たちがコレクションを成長させるのを手伝ってください！",
                         "submissionButton": "MODを送信する"
                     }
@@ -291,20 +291,20 @@
             "settings": "設定",
             "aboutCard": {
                 "title": "情報",
-                "description": "このクラッシュビルドに関する情報",
-                "note": "覚えておいてください！ CRUSHは無料で使用できます。再スキンして販売しようとしている人は、Discordサーバーでお知らせください。",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "以下に基づいています。{date}",
                 "commitHash": "コミットハッシュ: {hash}",
                 "version": "バージョン："
             },
             "onBoardCard": {
                 "title": "クラッシュ・ハロー",
-                "description": "強制的に再度乗船させてください。",
+                "description": "Force the onboarding flow to run again.",
                 "button": "リセット"
             },
             "languageCard": {
                 "title": "言語",
-                "description": "押しつぶしたい言語を選択します。"
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "窓の鮮やかさ",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Discord RPCをクラッシュ",
-                "description": "Discord RPCを使用して何をしているかを表示するかどうかを切り替えます。再起動をお勧めします。"
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "寄付",
-                "description": "クラッシュが大好きですか？マリーの作品を応援するために寄付しましょう！",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "寄付"
             }
         }

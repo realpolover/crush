@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "Sıfırdan yazılmış bir roblox çizici",
-        "integrations": "Entegrasyon Rotasında",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "Kurulum Rotasında",
-        "fastflag": "Fastflag Rotasında",
+        "fastflag": "In Fast Flags Route",
         "mod": "Mod Rotasında",
         "appearance": "Görünüş Yolunda",
         "rust": {
             "watcher": {
-                "general": "Roblox oynamak",
+                "general": "Playing Roblox",
                 "idle": "Oyunda değil",
                 "playing": "Çoğu zaman"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "Görünüş",
             "description": "Roblox önyükleyicinin görünümünü ve hissini özelleştirin.",
-            "boostrapThemeCard": {
-                "title": "Önyükleyici Teması",
-                "description": "Varsayılan Crush teması veya özel bir XML teması arasından seçim yapın.",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "Varsayılan (Ezilme)",
-                    "custom": "Özel"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "Yeni dosyayı içe aktar",
-                    "noThemes": "Henüz özel tema içe aktarılmadı.",
-                    "missingAssets": "Eksik Tema Varlıkları"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "Entegrasyonlar",
-            "description": "Roblox dışındaki yapılandırma entegrasyonları",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "Sunucu Konumu Bildirici",
-                "description": "İstemci bir sunucuya bağlandığında bildirim alın."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (Ezme)",
-                "description": "Roblox Rich Varlığını Crush'ınkiyle değiştir",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "İnsanların oyununuza katılmasına izin verin",
-                "option2": "Roblox oynarken Hesabınızı Görüntüleyin"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "Oyun geçmişiniz",
@@ -77,20 +77,20 @@
                 "button": "Görüntüle"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "RoValra ile daha iyi eşleştirme",
-                "description": "Crush, entegre bir eşleştirme özelliğine sahiptir. RoValra'nın Gizlilik Politikası geçerlidir.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "Açık"
             },
             "roValra": {
                 "description": "Yapılandırma",
                 "joinServerForYouCard": {
-                    "title": "Crush'ın sizin için sunucuya katılmasına izin verin",
-                    "description": "Roblox eşleştirme yapmak yerine Rovalra API'sini kullanacağız ve en iyi sunucuyu bulacağız."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "Kurulumlar",
             "customVersion": {
                 "title": "Özel bir Roblox sürümü yükleyin",
-                "description": "Güncelleme kontrolünü atlayın ve sürümü indirin. Varsayılan değer en son değerdir. Geçersiz sürüm indirilmeyecek ve en son sürüme geri dönecektir."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Roblox'u Yeniden Yüklemeye Zorla",
-                "description": "Roblox'u her başlattığınızda yeniden yükleyin."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Roblox'u güncelleme",
-                "description": "Roblox güncellemesini atlayın ve anında başlatın"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "Hızlı Bayraklar",
-            "description": "Roblox Fastflags ve yapılandırmaları ekleyin/kaldırın.",
-            "generalBack": "Fastflag'a geri dön",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "Lütfen bir eylem seçin.",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Ön Ayar",
-                    "description": "Crush içinde yerleşik Özellik Bayrağı Ön Ayarını kullanın."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "Bayrak ve İsim",
                     "texboxFlagValue": "Değer",
                     "buttonAdd": "Ekle",
-                    "search": "Tüm bayrakları ara...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "Aramanızla eşleşen bayrak bulunamadı.",
                     "flagCol": {
                         "deleteNote": "İşareti Sil",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "Ön ayarlar",
-                "description": "Yerleşik hızlı bayrak ön ayarımızı kullanın",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "Yumuşatma Kalitesi (MSAA)",
                     "description": "Pürüzlü kenarları pürüzsüzleştirir. Daha yüksek değerler daha iyi görünür ancak performansı düşürebilir."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Voxelier'i duraklat",
-                    "description": "Performansı artırmak için vokselleştirmeyi durdurur"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "Çim sallama animasyonu",
-                    "description": "Çim hareketinin yoğunluğunu ayarlar. (0 azalma yoktur, 999 veya daha yüksek bir sayı çimi dondurur, 0 & 1 hafifçe azaltılmış hareket ve 1 'den büyük bir değer güçlü bir şekilde azaltılmış harekettir, durgunluğa yaklaşır)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Doku kalite seviyesinin üzerine yaz",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Düşük Kaliteli Ağları Etkinleştir",
-                    "description": "Performansı artırabilir."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Mod Yönetimi",
-                    "description": "Roblox modlarınızı yönetin.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "Bir Mod Ekle",
                     "noModsFound": "Burada hiç mod bulamadık, Yuppies.",
                     "noModsFoundCreateButton": "İlk modunuzu oluşturun",
@@ -256,7 +256,7 @@
                         "renameNote": "Mod'u Yeniden Adlandır",
                         "openFolderNote": "Mod Paketi Klasörünü Aç",
                         "deleteNote": "MODÜLÜ SİL",
-                        "layoutNote": "Frostrap'ın mod yöneticisinden ilham alan mod düzeni",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Mod yüklemeyi etkinleştirin ve mod klasörü konumunu ayarlayın."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "Özel Yazı Tipi",
-                        "description": "Roblox yazı tipini istediğin gibi değiştir.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "Yazı tipini değiştir"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "Topluluk Modları",
                     "description": "Topluluk tarafından oluşturulan modları keşfedin.",
                     "notice": {
-                        "title": "Henüz mod yok",
+                        "title": "No mods yet",
                         "description": "Henüz herhangi bir topluluk modumuz yok. Katkıda bulunan ve koleksiyonu büyütmemize yardımcı olan ilk kişi siz olun!",
                         "submissionButton": "Mod gönder"
                     }
@@ -291,20 +291,20 @@
             "settings": "Ayarlar",
             "aboutCard": {
                 "title": "Hakkında",
-                "description": "Bu ezilme yapısı hakkında bilgi",
-                "note": "Unutmayın! crush'ı kullanmak ücretsizdir, yeniden ciltlemeye ve satmaya çalışan herkes lütfen Discord sunucumuzda bize bildirin!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "Üzerine inşa",
                 "commitHash": "İşlem karması:  {hash}",
                 "version": "Versiyon:"
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Sizi tekrar katılmaya zorlayın.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "Sıfırla"
             },
             "languageCard": {
                 "title": "Dil",
-                "description": "Ezmek için tercih ettiğiniz dili seçin."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "Pencere Canlılığı",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "Discord RPC kullanarak ne yaptığınızı gösterip göstermeyeceğinizi değiştirin. Yeniden başlatmanız önerilir."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "Bağış yap",
-                "description": "Aşık olmayı seviyor musun? Çalışmalarını desteklemek için Mally'ye bağış yap!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Bağış yap"
             }
         }

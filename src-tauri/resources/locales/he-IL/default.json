@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "רובלוקס Bootrapper שנכתב מאפס",
-        "integrations": "במסלול Intergrations",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "במסלול ההתקנות",
-        "fastflag": "במסלול Fastflag",
+        "fastflag": "In Fast Flags Route",
         "mod": "במסלול Mod",
         "appearance": "במסלול המראה",
         "rust": {
             "watcher": {
-                "general": "משחק רובלוקס",
+                "general": "Playing Roblox",
                 "idle": "לא במשחק",
                 "playing": "בתוך "
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "עיצוב",
             "description": "התאם אישית את המראה והתחושה של ה - bootstrapper של Roblox.",
-            "boostrapThemeCard": {
-                "title": "ערכת עיצוב Bootstrapper",
-                "description": "בחר בין ערכת נושא ברירת המחדל של Crush או ערכת נושא XML מותאמת אישית.",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "ברירת מחדל (קראש)",
-                    "custom": "התאמה אישית"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "ייבוא חדש",
-                    "noThemes": "עדיין לא יובאו ערכות עיצוב מותאמות אישית.",
-                    "missingAssets": "חסרים נכסי ערכת נושא"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "אינטגרציות",
-            "description": "קביעת תצורה של אינטגרציות מחוץ לרובלוקס",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "הודעה על מיקום השרת",
-                "description": "קבל הודעה כאשר לקוח מתחבר לשרת."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "החלף את הנוכחות העשירה של Roblox עם זו של Crush",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "אפשר לאנשים להצטרף למשחק שלך",
-                "option2": "הצג את החשבון שלך בעת הפעלת Roblox"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "היסטוריית המשחקים שלכם",
@@ -77,20 +77,20 @@
                 "button": "להציג"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "התאמה טובה יותר עם RoValra",
-                "description": "לקראש יש התאמה מובנית שעושה intergration. מדיניות הפרטיות של RoValra חלה.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "פתיחה"
             },
             "roValra": {
                 "description": "הגדרות",
                 "joinServerForYouCard": {
-                    "title": "בואו ל - Crush להצטרף לשרת בשבילכם",
-                    "description": "במקום לבצע התאמות ב - Roblox, נשתמש ב - API של Rovalra ונמצא את השרת הטוב ביותר."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "התקנות",
             "customVersion": {
                 "title": "התקנת גרסת Roblox מותאמת אישית",
-                "description": "דלג על בדיקת העדכון והורד את הגרסה. ערך ברירת המחדל הוא העדכני ביותר. גרסה לא חוקית לא תרד ותחזור לגרסה העדכנית ביותר."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "כפה התקנה מחדש של Roblox",
-                "description": "התקן מחדש את roblox בכל פעם שאתה מפעיל אותו."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "אל תעדכן את Roblox",
-                "description": "דלג על עדכון והשיקה של Roblox באופן מיידי"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "דגלים מהירים",
-            "description": "הוסף/הסר דגלים מהירים וקונפיגורציות של Roblox.",
-            "generalBack": "חזרה ל - fastflag",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "יש לבחור פעולה.",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Preset",
-                    "description": "השתמש ב - Feature Flag Preset מובנה במחיצה."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "שם הסימון",
                     "texboxFlagValue": "ערך",
                     "buttonAdd": "הוספה",
-                    "search": "חפש את כל דגמי ה - fflags",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "לא נמצאו דגלים שתואמים לחיפוש שלכם.",
                     "flagCol": {
                         "deleteNote": "מחיקת סימון",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "מוגדר מראש",
-                "description": "השתמשו בהגדרה הקבועה מראש המובנית שלנו לדגל מהיר",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "איכות נוגדת עליות (MSAA)",
                     "description": "מחליק קצוות משוננים. ערכים גבוהים יותר נראים טוב יותר אך עשויים להפחית את הביצועים."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "השהיית Voxelier",
-                    "description": "עוצר את voxelization כדי לשפר את הביצועים"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "הנפשת נפנוף דשא",
-                    "description": "מתאים את עוצמת תנועת הדשא. (0 אינו הפחתה, 999 או כל מספר גבוה יותר יקפיא את הדשא, 0 & 1 תנועה מופחתת מעט וערך שגדול מ -1 מופחת בחוזקה בתנועה, מתקרב לשקט)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "החלף רמת איכות מרקם",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "הפעלת מסרים באיכות נמוכה",
-                    "description": "עשוי לשפר את הביצועים."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "ניהול מוד",
-                    "description": "נהל את מצבי ה - Roblox שלך.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "הוסף מוד",
                     "noModsFound": "לא מצאנו כאן אופנות, יאפים.",
                     "noModsFoundCreateButton": "צור את המוד הראשון שלך",
@@ -256,7 +256,7 @@
                         "renameNote": "שנה שם של מצב",
                         "openFolderNote": "פתח תיקיית Mod",
                         "deleteNote": "מחק מוד",
-                        "layoutNote": "פריסת מצבים בהשראת מנהל המצבים של Frostrap",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "אפשר טעינת MOD והגדר את מיקום תיקיית MOD."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "גופן מותאם אישית",
-                        "description": "שנה את גופן ה - Roblox שלך לכל מה שתרצה.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "שינוי עיצוב"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "מצבים קהילתיים",
                     "description": "לגלות מצבים שנוצרו על ידי הקהילה.",
                     "notice": {
-                        "title": "עדיין אין מצב",
+                        "title": "No mods yet",
                         "description": "עדיין אין לנו מצבי קהילה. היו הראשונים לתרום ועזרו לנו להגדיל את הקולקציה!",
                         "submissionButton": "שלח מוד"
                     }
@@ -291,20 +291,20 @@
             "settings": "הגדרות",
             "aboutCard": {
                 "title": "אודות",
-                "description": "מידע על בניית ריסוק זו",
-                "note": "זכור! למחוץ הוא בחינם, כל מי שמנסה לחדש את עורו ולמכור אותו, אנא ספר לנו בשרת הדיסקורד שלנו!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "בנוי על:  {date}",
                 "commitHash": "בצע גיבוב:  {hash}",
                 "version": "גרסה:"
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "להכריח אותך להצטרף שוב.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "אפס"
             },
             "languageCard": {
                 "title": "שפה",
-                "description": "בחר את השפה המועדפת עליך למחוץ."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "רטט חלון",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "החלף מצב כדי להראות מה אתה עושה באמצעות Discord RPC. מומלץ להפעיל מחדש."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "תרום",
-                "description": "אהבתם? תרמו ל - Mally כדי לתמוך בעבודתו!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "תרום"
             }
         }
