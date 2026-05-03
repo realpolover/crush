@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "Ein Roblox-Bootrapper von Grund auf neu geschrieben",
-        "integrations": "In Integrationsroute",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "In Installationsroute",
-        "fastflag": "In Fastflag-Route",
+        "fastflag": "In Fast Flags Route",
         "mod": "In-Mod-Route",
         "appearance": "In Appearance Route",
         "rust": {
             "watcher": {
-                "general": "Roblox spielen",
+                "general": "Playing Roblox",
                 "idle": "Nicht in einem",
                 "playing": "In"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "Aussehen",
             "description": "Passen Sie das Erscheinungsbild des Roblox-Bootstrappers an.",
-            "boostrapThemeCard": {
+            "bootstrapThemeCard": {
                 "title": "Bootstrapper Theme",
-                "description": "Wählen Sie zwischen dem Standard-Crush-Design oder einem benutzerdefinierten XML-Design.",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "Standard (Crush)",
-                    "custom": "Angepasst"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "Neue Datei importieren",
-                    "noThemes": "Noch keine benutzerdefinierten Designs importiert.",
-                    "missingAssets": "Fehlende Theme-Assets"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "Integrationen",
-            "description": "Konfigurationsintegrationen außerhalb von roblox",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "Benachrichtigung zum Serverstandort",
-                "description": "Lassen Sie sich benachrichtigen, wenn der Client eine Verbindung zu einem Server herstellt"
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Ersetzen Sie die Roblox Rich Presence durch Crush's",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Lass Leute an deinem Spiel teilnehmen",
-                "option2": "Zeige dein Konto an, wenn du Roblox spielst"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "Spielverlauf",
@@ -77,20 +77,20 @@
                 "button": "Ansehen"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "Besseres Matching mit RoValra",
-                "description": "Crush haben einen eingebauten Match, der die Integration ermöglicht. Es gelten die Datenschutzbestimmungen von RoValra.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "Öffnen"
             },
             "roValra": {
                 "description": "Konfiguration",
                 "joinServerForYouCard": {
-                    "title": "Lassen Sie Crush Server für Sie beitreten",
-                    "description": "Anstelle von Roblox Match-Making verwenden wir die Rovalra-API und finden den besten Server."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "Installations",
             "customVersion": {
                 "title": "Installieren Sie eine benutzerdefinierte Roblox-Version",
-                "description": "Überspringen Sie die Update-Überprüfung und laden Sie die Version herunter. Der Standardwert ist der späteste. Ungültige Version wird nicht heruntergeladen und fällt auf die neueste Version zurück."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Roblox neu installieren",
-                "description": "Installieren Sie roblox jedes Mal neu, wenn Sie es starten."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Roblox nicht aktualisieren",
-                "description": "Roblox-Update überspringen und sofort starten"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "Schnellflaggen",
-            "description": "Hinzufügen/Entfernen von Roblox Fastflags und Konfigurationen.",
-            "generalBack": "Zurück zur Fastflagge",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "Bitte wählen Sie eine Aktion aus.",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Voreinstellung",
-                    "description": "Verwende die voreingestellte Feature-Flagge, die in Crush eingebaut ist."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "Flaggenname",
                     "texboxFlagValue": "Wert",
                     "buttonAdd": "Hinzufügen",
-                    "search": "Alle Flaggen durchsuchen...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "Es wurden keine Flaggen gefunden, die Ihrer Suche entsprechen.",
                     "flagCol": {
                         "deleteNote": "Kennzeichen löschen",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "Voreinstellungen",
-                "description": "Verwenden Sie unsere integrierte Fast-Flag-Voreinstellung",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "Anti-Aliasing-Qualität",
                     "description": "Glättet gezackte Kanten. Höhere Werte sehen besser aus, können aber die Leistung beeinträchtigen."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Voxelier pausieren",
-                    "description": "Stoppt die Voxelisierung, um die Leistung zu verbessern"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "Gras winkende Animation",
-                    "description": "Passt die Intensität der Grasbewegung an. (0 ist keine Reduzierung, 999 oder eine höhere Zahl friert das Gras ein, 0 & 1 leicht reduzierte Bewegung und der Wert, dass größer als 1 stark reduzierte Bewegung ist, nähert sich der Stille)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Texturqualitätsstufe überschreiben",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Aktivieren Sie Netze mit niedriger Qualität",
-                    "description": "Es steigert die Leistungsfähigkeit."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Mod-Management",
-                    "description": "Verwalte deine Mods Roblox-Mods.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "Mod hinzufügen",
                     "noModsFound": "Wir haben hier keine Mods gefunden, Yuppies.",
                     "noModsFoundCreateButton": "Erstelle deine erste Mod",
@@ -256,7 +256,7 @@
                         "renameNote": "Mod umbenennen",
                         "openFolderNote": "Mod-Ordner öffnen",
                         "deleteNote": "Mod löschen",
-                        "layoutNote": "Mods-Layout inspiriert von Frostraps Mods-Manager",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Aktivieren Sie das Laden von Mods und legen Sie den Speicherort des Mod-Ordners fest."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "Eigene Schrift",
-                        "description": "Ändern Sie Ihre roblox-Schriftart auf das, was Sie möchten.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "Font ändern"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "Community-Mods",
                     "description": "Entdecke Mods, die von der Community erstellt wurden.",
                     "notice": {
-                        "title": "Noch keine Mod",
+                        "title": "No mods yet",
                         "description": "Wir haben noch keine Community-Mods. Seien Sie der Erste, der einen Beitrag leistet und helfen Sie uns, die Kollektion zu erweitern!",
                         "submissionButton": "Mod einreichen"
                     }
@@ -291,20 +291,20 @@
             "settings": "Settings",
             "aboutCard": {
                 "title": "Über",
-                "description": "Informationen zu diesem Crush-Build",
-                "note": "Denken Sie daran! Crush kann kostenlos verwendet werden. Jeder, der versucht, es neu zu häuten und zu verkaufen, teilt es uns bitte auf unserem Discord-Server mit!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "Aber nach dem High-Level-Meeting in...",
                 "commitHash": "Commit-Hash",
                 "version": "Version:"
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Zwingen Sie Sie, wieder an Bord zu gehen.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "Zurücksetzen"
             },
             "languageCard": {
                 "title": "Sprache",
-                "description": "Wählen Sie Ihre bevorzugte Sprache für Crush."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "Fenster Lebendigkeit",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "Umschalten, ob angezeigt werden soll, was Sie mit Discord RPC tun. Ein Neustart wird empfohlen."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "Spenden",
-                "description": "Love Crush? Spende an Mally, um seine Arbeit zu unterstützen!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Spenden"
             }
         }

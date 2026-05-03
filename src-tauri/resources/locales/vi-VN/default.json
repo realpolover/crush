@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "Một bootrapper roblox được viết từ đầu",
-        "integrations": "Trong lộ trình tích hợp",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "Đang trong lộ trình lắp đặt",
-        "fastflag": "Trong lộ trình Fastflag",
+        "fastflag": "In Fast Flags Route",
         "mod": "Trong lộ trình Mod",
         "appearance": "Trong lộ trình xuất hiện",
         "rust": {
             "watcher": {
-                "general": "Chơi roblox",
+                "general": "Playing Roblox",
                 "idle": "Không có trong trò chơi",
                 "playing": "Trong {}"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "Giao diện",
             "description": "Tùy chỉnh giao diện của Roblox bootstrapper.",
-            "boostrapThemeCard": {
-                "title": "Chủ đề Bootstrapper",
-                "description": "Chọn giữa chủ đề Crush mặc định hoặc chủ đề XML tùy chỉnh.",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "Mặc định (Crush)",
-                    "custom": "Tùy chỉnh"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "Nhập mới",
-                    "noThemes": "Chưa có chủ đề tùy chỉnh nào được nhập.",
-                    "missingAssets": "Thiếu tài sản chủ đề"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "Tích hợp",
-            "description": "Cấu hình tích hợp bên ngoài roblox",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "Thông báo vị trí máy chủ",
-                "description": "Nhận thông báo khi máy khách kết nối với máy chủ."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Thay thế Roblox Rich Presence bằng Crush's",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Cho phép mọi người tham gia trò chơi của bạn",
-                "option2": "Hiển thị tài khoản của bạn khi chơi roblox"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "Lịch sử Trò chơi",
@@ -77,20 +77,20 @@
                 "button": "Xem"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "Kết nối tốt hơn với RoValra",
-                "description": "Crush có tính năng tích hợp ghép đôi tích hợp. Áp dụng Chính sách quyền riêng tư của RoValra.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "Mở"
             },
             "roValra": {
                 "description": "Cấu hình",
                 "joinServerForYouCard": {
-                    "title": "Hãy để Crush tham gia máy chủ cho bạn",
-                    "description": "Thay vì tạo đối sánh Roblox, chúng tôi sẽ sử dụng API Rovalra và tìm máy chủ tốt nhất."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "Cài đặt",
             "customVersion": {
                 "title": "Cài đặt phiên bản Roblox tùy chỉnh",
-                "description": "Bỏ qua kiểm tra cập nhật và tải xuống phiên bản. Giá trị mặc định là mới nhất. Phiên bản không hợp lệ sẽ không được tải xuống và sẽ chuyển sang phiên bản mới nhất."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Bắt buộc cài đặt lại Roblox",
-                "description": "Cài đặt lại roblox mỗi khi bạn khởi chạy nó."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Không cập nhật Roblox",
-                "description": "Bỏ qua cập nhật Roblox và khởi chạy ngay lập tức"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "Cờ nhanh",
-            "description": "Thêm/Xóa Roblox Fastflags và cấu hình.",
-            "generalBack": "Quay lại cờ nhanh",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "Vui lòng chọn một hành động.",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Đặt trước",
-                    "description": "Sử dụng Cài đặt sẵn cờ tính năng được tích hợp trong crush."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "Tên cờ",
                     "texboxFlagValue": "Giá trị",
                     "buttonAdd": "Thêm",
-                    "search": "Tìm kiếm tất cả các fflags...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "Không tìm thấy cờ nào phù hợp với tìm kiếm của bạn.",
                     "flagCol": {
                         "deleteNote": "Xóa cờ",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "Có sẵn",
-                "description": "Sử dụng cài đặt sẵn gắn cờ nhanh tích hợp của chúng tôi",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "Chất lượng chống răng cưa (MSAA)",
                     "description": "Làm mịn các cạnh lởm chởm. Các giá trị cao hơn trông đẹp hơn nhưng có thể làm giảm hiệu suất."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Tạm dừng Voxelier",
-                    "description": "Ngừng voxelization để cải thiện hiệu suất"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "Hoạt ảnh vẫy cỏ",
-                    "description": "Điều chỉnh cường độ chuyển động của cỏ. (0 là không giảm, 999 hoặc bất kỳ số cao hơn sẽ đóng băng cỏ, 0 & 1 giảm nhẹ chuyển động và giá trị lớn hơn 1 là giảm mạnh chuyển động, tiếp cận tĩnh lặng)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Ghi đè mức chất lượng kết cấu",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Bật mắt lưới chất lượng thấp",
-                    "description": "Có thể cải thiện hiệu suất."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Quản lý Mod",
-                    "description": "Quản lý mod Roblox của bạn.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "Thêm Mod",
                     "noModsFound": "Chúng tôi không tìm thấy mod nào ở đây, Yuppies.",
                     "noModsFoundCreateButton": "Tạo mod đầu tiên của bạn",
@@ -256,7 +256,7 @@
                         "renameNote": "Đổi tên Mod",
                         "openFolderNote": "Mở thư mục Mod",
                         "deleteNote": "Xóa Mod",
-                        "layoutNote": "Bố cục mod lấy cảm hứng từ trình quản lý mod của Frostrap",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Bật tải mod và đặt vị trí thư mục mod."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "Tùy chỉnh phông chữ",
-                        "description": "Thay đổi phông chữ roblox của bạn thành bất cứ thứ gì bạn thích.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "Thay đổi phông chữ"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "Mod cộng đồng",
                     "description": "Khám phá các bản mod do cộng đồng tạo ra.",
                     "notice": {
-                        "title": "Chưa có mod nào",
+                        "title": "No mods yet",
                         "description": "Chúng tôi chưa có bất kỳ mod cộng đồng nào. Hãy là người đầu tiên đóng góp và giúp chúng tôi phát triển bộ sưu tập!",
                         "submissionButton": "Gửi mod"
                     }
@@ -291,20 +291,20 @@
             "settings": "Cài đặt",
             "aboutCard": {
                 "title": "Giới thiệu",
-                "description": "Thông tin về bản build crush này",
-                "note": "Hãy nhớ rằng! crush là miễn phí để sử dụng, bất cứ ai cố gắng để reskin & bán nó xin vui lòng cho chúng tôi biết trong máy chủ Discord của chúng tôi!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "Được xây dựng trên:  {date}",
                 "commitHash": "Hàm băm cam kết:  {hash}",
                 "version": "Phiên bản:"
             },
             "onBoardCard": {
                 "title": "Crush xin chào",
-                "description": "Buộc bạn phải tham gia một lần nữa.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "Cài đặt lại"
             },
             "languageCard": {
                 "title": "Ngôn ngữ:",
-                "description": "Chọn ngôn ngữ ưa thích của bạn cho crush."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "Độ sống động của cửa sổ",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "Chuyển đổi để hiển thị những gì bạn đang làm bằng Discord RPC. Nên khởi động lại."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "Ủng hộ",
-                "description": "Bạn thích crush? Hãy quyên góp cho Mally để hỗ trợ công việc của anh ấy!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Ủng hộ"
             }
         }

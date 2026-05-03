@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Intergrations Route",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
+        "fastflag": "In Fast Flags Route",
         "mod": "In Mod Route",
         "appearance": "In Appearance Route",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
+                "general": "Playing Roblox",
                 "idle": "Not in a game",
                 "playing": "In {}"
             }
@@ -44,7 +44,7 @@
         "appearance": {
             "appearance": "Appearance",
             "description": "Customize the look and feel of the Roblox bootstrapper.",
-            "boostrapThemeCard": {
+            "bootstrapThemeCard": {
                 "title": "Bootstrapper Theme",
                 "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
@@ -60,16 +60,16 @@
         },
         "integrations": {
             "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Let people join your game",
-                "option2": "Display Your Account when playing roblox"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "Your game history",
@@ -77,20 +77,20 @@
                 "button": "View"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "Better match making with RoValra",
-                "description": "Crush have a built-in match making intergration. RoValra's Privacy Policy applies.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "Open"
             },
             "roValra": {
                 "description": "Configuration",
                 "joinServerForYouCard": {
-                    "title": "Let Crush join server for you",
-                    "description": "Instead of Roblox match making, we'll use Rovalra API & find the best server."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "Installations",
             "customVersion": {
                 "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Force Reinstall Roblox",
-                "description": "Reinstall roblox everytime you launch it."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Don't update Roblox",
-                "description": "Skip Roblox updating and launch instantly"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
-            "generalBack": "Back to fastflag",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "Please choose an action.",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Preset",
-                    "description": "Use Feature Flag Preset built in in crush."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "Flag name",
                     "texboxFlagValue": "Value",
                     "buttonAdd": "Add",
-                    "search": "Search all fflags...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "No flags found matching your search.",
                     "flagCol": {
                         "deleteNote": "Delete Flag",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "Presets",
-                "description": "Use our built-in fast-flag preset",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "Anti-Aliasing Quality (MSAA)",
                     "description": "Smooths jagged edges. Higher values look better but may reduce performance."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelier",
-                    "description": "Stops voxelization to improve performance"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "Grass waving animation",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freezes the grass, 0 & 1 slightly reduced motion and value that greater than 1 is strongly reduced motion, approaching stillness)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Overwrite texture quality level",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Enable Low Quality Meshes",
-                    "description": "May improves performance."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "Add A Mod",
                     "noModsFound": "We found no mods here, Yuppies.",
                     "noModsFoundCreateButton": "Create your first mod",
@@ -256,7 +256,7 @@
                         "renameNote": "Rename Mod",
                         "openFolderNote": "Open Mod Folder",
                         "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Enable mod loading and set the mod folder location."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "Change Font"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "Community Mods",
                     "description": "Explore mods created by the community.",
                     "notice": {
-                        "title": "No mod yet",
+                        "title": "No mods yet",
                         "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
                         "submissionButton": "Submit a mod "
                     }
@@ -291,20 +291,20 @@
             "settings": "Settings",
             "aboutCard": {
                 "title": "About",
-                "description": "Information about this crush build",
-                "note": "Remember! crush is free to use, anyone trying to reskin & sell it please tell us in our Discord server!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "Built on: {date}",
                 "commitHash": "Commit hash: {hash}",
                 "version": "Version: {version}"
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Force you to onboard again.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "Reset"
             },
             "languageCard": {
                 "title": "Language",
-                "description": "Select your preferred language for crush."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "Window Vibrancy",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "Toggle whether to show what you are doing using Discord RPC. Restart is recommended."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Donate"
             }
         }

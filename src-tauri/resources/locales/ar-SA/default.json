@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "روبلكس بوترابر مكتوب من الصفر",
-        "integrations": "في طريق التداخلات",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "في مسار التركيبات",
-        "fastflag": "في طريق Fastflag",
+        "fastflag": "In Fast Flags Route",
         "mod": "في طريق وزارة الدفاع",
         "appearance": "المسار الظاهري",
         "rust": {
             "watcher": {
-                "general": "لعب روبلوكس Roblox.",
+                "general": "Playing Roblox",
                 "idle": "ليس في لعبة",
                 "playing": "في"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "شكل الخارجي",
             "description": "قم بتخصيص شكل وإحساس مشبك التمهيد Roblox.",
-            "boostrapThemeCard": {
-                "title": "قالب Bootstrapper",
-                "description": "اختر بين قالب Crush الافتراضي أو قالب XML مخصص.",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "الافتراضي (سحق)",
-                    "custom": "المخصص"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "استيراد جديد",
-                    "noThemes": "لا توجد قوالب مخصصة مستوردة حتى الآن.",
-                    "missingAssets": "أصول القالب مفقودة"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "التكامل",
-            "description": "تكوين التداخلات خارج roblox",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "مخطر موقع الخادم",
-                "description": "احصل على إشعار عند اتصال العميل بخادم."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "ديسكورد آر بي سي (كراش)",
-                "description": "استبدل حضور Roblox الغني بحضور Crush's",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "اسمح للأشخاص بالانضمام إلى لعبتك",
-                "option2": "عرض حسابك عند لعب roblox"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "تاريخ لعبك",
@@ -77,20 +77,20 @@
                 "button": "عرض"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "صنع مباراة أفضل مع روفالرا",
-                "description": "يحتوي Crush على تطابق مدمج مما يجعل الدمج. تُطبق سياسة الخصوصية الخاصة بشركة روفالرا.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "مصدر مفتوح"
             },
             "roValra": {
                 "description": "[ترجمة المصطلح: Configuration]",
                 "joinServerForYouCard": {
-                    "title": "دع Crush ينضم إلى الخادم من أجلك",
-                    "description": "بدلاً من إجراء مطابقة Roblox، سنستخدم Rovalra API ونجد أفضل خادم."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "[ترجمة المصطلح: Installations]",
             "customVersion": {
                 "title": "تثبيت إصدار Roblox مخصص",
-                "description": "تخطي التحقق من التحديث وقم بتنزيل الإصدار. القيمة الافتراضية هي الأحدث. لن يتم تنزيل الإصدار غير الصالح وسيعود إلى أحدث إصدار."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "فرض إعادة تثبيت Roblox",
-                "description": "أعد تثبيت roblox في كل مرة تقوم فيها بتشغيله."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "لا تقم بتحديث Roblox",
-                "description": "تخطي تحديث Roblox وإطلاقه على الفور"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "أعلام سريعة",
-            "description": "إضافة/إزالة Roblox Fastflags والتكوينات.",
-            "generalBack": "العودة إلى fastflag",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "يُرجى اختيار إجراء.",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "مسبق التعيين",
-                    "description": "استخدم الإعداد المسبق لعلامة الميزة المدمج في السحق."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "اسم مُعلّم",
                     "texboxFlagValue": "القيمة",
                     "buttonAdd": "إضافة",
-                    "search": "البحث في جميع الأعلام...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "لم يتم العثور على علامات تطابق بحثك.",
                     "flagCol": {
                         "deleteNote": "حذف العلم.",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "الإعدادات المسبقة",
-                "description": "استخدم الإعداد المسبق للعلم السريع المدمج لدينا",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "جودة مقاومة التشويش (MSAA)",
                     "description": "ينعم الحواف المسننة. القيم الأعلى تبدو أفضل ولكنها قد تقلل من الأداء."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "إيقاف Voxelier مؤقتًا",
-                    "description": "يوقف الفوكسيلايز لتحسين الأداء"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "رسوم متحركة للتلويح بالعشب",
-                    "description": "يضبط شدة حركة العشب. (0 ليس اختزالًا، 999 أو أي رقم أعلى سيجمد العشب، 0 & 1 حركة منخفضة قليلاً وقيمة أكبر من 1 حركة منخفضة بشدة، تقترب من السكون)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "الكتابة فوق مستوى جودة القوام",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "تمكين الشبكات منخفضة الجودة",
-                    "description": " يحسّن الأداء"
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "إدارة وزارة الدفاع",
-                    "description": "إدارة تعديلاتك تعديلات Roblox.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "إضافة تعديل",
                     "noModsFound": "لم نجد أي تعديل هنا يا شباب.",
                     "noModsFoundCreateButton": "أنشئ أول تعديل لك",
@@ -256,7 +256,7 @@
                         "renameNote": "إعادة تسمية وزارة الدفاع",
                         "openFolderNote": "فتح مجلد التعديل",
                         "deleteNote": "حذف وزارة الدفاع",
-                        "layoutNote": "تخطيط التعديلات مستوحى من مدير تعديلات فروستراب",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "تمكين تحميل التعديل وتعيين موقع مجلد التعديل."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "خط مخصص",
-                        "description": "قم بتغيير خط roblox الخاص بك إلى ما تريد.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "تغيير الخط..."
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "مشرفو المجتمع",
                     "description": "استكشف التعديلات التي أنشأها المجتمع.",
                     "notice": {
-                        "title": "لا يوجد تعديل حتى الآن",
+                        "title": "No mods yet",
                         "description": "ليس لدينا أي تعديلات مجتمعية حتى الآن. كن أول من يساهم ويساعدنا على تنمية المجموعة!",
                         "submissionButton": "إرسال تعديل"
                     }
@@ -291,20 +291,20 @@
             "settings": "الإعدادات",
             "aboutCard": {
                 "title": "الموضوع",
-                "description": "معلومات حول بنية السحق هذه",
-                "note": "تذكر! Crush مجاني للاستخدام، أي شخص يحاول إعادة تصميمه وبيعه، يرجى إخبارنا بذلك في خادم Discord الخاص بنا!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "إتكل على, وثق ب-, تعلق ب-",
                 "commitHash": "خوارزمية \"هاش\" للإيداع",
                 "version": "تاريخ الإصدار:"
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "يجبرك على الانضمام مرة أخرى.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "إعادة ضبط"
             },
             "languageCard": {
                 "title": "اللغة",
-                "description": "حدد لغتك المفضلة للإعجاب."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "اهتزاز النافذة",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "قم بتبديل ما إذا كنت تريد إظهار ما تفعله باستخدام Discord RPC. يوصى بإعادة التشغيل."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "تَبرَّع ",
-                "description": "هل تحب الإعجاب ؟ تبرع لمالي لدعم عمله!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "تَبرَّع "
             }
         }

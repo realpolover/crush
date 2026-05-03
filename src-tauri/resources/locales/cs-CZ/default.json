@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "Roblox bootrapper psaný od nuly",
-        "integrations": "V intergrační trase",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "V instalační trase",
-        "fastflag": "V trase Fastflag",
+        "fastflag": "In Fast Flags Route",
         "mod": "In Mod Route",
         "appearance": "Trasa ve vzhledu",
         "rust": {
             "watcher": {
-                "general": "Hraní robloxu",
+                "general": "Playing Roblox",
                 "idle": "Není součástí",
                 "playing": "In"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "Vzhled",
             "description": "Přizpůsobte si vzhled a dojem z bootstrapperu Roblox.",
-            "boostrapThemeCard": {
-                "title": "Téma Bootstrapper",
-                "description": "Vyberte si mezi výchozím motivem Crush nebo vlastním motivem XML.",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "Výchozí (rozdrcení)",
-                    "custom": "Vlastní"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import nového souboru",
-                    "noThemes": "Zatím nebyly importovány žádné vlastní motivy.",
-                    "missingAssets": "Chybějící aktiva šablony"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "Integrace",
-            "description": "Konfigurace interakcí mimo roblox",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "Oznámení o umístění serveru",
-                "description": "Získejte upozornění, když se klient připojí k serveru."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (rozdrtit)",
-                "description": "Vyměňte Roblox Rich Presence za Crush's",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Umožněte lidem připojit se k vaší hře",
-                "option2": "Při hraní robloxu zobrazte svůj účet"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "HERNÍ HISTORIE",
@@ -77,20 +77,20 @@
                 "button": "Zobrazit"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "Lepší párování s RoValrou",
-                "description": "Rozdrcení má vestavěnou intergraci tvorby zápasu. Platí zásady ochrany osobních údajů společnosti RoValra.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "Otevřít"
             },
             "roValra": {
                 "description": "Konfigurace",
                 "joinServerForYouCard": {
-                    "title": "Nechte Crush připojit se k serveru za vás",
-                    "description": "Namísto vytváření shody Roblox použijeme rozhraní Rovalra API a najdeme nejlepší server."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "Instalace",
             "customVersion": {
                 "title": "Nainstalujte si vlastní verzi Robloxu",
-                "description": "Přeskočit kontrolu aktualizace a stáhnout verzi. Výchozí hodnota je nejnovější. Neplatná verze se nestáhne a přejde na nejnovější verzi."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Vynutit přeinstalaci Robloxu",
-                "description": "Roblox znovu nainstalujte pokaždé, když jej spustíte."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Neaktualizovat Roblox",
-                "description": "Přeskočit aktualizaci Robloxu a okamžitě spustit"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "Rychlé vlajky",
-            "description": "Přidat/odebrat Roblox Fastflags a konfigurace.",
-            "generalBack": "Zpět na fastflag",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "Vyberte akci:",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Předvolby",
-                    "description": "Použijte předvolbu příznaku funkce vestavěnou v crush."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "Název příznaku",
                     "texboxFlagValue": "Hodnota",
                     "buttonAdd": "Přidat",
-                    "search": "Prohledat všechny fflagy...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "Nebyly nalezeny žádné příznaky odpovídající vašemu vyhledávání.",
                     "flagCol": {
                         "deleteNote": "Smazat příznak",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "Přednastavení",
-                "description": "Použijte naši vestavěnou předvolbu rychlé vlajky",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "Anti-Aliasing Quality (MSAA)",
                     "description": "Vyhlazuje zubaté okraje. Vyšší hodnoty vypadají lépe, ale mohou snížit výkon."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pozastavit Voxelier",
-                    "description": "Zastavuje voxelizaci pro zlepšení výkonu"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "Animace mávání trávy",
-                    "description": "Upravuje intenzitu pohybu trávy. (0 je žádné snížení, 999 nebo vyšší číslo zmrazí trávu, 0 a 1 mírně snížený pohyb a hodnota větší než 1 je silně snížený pohyb, blížící se klid)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Přepsat úroveň kvality textury",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Povolit sítě nízké kvality",
-                    "description": "Může zlepšit výkonnost."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Správa modů",
-                    "description": "Spravujte své mody Roblox mods.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "Přidat mod",
                     "noModsFound": "Nenašli jsme zde žádné mody, Yuppies.",
                     "noModsFoundCreateButton": "Vytvořte si svůj první mod",
@@ -256,7 +256,7 @@
                         "renameNote": "Přejmenovat mod",
                         "openFolderNote": "Otevřít složku Mod",
                         "deleteNote": "Smazat mod",
-                        "layoutNote": "Rozvržení modů inspirované manažerem modů Frostrap",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Povolte načítání modů a nastavte umístění složky modů."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "Vlastní písmo",
-                        "description": "Změňte si písmo roblox na libovolné.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "Změnit písmo"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "Komunitní módy",
                     "description": "Prozkoumejte modifikace vytvořené komunitou.",
                     "notice": {
-                        "title": "Zatím žádný mod",
+                        "title": "No mods yet",
                         "description": "Zatím nemáme žádné komunitní módy. Buďte první, kdo přispěje a pomůže nám rozšiřovat kolekci!",
                         "submissionButton": "Odeslat mod"
                     }
@@ -291,20 +291,20 @@
             "settings": "Nastavení",
             "aboutCard": {
                 "title": "O nás",
-                "description": "Informace o této sestavě rozdrcení",
-                "note": "Pamatujte! Crush je zdarma k použití, každý, kdo se snaží reskin a prodat to, prosím, řekněte nám na našem serveru Discord!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "Postaveno na:  {date}",
                 "commitHash": "Odevzdat hash:  {hash}",
                 "version": "Verze:"
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Přinuť se k opětovnému nastoupení.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "Obnovit"
             },
             "languageCard": {
                 "title": "Jazyk",
-                "description": "Vyberte preferovaný jazyk pro zamilovanost."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "Živost okna",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "Přepněte, zda chcete zobrazit, co děláte pomocí Discord RPC. Doporučuje se restartovat."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "Přispět",
-                "description": "Láska zamilovanost? Darujte Mally na podporu jeho práce!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Přispět"
             }
         }

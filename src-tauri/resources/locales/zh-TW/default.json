@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "從頭開始寫的roblox bootrapper",
-        "integrations": "在集成路由中",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "在安裝路線中",
-        "fastflag": "在Fastflag路線中",
+        "fastflag": "In Fast Flags Route",
         "mod": "改裝配件路線中",
         "appearance": "外觀路線",
         "rust": {
             "watcher": {
-                "general": "玩roblox",
+                "general": "Playing Roblox",
                 "idle": "不屬於",
                 "playing": "在"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "外觀",
             "description": "自訂Roblox bootstrapper的外觀和感覺。",
-            "boostrapThemeCard": {
-                "title": "Bootstrapper主題",
-                "description": "在預設粉碎主題或自訂XML主題之間進行選擇。",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "預設（粉碎）",
-                    "custom": "自訂"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "匯入新檔",
-                    "noThemes": "尚未匯入自訂佈景主題。",
-                    "missingAssets": "缺少主題資產"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "串接",
-            "description": "在roblox外部配置集成",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "伺服器位置通知程式",
-                "description": "當用戶端連線到伺服器時，取得通知。"
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC （粉碎）",
-                "description": "用Crush's替換Roblox Rich Presence",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "讓其他人加入你的遊戲",
-                "option2": "播放roblox時顯示您的帳戶"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "你的遊戲紀錄",
@@ -77,20 +77,20 @@
                 "button": "查看"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "與RoValra更好地搭配",
-                "description": "粉碎有一個內置的匹配，使整合。RoValra的隱私政策適用。",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "開啟"
             },
             "roValra": {
                 "description": "設定",
                 "joinServerForYouCard": {
-                    "title": "讓Crush為你加入伺服器",
-                    "description": "我們不會使用Roblox配對，而是使用Rovalra API並尋找最佳伺服器。"
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "安裝",
             "customVersion": {
                 "title": "安裝自訂Roblox版本",
-                "description": "跳過更新檢查並下載版本。預設值為最新。無效版本將不會被下載，並將回退到最新版本。"
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "強制重新安裝Roblox",
-                "description": "每次啟動時重新安裝roblox。"
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "不要更新Roblox",
-                "description": "跳過Roblox更新並立即啟動"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "快速標記",
-            "description": "新增/移除Roblox Fastflags和配置。",
-            "generalBack": "返回fastflag",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "請選擇一個動作。",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "預置",
-                    "description": "使用內建CRUSH的圖徵旗標預設值。"
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "標記名稱",
                     "texboxFlagValue": "數值",
                     "buttonAdd": "新增",
-                    "search": "搜尋所有旗幟...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "找不到符合搜尋條件的旗標。",
                     "flagCol": {
                         "deleteNote": "刪除標記",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "預置",
-                "description": "使用我們的內建快速旗幟預設值",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "抗鋸齒品質(MSAA)",
                     "description": "平滑鋸齒邊緣。較高的值看起來更好，但可能會降低性能。"
                 },
                 "pauseVoxelizerCard": {
-                    "title": "暫停Voxelier",
-                    "description": "停止體素化以提高性能"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "草地揮舞動畫",
-                    "description": "調整草叢移動的強度。（ 0表示沒有減少， 999或任何更高的數字將凍結草叢， 0和1略微減少運動，大於1的值是強烈減少運動，接近靜止）"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "覆蓋紋理質量級別",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "啟用低品質網格",
-                    "description": "可能會提高性能。"
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "改裝配件管理",
-                    "description": "管理您的改裝配件Roblox改裝配件。",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "新增改裝配件",
                     "noModsFound": "我們在這裡找不到改裝配件，雅皮士。",
                     "noModsFoundCreateButton": "建立你的第一個改裝配件",
@@ -256,7 +256,7 @@
                         "renameNote": "重新命名改裝配件",
                         "openFolderNote": "開啟改裝配件資料夾",
                         "deleteNote": "刪除改裝配件",
-                        "layoutNote": "改裝配件佈局靈感來自Frostrap的改裝配件管理員",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "啟用MOD載入並設定MOD資料夾位置。"
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "自訂字體",
-                        "description": "將roblox字型變更為您喜歡的任何字型。",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "變更字型..."
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "社羣改裝配件",
                     "description": "探索社羣製作的改裝配件。",
                     "notice": {
-                        "title": "尚無改裝配件",
+                        "title": "No mods yet",
                         "description": "我們還沒有任何社羣改裝配件。成為第一個貢獻並幫助我們擴大收藏的人！",
                         "submissionButton": "送出改裝配件"
                     }
@@ -291,20 +291,20 @@
             "settings": "設定",
             "aboutCard": {
                 "title": "關於",
-                "description": "關於此粉碎版本的資訊",
-                "note": "請記住！ CRUSH是免費使用的，任何試圖重新包裝和銷售的人都可以在我們的Discord伺服器中告訴我們！",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "建置時間",
                 "commitHash": "提交哈希： # # #",
                 "version": "版本："
             },
             "onBoardCard": {
                 "title": "粉碎你好",
-                "description": "強制您再次註冊。",
+                "description": "Force the onboarding flow to run again.",
                 "button": "重新設定"
             },
             "languageCard": {
                 "title": "語言",
-                "description": "選擇粉碎的首選語言。"
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "窗戶活力",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "粉碎Discord RPC",
-                "description": "切換是否顯示你正在使用Discord RPC進行的操作。建議重新啟動。"
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "捐贈",
-                "description": "愛情迷戀？捐贈給Mally以支持他的工作！",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "捐贈"
             }
         }

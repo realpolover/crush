@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "Roblox Bootrapper, написаний з нуля",
-        "integrations": "In Intergrations Route",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "На шляху встановлення",
-        "fastflag": "У маршруті Fastflag",
+        "fastflag": "In Fast Flags Route",
         "mod": "In Mod Route",
         "appearance": "Зовнішній вигляд Маршрут",
         "rust": {
             "watcher": {
-                "general": "Гра Roblox",
+                "general": "Playing Roblox",
                 "idle": "Не в",
                 "playing": "Більше"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "Зовнішній вигляд",
             "description": "Налаштуйте зовнішній вигляд завантажувача Roblox.",
-            "boostrapThemeCard": {
-                "title": "Тема завантажувача",
-                "description": "Виберіть тему Crush за замовчуванням або користувацьку тему XML.",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "За замовчуванням (Тиснява)",
-                    "custom": "Налаштування користувача"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "Імпорт нової форми",
-                    "noThemes": "Користувацькі теми ще не імпортовані.",
-                    "missingAssets": "Відсутні ресурси теми"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "Інтеграції",
-            "description": "Інтеграція конфігурації поза Roblox",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "Повідомлення про розташування сервера",
-                "description": "Отримувати сповіщення, коли клієнт підключається до сервера."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (Тиснява)",
-                "description": "Замініть Roblox Rich Presence на Crush's",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Дозвольте людям приєднатися до вашої гри",
-                "option2": "Відображати свій обліковий запис під час гри в roblox"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "Історія вашої гри",
@@ -77,20 +77,20 @@
                 "button": "Вид"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "Краще підібрати відповідність за допомогою RoValra",
-                "description": "Тиснява має вбудовану інтеграцію для створення збігів. Застосовується Політика конфіденційності RoValra.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "Відкрити"
             },
             "roValra": {
                 "description": "Конфігурація",
                 "joinServerForYouCard": {
-                    "title": "Дозвольте Crush приєднатися до сервера для вас",
-                    "description": "Замість того, щоб створювати відповідності Roblox, ми будемо використовувати Rovalra API та знаходити найкращий сервер."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "Інсталяції",
             "customVersion": {
                 "title": "Встановіть спеціальну версію Roblox",
-                "description": "Пропустити перевірку оновлення та завантажити версію. Значення за замовчуванням є найпізнішим. Недійсна версія не буде завантажена і повернеться до останньої версії."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Примусово перевстановити Roblox",
-                "description": "Перевстановлюйте roblox щоразу, коли ви його запускаєте."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Не оновлювати Roblox",
-                "description": "Пропустити оновлення та миттєвий запуск Roblox"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "Швидкі прапорці",
-            "description": "Додавання/видалення прапорців Roblox Fast Flag та конфігурацій.",
-            "generalBack": "Назад до fastflag",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "Виберіть дію.",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Пресет",
-                    "description": "Використовуйте попередню установку прапорця функції, вбудовану при розчавленні."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "Назва прапора",
                     "texboxFlagValue": "Значення",
                     "buttonAdd": "Додати",
-                    "search": "Шукати всі f-флаги...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "Не знайдено прапорців, що відповідають вашому пошуковому запиту.",
                     "flagCol": {
                         "deleteNote": "Видалити прапор",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "Пресети",
-                "description": "Скористайтеся нашим вбудованим попереднім налаштуванням швидкого прапора",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "Якість згладжування (MSAA)",
                     "description": "Згладжує зубчасті краї. Вищі значення виглядають краще, але можуть знизити продуктивність."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Призупинити Voxelier",
-                    "description": "Зупиняє вокселізацію для підвищення продуктивності"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "Анімація розмаху трави",
-                    "description": "Регулює інтенсивність руху трави. (0 - це відсутність зменшення, 999 або будь-яке більш високе число заморозить траву, 0 & 1 трохи зменшить рух і значення, що перевищує 1, сильно зменшить рух, наближаючись до нерухомості)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Перезаписати рівень якості текстури",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Увімкнути сітки низької якості",
-                    "description": "Може покращувати продуктивність."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Управління модифікаціями",
-                    "description": "Керуйте своїми модами Roblox mods.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "Додати модифікацію",
                     "noModsFound": "Ми не знайшли тут ніяких модів, Яппі.",
                     "noModsFoundCreateButton": "Створіть свій перший мод",
@@ -256,7 +256,7 @@
                         "renameNote": "Перейменувати мод",
                         "openFolderNote": "Відкрити папку модифікації",
                         "deleteNote": "Видалити модифікацію",
-                        "layoutNote": "Макет модів натхненний менеджером модів Frostrap",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Увімкнути завантаження модифікації та встановити розташування папки модифікації."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "Користувацький шрифт",
-                        "description": "Змініть шрифт roblox на будь-який інший.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "Змінити шрифт"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "Моди спільноти",
                     "description": "Перегляньте моди, створені спільнотою.",
                     "notice": {
-                        "title": "Ще немає модифікації",
+                        "title": "No mods yet",
                         "description": "У нас ще немає модів спільноти. Будьте першими, хто зробить свій внесок і допоможе нам збільшити колекцію!",
                         "submissionButton": "Надіслати модифікацію"
                     }
@@ -291,20 +291,20 @@
             "settings": "Налаштування",
             "aboutCard": {
                 "title": "Про плагін",
-                "description": "Інформація про цю розчавлену збірку",
-                "note": "Пам 'ятайте! Crush можна використовувати безкоштовно, будь-хто, хто намагається переробити та продати його, будь ласка, повідомте нам про це на нашому сервері Discord!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "Дата випуску",
                 "commitHash": "Зафіксувати хеш:  {hash}",
                 "version": "Версія:"
             },
             "onBoardCard": {
                 "title": "Тиснява Привіт",
-                "description": "Примусьте вас знову піднятися на борт.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "Reset (Скид)"
             },
             "languageCard": {
                 "title": "Мова",
-                "description": "Виберіть потрібну мову для розчарування."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "Яскравість вікна",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Розім 'яти Discord RPC",
-                "description": "Увімкніть або вимкніть показ того, що ви робите за допомогою Discord RPC. Рекомендується перезапустити."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "Пожертвувати",
-                "description": "Любіть розчарування? Пожертвуйте Маллі, щоб підтримати його роботу!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Пожертвувати"
             }
         }

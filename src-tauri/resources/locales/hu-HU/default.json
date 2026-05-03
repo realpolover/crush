@@ -1,14 +1,14 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper a semmiből írva",
-        "integrations": "In Intergrations Route",
+        "general": "A Roblox bootstrapper written from scratch",
+        "integrations": "In Integrations Route",
         "installation": "Telepítési útvonalon",
-        "fastflag": "Fastflag-útvonalban",
+        "fastflag": "In Fast Flags Route",
         "mod": "Modális útvonalon",
         "appearance": "Megjelenési útvonalon",
         "rust": {
             "watcher": {
-                "general": "Roblox játék",
+                "general": "Playing Roblox",
                 "idle": "Nem szerepel a játékban",
                 "playing": "Be"
             }
@@ -44,32 +44,32 @@
         "appearance": {
             "appearance": "Megjelenés",
             "description": "Szabja testre a Roblox bootstrapper megjelenését és hangulatát.",
-            "boostrapThemeCard": {
-                "title": "Bootstrapper téma",
-                "description": "Válasszon az alapértelmezett Crush téma vagy egy egyéni XML téma között.",
+            "bootstrapThemeCard": {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "Alapértelmezett (Crush)",
-                    "custom": "Egyedi"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "Új megjegyzés importálása",
-                    "noThemes": "Még nincsenek egyéni témák importálva.",
-                    "missingAssets": "Hiányzó témaeszközök"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
             "integrations": "Integráció",
-            "description": "Konfigurációs intergrációk a robloxon kívül",
+            "description": "Configure integrations outside Roblox.",
             "serverNotifierCard": {
                 "title": "Kiszolgáló helyének értesítője",
-                "description": "Értesítést kap, amikor az ügyfél csatlakozik egy szerverhez."
+                "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Cserélje ki a Roblox Rich jelenlétet a Crush",
+                "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Engedd, hogy mások is csatlakozzanak a",
-                "option2": "Jelenítse meg fiókját roblox játék közben"
+                "option2": "Display your account when playing Roblox"
             },
             "gameHistoryCard": {
                 "title": "Játékelőzményeid",
@@ -77,20 +77,20 @@
                 "button": "Megtekintés"
             },
             "windowManipulationCard": {
-                "title": "Window manipulation (Perviously Interactive API)",
-                "description": "Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way how BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (Previously Interactive API)",
+                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
                 "button": "Open"
             },
             "roValraCard": {
-                "title": "Jobb párosítás a RoValra-val",
-                "description": "A Crush beépített egyezés-készítő intergrációval rendelkezik. A RoValra adatvédelmi irányelvei érvényesek.",
+                "title": "Better Matchmaking with RoValra",
+                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
                 "button": "Nyitva"
             },
             "roValra": {
                 "description": "Konfiguráció",
                 "joinServerForYouCard": {
-                    "title": "Hagyja, hogy a Crush csatlakozzon az Ön szerveréhez",
-                    "description": "A Roblox párosítás helyett a Rovalra API-t használjuk, és megtaláljuk a legjobb szervert."
+                    "title": "Let Crush join a server for you",
+                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
                 }
             },
             "gameHistory": {
@@ -108,8 +108,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window manipulation settings",
-                "description": "Configure how Window manipulation should act.",
+                "title": "Window Manipulation Settings",
+                "description": "Configure how Window Manipulation should behave.",
                 "enableCard": {
                     "title": "Enable",
                     "description": "Choose whether or not to enable Window Manipulation."
@@ -121,46 +121,46 @@
                         "title": "Scopes",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whenther or not enable mimimize control via Window Manipulation."
+                            "description": "Whether or not to enable minimize control via Window Manipulation."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whenther or not enable maximize control via Window Manipulation."
+                            "description": "Whether or not to enable maximize control via Window Manipulation."
                         },
                         "focusCard": {
                             "title": "Focus",
-                            "description": "Whenther or not enable focus control via Window Manipulation."
+                            "description": "Whether or not to enable focus control via Window Manipulation."
                         },
                         "moveWindowCard": {
                             "title": "Move Window",
-                            "description": "Whenther or not enable move window control via Window Manipulation."
+                            "description": "Whether or not to enable move window control via Window Manipulation."
                         },
                         "restoreCard": {
                             "title": "Restore",
-                            "description": "Whenther or not enable restore control via Window Manipulation."
+                            "description": "Whether or not to enable restore control via Window Manipulation."
                         },
                         "setWindowTitleCard": {
                             "title": "Set window title",
-                            "description": "Whenther or not enable set window title control via Window Manipulation"
+                            "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
                             "title": "Set borderless",
-                            "description": "Whenther or not enable borderless of the window control via Window Manipulation."
+                            "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
                         "title": "Transparency Settings",
                         "enableCard": {
                             "title": "Enable",
-                            "description": "Whenther or not transparency control via Interactive API."
+                            "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum of how transparency of your window would get."
+                            "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum of how transparency of your window would get."
+                            "description": "The maximum transparency level your window can reach."
                         }
                     }
                 }
@@ -170,21 +170,21 @@
             "installations": "Létesítmények",
             "customVersion": {
                 "title": "Telepítsen egy egyedi Roblox verziót",
-                "description": "Hagyja ki a frissítés ellenőrzését és töltse le a verziót. Az alapértelmezett érték a legfrissebb. Az érvénytelen verzió nem lesz letöltve, és visszalép a legújabb verzióra."
+                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
             "forceReinstallCard": {
                 "title": "Roblox újratelepítésének kényszerítése",
-                "description": "Telepítse újra a robloxot minden indításkor."
+                "description": "Reinstall Roblox every time you launch it."
             },
             "dontUpdateCard": {
                 "title": "Ne frissítse a Robloxot",
-                "description": "A Roblox frissítésének kihagyása és azonnali elindítása"
+                "description": "Skip the Roblox update check and launch instantly."
             }
         },
         "fastflag": {
             "fastflag": "Gyorsjelzők",
-            "description": "Roblox Fastflagek és konfigurációk hozzáadása/eltávolítása.",
-            "generalBack": "Vissza a fastflaghez",
+            "description": "Add/Remove Roblox Fast Flags and configurations.",
+            "generalBack": "Back to Fast Flags",
             "selectScreeen": {
                 "title": "Válasszon ki egy műveletet.",
                 "editCard": {
@@ -193,7 +193,7 @@
                 },
                 "presetCard": {
                     "title": "Előre beállított tételek",
-                    "description": "Használja a Feature Flag Preset beépített összetörést."
+                    "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
@@ -201,7 +201,7 @@
                     "texboxFlagName": "Jelölő neve",
                     "texboxFlagValue": "Érték",
                     "buttonAdd": "Hozzáadás",
-                    "search": "Keresés az összes fflagben...",
+                    "search": "Search all fast flags...",
                     "searchNotFound": "Nem található a keresésnek megfelelő jelző.",
                     "flagCol": {
                         "deleteNote": "Jelző törlése",
@@ -213,18 +213,18 @@
             },
             "preset": {
                 "preset": "Előre megadott értékek",
-                "description": "Használja beépített gyorszászlós előbeállításunkat",
+                "description": "Use our built-in fast flag presets.",
                 "msaaCard": {
                     "title": "Anti-Aliasing Quality (MSAA)",
                     "description": "Simítja a szaggatott éleket. A magasabb értékek jobban néznek ki, de csökkenthetik a teljesítményt."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Voxelier szüneteltetése",
-                    "description": "Leállítja a voxelizációt a teljesítmény javítása érdekében"
+                    "title": "Pause Voxelizer",
+                    "description": "Stops voxelization to improve performance."
                 },
                 "grassAnimationCard": {
                     "title": "Fű integető animáció",
-                    "description": "Beállítja a fű mozgásának intenzitását. (A 0 nem csökken, a 999 vagy annál nagyobb szám megfagyasztja a füvet, a 0 és 1 kissé csökkent mozgás és az 1-nél nagyobb érték erősen csökkent mozgás, közeledik a csendhez)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Textúraminőségi szint felülírása",
@@ -233,11 +233,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Gyenge minőségű hálók engedélyezése",
-                    "description": "Javíthatja a teljesítményt."
+                    "description": "May improve performance."
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Change the sky to gray, may improve performance."
+                    "description": "Changes the sky to gray. May improve performance."
                 }
             }
         },
@@ -246,7 +246,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Mod menedzsment",
-                    "description": "A Roblox modok kezelése.",
+                    "description": "Manage your Roblox mods.",
                     "addModButton": "Mod hozzáadása",
                     "noModsFound": "Itt nem találtunk modokat, Yuppies.",
                     "noModsFoundCreateButton": "Hozd létre az első mododat",
@@ -256,7 +256,7 @@
                         "renameNote": "Mod átnevezése",
                         "openFolderNote": "Mod mappa megnyitása",
                         "deleteNote": "Mod törlése",
-                        "layoutNote": "A Frostrap mod menedzsere által ihletett mod elrendezés",
+                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Engedélyezze a mod betöltését és állítsa be a mod mappa helyét."
                     }
                 },
@@ -272,7 +272,7 @@
                     },
                     "customFontCard": {
                         "title": "Egyedi betűtípus",
-                        "description": "Módosítsd a roblox betűtípusát arra, amire szeretnéd.",
+                        "description": "Change your Roblox font to whatever you like.",
                         "button": "Betűtípus módosítása"
                     }
                 },
@@ -280,7 +280,7 @@
                     "title": "Közösségi módok",
                     "description": "Fedezd fel a közösség által létrehozott módosításokat.",
                     "notice": {
-                        "title": "Még nincs mod.",
+                        "title": "No mods yet",
                         "description": "Még nincsenek közösségi modjaink. Legyen Ön az első, aki hozzájárul és segítsen bővíteni a kollekciót!",
                         "submissionButton": "Mod beküldése"
                     }
@@ -291,20 +291,20 @@
             "settings": "Beállítások",
             "aboutCard": {
                 "title": "Névjegy",
-                "description": "Információ erről a zúzó építményről",
-                "note": "Ne feledje! A Crush ingyenesen használható, bárki, aki megpróbálja újra és eladni, kérjük, mondja el nekünk a Discord szerverünkön!",
+                "description": "Information about this Crush build.",
+                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
                 "builtOn": "Beépítve:  {date}",
                 "commitHash": "Hash végrehajtása:  {hash}",
                 "version": "Változat:"
             },
             "onBoardCard": {
                 "title": "Halló összetörése",
-                "description": "Kényszerít, hogy újra a fedélzetre lépj.",
+                "description": "Force the onboarding flow to run again.",
                 "button": "Visszaállítás"
             },
             "languageCard": {
                 "title": "Nyelv",
-                "description": "Válassza ki a crush kívánt nyelvét."
+                "description": "Select your preferred language for Crush."
             },
             "windowVibrancyCard": {
                 "title": "Ablakélénkség",
@@ -312,11 +312,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Zúzza össze a Discord RPC-t",
-                "description": "Kapcsolja be, hogy megjelenjen-e a Discord RPC használata. Javasoljuk az újraindítást."
+                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "donateCard": {
                 "title": "Adományozás",
-                "description": "Szerelmes vagy? Támogasd Mallyt a munkájában!",
+                "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Adományozás"
             }
         }
