@@ -121,8 +121,8 @@
         </ExpandableSettingCard>
 
         <SettingCard
-            title="Window manipulation (Perviously Interactive API)"
-            description="Let supported game move your window, resize, notify, interact with your hardware. Only support games with window manipulation only! not all game works. Inspired by the way BloxstrapRPC work."
+            title={$_("pages.integrations.windowManipulationCard.title")}
+            description={$_("pages.integrations.windowManipulationCard.description")}
             icon={CodeXml}
         >
             <Button
@@ -132,7 +132,7 @@
                     goto('integrations/interactiveSettings')
                 }}
             >
-                Open
+                {$_("pages.integrations.windowManipulationCard.button")}
             </Button>
         </SettingCard>
 

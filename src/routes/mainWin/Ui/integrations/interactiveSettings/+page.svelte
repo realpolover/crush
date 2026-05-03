@@ -103,10 +103,10 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Interactive API settings
+                {$_("pages.integrations.windowManipulation.title")}
             </h1>
             <p class="text-stone-400 mt-1">
-                Configure how Interactive API should act.
+                {$_("pages.integrations.windowManipulation.description")}
             </p>
         </div>
         <div class="flex items-center gap-2">
@@ -117,8 +117,8 @@
     </div>
 
     <SettingCard
-        title="Enable"
-        description="Choose whether or not to enable Interactive API."
+        title={$_("pages.integrations.windowManipulation.enableCard.title")}
+        description={$_("pages.integrations.windowManipulation.enableCard.description")}
     >
         <Switch slot="action" bind:checked={interactAPIValue} on:change={handleChanges} />
     </SettingCard>
@@ -126,61 +126,61 @@
     <div class="flex flex-col gap-3">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Advanced
+                {$_("pages.integrations.windowManipulation.title")}
             </h1>
-            <p class="text-stone-400 mt-1">Deeply configure Interactive API.</p>
+            <p class="text-stone-400 mt-1">{$_("pages.integrations.windowManipulation.description")}</p>
         </div>
 
         <div class="flex flex-col gap-2">
             <h1 class="text-2xl font-bold tracking-tight text-stone-100">
-                Scopes
+                {$_("pages.integrations.windowManipulation.advanced.scopes.title")}
             </h1>
 
             <SettingCard
-                title="Minimize"
-                description="Whenther or not enable mimimize control via Interactive API."
+                title={$_("pages.integrations.windowManipulation.advanced.scopes.minimizeCard.title")}
+                description={$_("pages.integrations.windowManipulation.advanced.scopes.minimizeCard.description")}
             >
                 <Switch slot="action" bind:checked={mimimizeValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
 
             <SettingCard
-                title="Maximize"
-                description="Whenther or not enable maximize control via Interactive API."
+                title={$_("pages.integrations.windowManipulation.advanced.scopes.maximizeCard.title")}
+                description={$_("pages.integrations.windowManipulation.advanced.scopes.maximizeCard.description")}
             >
                 <Switch slot="action" bind:checked={maximizeValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
 
             <SettingCard
-                title="Focus"
-                description="Whenther or not enable focus control via Interactive API."
+                title={$_("pages.integrations.windowManipulation.advanced.scopes.focusCard.title")}
+                description={$_("pages.integrations.windowManipulation.advanced.scopes.focusCard.description")}
             >
                 <Switch slot="action" bind:checked={focusValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
 
             <SettingCard
-                title="Move Window"
-                description="Whenther or not enable move window control via Interactive API."
+                title={$_("pages.integrations.windowManipulation.advanced.scopes.moveWindowCard.title")}
+                description={$_("pages.integrations.windowManipulation.advanced.scopes.moveWindowCard.description")}
             >
                 <Switch slot="action" bind:checked={moveWindowValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
 
             <SettingCard
-                title="Restore"
-                description="Whenther or not enable restore control via Interactive API."
+                title={$_("pages.integrations.windowManipulation.advanced.scopes.moveWindowCard.title")}
+                description={$_("pages.integrations.windowManipulation.advanced.scopes.moveWindowCard.description")}
             >
                 <Switch slot="action" bind:checked={restoreValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
 
             <SettingCard
-                title="Set window title"
-                description="Whenther or not enable set window title control via Interactive API."
+                title={$_("pages.integrations.windowManipulation.advanced.scopes.setWindowTitleCard.title")}
+                description={$_("pages.integrations.windowManipulation.advanced.scopes.setWindowTitleCard.description")}
             >
                 <Switch slot="action" bind:checked={windowTitleValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
 
             <SettingCard
-                title="Set borderless"
-                description="Whenther or not enable borderless of the window control via Interactive API."
+                title={$_("pages.integrations.windowManipulation.advanced.scopes.setBorderless.title")}
+                description={$_("pages.integrations.windowManipulation.advanced.scopes.setBorderless.description")}
             >
                 <Switch slot="action" bind:checked={borderlessValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
@@ -188,26 +188,26 @@
 
         <div class="flex flex-col gap-2">
             <h1 class="text-2xl font-bold tracking-tight text-stone-100">
-                Transparency Settings
+                {$_("pages.integrations.windowManipulation.advanced.transparencySettings.title")}
             </h1>
 
             <SettingCard
-                title="Enable"
-                description="Whenther or not transparency control via Interactive API."
+                title={$_("pages.integrations.windowManipulation.advanced.transparencySettings.enableCard.title")}
+                description={$_("pages.integrations.windowManipulation.advanced.transparencySettings.enableCard.description")}
             >
                 <Switch slot="action" bind:checked={transparencyValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
 
             <SettingCard
-                title="Min transparency"
-                description="The minimum of how transparency of your window would get."
+                title={$_("pages.integrations.windowManipulation.advanced.transparencySettings.minTransparency.title")}
+                description={$_("pages.integrations.windowManipulation.advanced.transparencySettings.minTransparency.description")}
             >
                 <Textbox slot="action" bind:value={minimumTransValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
 
             <SettingCard
-                title="Max transparency"
-                description="The maximum of how transparency of your window would get."
+                title={$_("pages.integrations.windowManipulation.advanced.transparencySettings.maxTransparency.title")}
+                description={$_("pages.integrations.windowManipulation.advanced.transparencySettings.maxTransparency.description")}
             >
                 <Textbox slot="action" bind:value={maximizeTransValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
