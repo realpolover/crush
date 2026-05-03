@@ -1,38 +1,42 @@
 # Crush
 
 [![Discord][discordBadge]][discord]
-[![tauri][tauriBadge]][tauri]
+[![Tauri][tauriBadge]][tauri]
 [![Rust][rustBadge]][rust]
 [![Svelte][svelteBadge]][svelte]
-[![tailwindcss][tailwindcssBadge]][tailwindcss]
-[![jules][julesBadge]][jules]
+[![TailwindCSS][tailwindcssBadge]][tailwindcss]
+[![Jules][julesBadge]][jules]
 
-> [!NOTE]
-> There is a [Gitea mirror](https://git.mally.qzz.io/Mally/crush) from my homelab.
+> **Note**
+> A Gitea mirror is available from my homelab: https://git.mally.qzz.io/Mally/crush
 
-Crush is a Roblox Boostrapper written from scratch, inpsired by many other boostrappers.
+Crush is a Roblox bootstrapper written from scratch, inspired by many other bootstrappers.
 
 <img src="./demo.gif" />
 
-Crush is now available to use. Download using the latest release.
-Made with Tauri + Svelte.
+Crush is now available! You can download it from the latest release.
+Built with **Tauri + Svelte**.
 
-# Features
-- Not a bloxstrap fork
-- Fastflag editor (Preset & Editing)
-- Better Discord Rich Presence
-- Server join notifier
-- View game history
-- Disable roblox update
-- Download a roblox version and use it (Not all versions work)
-- Bootstrap Theme
-- Config importing for bloxstrap based forks
-- Modding and such
-- Better Match Making (using RoVlara apis, Submission by Yuki)
+## Features
 
-# Crush's speed
-Crush is faster than bloxstrap! Check it out [here.](/tests/speed.md)
+* Not a Bloxstrap fork
+* FastFlag editor (presets + manual editing)
+* Improved Discord Rich Presence
+* Server join notifications
+* View game history
+* Option to disable Roblox updates
+* Download and use specific Roblox versions *(note: not all versions work)*
+* Custom bootstrap themes
+* Import configs from Bloxstrap-based forks
+* Modding support and more
+* Improved matchmaking *(uses RoValra APIs, submitted by Yuki)*
 
+## Performance
+
+Crush is faster than Bloxstrap!
+See benchmark results here: [tests/speed.md](./tests/speed.md)
+
+## Badges
 
 [discordBadge]: https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white
 [rustBadge]: https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white
@@ -41,6 +45,7 @@ Crush is faster than bloxstrap! Check it out [here.](/tests/speed.md)
 [tauriBadge]: https://img.shields.io/badge/tauri-%2324C8DB.svg?style=for-the-badge&logo=tauri&logoColor=%23FFFFFF
 [julesBadge]: https://img.shields.io/badge/jules-purple?style=for-the-badge&logo=googlejules
 
+## Links
 
 [tailwindcss]: https://tailwindcss.com/
 [tauri]: https://tauri.app/
