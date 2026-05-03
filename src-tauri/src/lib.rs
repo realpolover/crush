@@ -114,7 +114,8 @@ fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
 
 fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
-    let menu = Menu::with_items(app, &[&quit_i])?;
+    let open_i = MenuItem::with_id(app, "open", "Open", true, None::<&str>)?;
+    let menu = Menu::with_items(app, &[&open_i, &quit_i])?;
 
     let mut tray_builder = TrayIconBuilder::new();
 
@@ -128,6 +129,16 @@ fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
         .on_menu_event(|app, event| {
             if event.id.as_ref() == "quit" {
                 app.exit(0);
+            }
+            if event.id.as_ref() == "open" {
+                let window = app
+                    .get_webview_window("CrushMainWindow")
+                    .or_else(|| app.get_webview_window("crushBoostrapChoiceWindow"));
+
+                if let Some(window) = window {
+                    let _ = window.show();
+                    let _ = window.set_focus();
+                }
             }
         })
         .on_tray_icon_event(|tray, event| {
