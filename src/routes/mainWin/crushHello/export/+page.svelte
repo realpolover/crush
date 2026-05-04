@@ -41,7 +41,8 @@
             const newInstallation: Installation = {
                 version: "latest",
                 forceReinstall: false,
-                dontUpdate: boostraperConfig.UpdateRoblox ?? false
+                dontUpdate: boostraperConfig.UpdateRoblox ?? false,
+                parallel: 4
             }
 
             config.set('discordRpcEnabled', boostraperConfig.ShowUsingFroststrapRPC ?? boostraperConfig.VoidRPC ?? true)
