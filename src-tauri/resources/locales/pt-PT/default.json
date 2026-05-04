@@ -172,6 +172,10 @@
                 "title": "Instale uma versão personalizada do Roblox",
                 "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
             },
+            "parallelDownloadingCard": {
+                "title": "Parallel Downloading",
+                "description": "Download multiple assets instead of one at a time. Default is 4."
+            },
             "forceReinstallCard": {
                 "title": "Forçar reinstalação do Roblox",
                 "description": "Reinstall Roblox every time you launch it."
