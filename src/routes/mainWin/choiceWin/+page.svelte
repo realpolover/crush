@@ -144,7 +144,7 @@
                     </span>
                 </button>
 
-                <div class="w-px bg-stone-800 flex-shrink-0"></div>
+                <div class="w-px bg-stone-800 shrink-0"></div>
 
                 <button
                     on:click={() => (showVariantMenu = !showVariantMenu)}
@@ -161,7 +161,7 @@
 
             {#if showVariantMenu}
                 <div
-                    class="absolute top-full right-0 mt-1 z-50 bg-stone-900 border border-stone-800 rounded-lg p-1 flex flex-col gap-0.5 min-w-[140px]"
+                    class="absolute top-full right-0 mt-1 z-50 bg-stone-900 border border-stone-800 rounded-lg p-1 flex flex-col gap-0.5 min-w-35"
                 >
                     <button
                         on:click={() => {

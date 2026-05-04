@@ -7,9 +7,8 @@ use serde::Deserialize;
 use serde_json::{Value, json};
 use windows::Win32::Foundation::HWND;
 use std::path::Path;
-use crate::interactive::{set_transparency, find_windows_by_title, move_window, get_window_rect, set_window_title};
+use crate::interactive::{set_transparency, find_windows_by_title, move_window, set_window_title};
 use std::sync::{OnceLock, atomic::{AtomicBool, Ordering}};
-use std::thread::{self, sleep};
 use std::{fs::File, io::{BufRead, BufReader, Seek, SeekFrom}, path::PathBuf, time::{Duration, Instant}};
 use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager};
@@ -381,7 +380,7 @@ async fn on_joined(
     send_location_notification(app, state, store).await?;
 
     if integration_enabled(store, &["discordRpc", "enable"]) {
-        update_discord_rpc(app, state, place_id, store).await?;
+        update_discord_rpc(app, state, place_id).await?;
     }
 
     Ok(())
@@ -514,7 +513,7 @@ async fn on_bloxstrap_rpc(
         }
 
         "StartWindow" => {
-            if let Some(hwnd) = get_or_find_hwnd(state) {
+            if let Some(_hwnd) = get_or_find_hwnd(state) {
                 state.window_started = true;
                 log::info!("BloxstrapRPC: StartWindow acknowledged");
             }
@@ -614,8 +613,8 @@ fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(
         static TABLE: OnceLock<[u32; 256]> = OnceLock::new();
         let table = TABLE.get_or_init(|| {
             let mut t = [0u32; 256];
-            for i in 0..256 {
-                let mut c = i as u32;
+            for (i, val) in t.clone().iter().enumerate() {
+                let mut c = *val as u32;
                 for _ in 0..8 {
                     c = if c & 1 != 0 { 0xedb88320 ^ (c >> 1) } else { c >> 1 };
                 }
@@ -735,7 +734,6 @@ async fn update_discord_rpc(
     app: &AppHandle,
     state: &mut WatcherState,
     place_id: u64,
-    store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
     let now = Instant::now();
     if state.last_rpc.is_some_and(|t| now.duration_since(t).as_secs() <= 2) {

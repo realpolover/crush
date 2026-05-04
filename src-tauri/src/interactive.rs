@@ -1,5 +1,5 @@
 use windows::{
-    core::{PSTR, PCSTR},
+    core::{PCSTR},
     Win32::Foundation::{COLORREF, HWND, LPARAM, RECT},
     Win32::UI::WindowsAndMessaging::{
         EnumWindows, GetWindowTextA, GetWindowRect, IsWindowVisible,
@@ -59,7 +59,7 @@ pub fn find_windows_by_title(keyword: &str) -> Vec<HWND> {
     };
 
     unsafe {
-        EnumWindows(
+        let _ = EnumWindows(
             Some(enum_windows),
             LPARAM(&mut data as *mut _ as isize),
         );
@@ -70,7 +70,7 @@ pub fn find_windows_by_title(keyword: &str) -> Vec<HWND> {
 
 pub fn move_window(hwnd: HWND, x: i32, y: i32, width: i32, height: i32) {
     unsafe {
-        SetWindowPos(
+        let _ = SetWindowPos(
             hwnd,
             Some(HWND(std::ptr::null_mut())),
             x,
@@ -84,25 +84,25 @@ pub fn move_window(hwnd: HWND, x: i32, y: i32, width: i32, height: i32) {
 
 pub fn minimize_window(hwnd: HWND) {
     unsafe {
-        ShowWindow(hwnd, SW_MINIMIZE);
+        let _ = ShowWindow(hwnd, SW_MINIMIZE);
     }
 }
 
 pub fn maximize_window(hwnd: HWND) {
     unsafe {
-        ShowWindow(hwnd, SW_MAXIMIZE);
+        let _ = ShowWindow(hwnd, SW_MAXIMIZE);
     }
 }
 
 pub fn restore_window(hwnd: HWND) {
     unsafe {
-        ShowWindow(hwnd, SW_RESTORE);
+        let _ = ShowWindow(hwnd, SW_RESTORE);
     }
 }
 
 pub fn focus_window(hwnd: HWND) {
     unsafe {
-        SetForegroundWindow(hwnd);
+        let _ = SetForegroundWindow(hwnd);
     }
 }
 
@@ -127,7 +127,7 @@ pub fn set_window_title(hwnd: HWND, title: &str) {
     bytes.push(0);
 
     unsafe {
-        SetWindowTextA(hwnd, PCSTR(bytes.as_ptr()));
+        let _ = SetWindowTextA(hwnd, PCSTR(bytes.as_ptr()));
     }
 }
 
@@ -147,7 +147,7 @@ pub fn set_borderless(hwnd: HWND, enabled: bool) {
 
         SetWindowLongA(hwnd, GWL_STYLE, style);
 
-        SetWindowPos(
+        let _ = SetWindowPos(
             hwnd,
                 Some(HWND(std::ptr::null_mut())),
             0,
