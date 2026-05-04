@@ -291,15 +291,18 @@ async function completeInstallation(
 async function performFullInstallation(
     onProgress: ProgressCallback,
     appType: AppType = 'player',
-    version?: string
+    version?: string,
 ): Promise<string> {
+    const store = await load('config.json')
     const assetsUrls = await getInstallationUrls(onProgress, appType, version)
+    const installation = await store.get<Installation>('installation')
+    const limit = installation?.parallel ?? 4
 
     onProgress({
         type: 'status',
         message: get(_)('typescript.downloader.downloadingAssets'),
     })
-    await downloadAssets(assetsUrls, onProgress)
+    await downloadAssets(assetsUrls, onProgress, limit)
 
     const versionHash =
         assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'

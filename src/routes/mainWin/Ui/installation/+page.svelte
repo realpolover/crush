@@ -4,6 +4,7 @@
     import Textbox from '$lib/components/atoms/Textbox.svelte'
     import {
         CircleFadingArrowUp,
+        Folders,
         HardDriveDownload,
         Rocket,
     } from '@lucide/svelte'
@@ -16,6 +17,7 @@
     let version: string
     let forceReinstall: boolean
     let dontUpdate: boolean
+    let parallel: number
 
     async function loadConfig() {
         const store = await load('config.json')
@@ -25,6 +27,7 @@
             version = savedInstallation.version ?? 'latest'
             forceReinstall = savedInstallation.forceReinstall ?? false
             dontUpdate = savedInstallation.dontUpdate ?? false
+            parallel = savedInstallation.parallel ?? 4
         }
     }
 
@@ -35,7 +38,7 @@
             details: $_('rpc.general'),
             stateText: $_('rpc.installation'),
         })
-        
+
         await loadConfig()
         console.log('loaded')
     })
@@ -46,6 +49,7 @@
             version,
             forceReinstall,
             dontUpdate,
+            parallel,
         }
 
         await store.set('installation', newInstallation)
@@ -76,6 +80,19 @@
                 slot="action"
                 class="w-48 h-8 text-sm"
                 bind:value={version}
+                on:change={handleChanges}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title={$_("pages.installations.parallelDownloadingCard.title")}
+            description={$_("pages.installations.parallelDownloadingCard.description")}
+            icon={Folders}
+        >
+            <Textbox
+                slot="action"
+                class="w-30 h-8 text-sm"
+                bind:value={parallel}
                 on:change={handleChanges}
             />
         </SettingCard>
