@@ -106,7 +106,7 @@
             await win.center()
         }
 
-        await invoke('set_rpc', {
+        invoke('set_rpc', {
             details: $_('rpc.general'),
             stateText: 'Loading...',
         })

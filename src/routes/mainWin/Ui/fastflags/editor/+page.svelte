@@ -34,7 +34,7 @@
 
         console.log('Current fast flags:', flags)
 
-        await invoke('set_rpc', {
+        invoke('set_rpc', {
             details: $_('rpc.general'),
             stateText: $_('rpc.fastflag'),
         })

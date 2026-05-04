@@ -40,7 +40,7 @@
     onMount(async () => {
         await loadConfig()
 
-        await invoke('set_rpc', {
+        invoke('set_rpc', {
             details: $_('rpc.general'),
             stateText: $_('rpc.integrations'),
         })
