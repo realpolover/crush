@@ -24,7 +24,7 @@
     import { info } from '@tauri-apps/plugin-log'
     import { getBestServers } from '$lib/rovalraHelper/rovalra'
     import { parseRobloxDeepLink, rebuildDeeplink } from '$lib/robloxDeepLink'
-    import { Window } from '@tauri-apps/api/window';
+    import { Window } from '@tauri-apps/api/window'
     import { launchAppType } from '$lib/stores/launchAppType'
 
     let state: ThemeState | null = null
@@ -110,7 +110,7 @@
         await win.show()
     }
 
-   async function runBootstrap() {
+    async function runBootstrap() {
         error = false
         errorMessage = ''
         done = false
@@ -124,10 +124,10 @@
             const appType = url.startsWith('roblox-player:')
                 ? 'player'
                 : url.startsWith('roblox-studio:')
-                ? 'studio'
-                : $launchAppType === 'studio'
-                ? 'studio'
-                : 'player'
+                  ? 'studio'
+                  : $launchAppType === 'studio'
+                    ? 'studio'
+                    : 'player'
 
             const version = await downloadRoblox(
                 handleProgress,
@@ -172,9 +172,11 @@
 
         const launchUrl = new URL(parsed.placelauncherurl)
         const request = launchUrl.searchParams.get('request')
-        const joinServerForYou = integrations?.roValra?.joinServerForYouValue ?? false
+        const joinServerForYou =
+            integrations?.roValra?.joinServerForYouValue ?? false
 
-        const isSpecialRequest = request === 'RequestFollowUser' || request === 'RequestPrivateGame'
+        const isSpecialRequest =
+            request === 'RequestFollowUser' || request === 'RequestPrivateGame'
         if (isSpecialRequest || !joinServerForYou || parsed.placeId == null) {
             info(`Launching with url: ${url}`)
             return launchPlayer(version, url)
@@ -187,7 +189,11 @@
             return launchPlayer(version, url)
         }
 
-        const finalUrl = rebuildDeeplink(parsed, parsed.placeId, bestServer.server_id)
+        const finalUrl = rebuildDeeplink(
+            parsed,
+            parsed.placeId,
+            bestServer.server_id
+        )
         return launchPlayer(version, finalUrl)
     }
 
@@ -208,9 +214,8 @@
             return
         }
 
-
-        const choiceWin = await Window.getByLabel('crushBoostrapChoiceWindow');
-        await choiceWin?.close();
+        const choiceWin = await Window.getByLabel('crushBoostrapChoiceWindow')
+        await choiceWin?.close()
 
         setTimeout(() => {
             win.close()
@@ -236,7 +241,7 @@
     })
 
     function sleep(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+        return new Promise((resolve) => setTimeout(resolve, ms))
     }
 
     function getPosStyle(h?: string, v?: string) {
@@ -325,7 +330,9 @@
         <div
             class="relative overflow-hidden h-screen w-screen"
             style="
-                background:{isDark ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)'};
+                background:{isDark
+                ? 'rgba(0,0,0,0.8)'
+                : 'rgba(255,255,255,0.8)'};
                 color:{isDark ? '#fff' : '#000'};
                 border-radius:{noRound ? '0' : '8px'};
             "
