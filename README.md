@@ -14,12 +14,15 @@ Crush is a Roblox bootstrapper written from scratch, inspired by many other boot
 
 <img src="./demo.gif" />
 
+*Recorded using [openscreen](https://github.com/siddharthvaddem/openscreen).*
+
 Crush is now available! You can download it from the latest release.
 Built with **Tauri + Svelte**.
 
 ## Features
 
 * Not a Bloxstrap fork
+* Both Studio & Player Support
 * FastFlag editor (presets + manual editing)
 * Improved Discord Rich Presence
 * Server join notifications
@@ -29,6 +32,7 @@ Built with **Tauri + Svelte**.
 * Custom bootstrap themes
 * Import configs from Bloxstrap-based forks
 * Modding support and more
+* Window Manipulation (Feature by Funkstrap)
 * Improved matchmaking *(uses RoValra APIs, submitted by Yuki)*
 
 ## Performance
