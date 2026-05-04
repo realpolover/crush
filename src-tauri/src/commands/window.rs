@@ -50,6 +50,14 @@ pub async fn create_or_focus_window(
     if let Some(window) = app.get_webview_window(&label) {
         window.show().map_err(|e| e.to_string())?;
         window.set_focus().map_err(|e| e.to_string())?;
+
+        let effect = app.get_store("config.json")
+            .and_then(|store| store.get("vibrancy"))
+            .and_then(|v| v.as_str().map(|s| s.to_string()))
+            .unwrap_or_else(|| "auto".to_string());
+
+        apply_vibrancy_to_window(&window, &effect);
+
         return Ok(());
     }
 

@@ -115,7 +115,7 @@
 </script>
 
 <div
-    class="flex flex-col items-center justify-center h-screen flex-1 p-3 gap-5 0 text-white selection:bg-stone-800"
+    class="flex flex-col items-center justify-center bg-transparent h-screen flex-1 p-3 gap-5 0 text-white selection:bg-stone-800"
 >
     <div>
         <h1 class="text-4xl tracking-tight text-stone-100 font-medium">
@@ -126,7 +126,7 @@
     <div class="flex flex-col gap-2 w-full max-w-sm">
         <div class="relative w-full max-w-sm">
             <div
-                class="w-full flex rounded-lg border border-stone-800 hover:border-stone-700 overflow-hidden transition-all"
+                class="w-full flex rounded-lg border border-stone-800 bg-transparent hover:border-stone-700 overflow-hidden transition-all"
             >
                 <button
                     on:click={handlePlayClick}
