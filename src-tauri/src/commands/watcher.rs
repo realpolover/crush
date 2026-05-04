@@ -614,7 +614,7 @@ fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(
         let table = TABLE.get_or_init(|| {
             let mut t = [0u32; 256];
             for (i, val) in t.clone().iter().enumerate() {
-                let mut c = *val as u32;
+                let mut c = *val;
                 for _ in 0..8 {
                     c = if c & 1 != 0 { 0xedb88320 ^ (c >> 1) } else { c >> 1 };
                 }
