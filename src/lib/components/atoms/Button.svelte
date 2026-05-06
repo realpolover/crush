@@ -10,7 +10,7 @@
     export { className as class }
 
     const variants = {
-        primary: 'bg-sapphire text-white hover:bg-sapphire-light shadow-lg shadow-sapphire/20',
+        primary: 'bg-sapphire text-white hover:bg-sapphire-light shadow-sapphire/20',
         secondary: 'bg-stone-800/40 text-stone-300 hover:bg-stone-700/60 hover:text-white border border-stone-700/40',
         danger: 'bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white border border-red-500/20',
         ghost: 'bg-transparent text-stone-400 hover:bg-stone-800/40 hover:text-white'
