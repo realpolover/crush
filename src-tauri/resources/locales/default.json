@@ -53,6 +53,19 @@
             "retry" : "Retry"
         },
 
+        "serverInfomationPage" : {
+            "title" : "Server Infomation",
+
+            "infomationCard" : {
+                "description" : "Infomation about this server",
+
+                "uptime" : "Uptime : Not fetched",
+                "instanceId" : "Server Instance ID : {id}",
+                "inviteLink" : "Copy invite link :"
+
+            }
+        },
+
         "appearance" : {
             "appearance": "Appearance",
             "description": "Customize the look and feel of the Roblox bootstrapper.",
@@ -213,6 +226,7 @@
         },
         "installations" : {
             "installations": "Installations",
+            "description" : "Manage your roblox installation.",
 
             "customVersion" : {
                 "title" : "Install a custom Roblox version",

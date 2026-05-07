@@ -6,7 +6,7 @@
     import { getMessageFormatter } from 'svelte-i18n'
     import { writeText } from '@tauri-apps/plugin-clipboard-manager';
     import { fetch } from '@tauri-apps/plugin-http';
-    import ClickableCard from '$lib/components/molecules/ClickableCard.svelte'
+    import { _} from 'svelte-i18n'
 
     let serverInstanceId: string = 'Unkown'
     let gameId: number = 1234
@@ -81,10 +81,10 @@
         isOpen={true}
     >
         <div class="flex flex-col gap-3 p-4">
-            <p>Uptime : Not fetched</p>
-            <p>Server Instance ID : {serverInstanceId}</p>
+            <p>{$_("pages.serverInfomationPage.infomationCard.uptime")}</p>
+            <p>{$_("pages.serverInfomationPage.infomationCard.instanceId", { values: { id: serverInstanceId} })}</p>
             <p class="flex items-center gap-2">
-                Copy invite link : <Button variant="secondary" on:click={async () => { await copyToClipboard(serverInviteLink)}} >Copy to clipboard</Button>
+                {$_("pages.serverInfomationPage.infomationCard.inviteLink")}d <Button variant="secondary" on:click={async () => { await copyToClipboard(serverInviteLink)}} >Copy to clipboard</Button>
             </p>
         </div>
     </ExpandableSettingCard>
