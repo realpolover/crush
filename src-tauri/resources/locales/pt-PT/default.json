@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Playing Roblox",
                 "idle": "Não num jogo",
-                "playing": "Pol."
+                "playing": "In game"
             }
         }
     },
@@ -42,9 +42,9 @@
             "retry": "Tentar novamente"
         },
         "serverInfomationPage": {
-            "title": "Server Infomation",
+            "title": "Server Information",
             "infomationCard": {
-                "description": "Infomation about this server",
+                "description": "Server information about this server",
                 "uptime": "Uptime : Not fetched",
                 "instanceId": "Server Instance ID : {id}",
                 "inviteLink": "Copy invite link :"
@@ -177,7 +177,7 @@
         },
         "installations": {
             "installations": "Instalações",
-            "description": "Manage your roblox installation.",
+            "description": "Manage your Roblox installation.",
             "customVersion": {
                 "title": "Instale uma versão personalizada do Roblox",
                 "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
