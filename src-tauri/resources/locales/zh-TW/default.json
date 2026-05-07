@@ -41,6 +41,15 @@
             "cancel": "取消",
             "retry": "重試(&R)"
         },
+        "serverInfomationPage": {
+            "title": "Server Infomation",
+            "infomationCard": {
+                "description": "Infomation about this server",
+                "uptime": "Uptime : Not fetched",
+                "instanceId": "Server Instance ID : {id}",
+                "inviteLink": "Copy invite link :"
+            }
+        },
         "appearance": {
             "appearance": "外觀",
             "description": "自訂Roblox bootstrapper的外觀和感覺。",
@@ -168,6 +177,7 @@
         },
         "installations": {
             "installations": "安裝",
+            "description": "Manage your roblox installation.",
             "customVersion": {
                 "title": "安裝自訂Roblox版本",
                 "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."

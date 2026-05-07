@@ -41,6 +41,15 @@
             "cancel": "Zrušit",
             "retry": "Zkusit znovu"
         },
+        "serverInfomationPage": {
+            "title": "Server Infomation",
+            "infomationCard": {
+                "description": "Infomation about this server",
+                "uptime": "Uptime : Not fetched",
+                "instanceId": "Server Instance ID : {id}",
+                "inviteLink": "Copy invite link :"
+            }
+        },
         "appearance": {
             "appearance": "Vzhled",
             "description": "Přizpůsobte si vzhled a dojem z bootstrapperu Roblox.",
@@ -168,6 +177,7 @@
         },
         "installations": {
             "installations": "Instalace",
+            "description": "Manage your roblox installation.",
             "customVersion": {
                 "title": "Nainstalujte si vlastní verzi Robloxu",
                 "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."

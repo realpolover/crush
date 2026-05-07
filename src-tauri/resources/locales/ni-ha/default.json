@@ -41,6 +41,15 @@
             "cancel": "nihahahahahahaha",
             "retry": "nihahahahaha"
         },
+        "serverInfomationPage": {
+            "title": "Server Infomation",
+            "infomationCard": {
+                "description": "Infomation about this server",
+                "uptime": "Uptime : Not fetched",
+                "instanceId": "Server Instance ID : {id}",
+                "inviteLink": "Copy invite link :"
+            }
+        },
         "appearance": {
             "appearance": "nihahahahaha",
             "description": "nihahahahahaha nihahahahahahaha nihahahaha nihaha nihahahahahaha nihahahahahaha nihahahaha nihahahahaha nihahahaha",
@@ -168,6 +177,7 @@
         },
         "installations": {
             "installations": "nihahahahaha",
+            "description": "Manage your roblox installation.",
             "customVersion": {
                 "title": "nihahahahaha nihahahaha nihahahaha nihahahahaha nihahahaha",
                 "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."

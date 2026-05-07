@@ -42,9 +42,9 @@
             "retry": "Retry"
         },
         "serverInfomationPage": {
-            "title": "Server Information",
+            "title": "Server Infomation",
             "infomationCard": {
-                "description": "Server information about this server",
+                "description": "Infomation about this server",
                 "uptime": "Uptime : Not fetched",
                 "instanceId": "Server Instance ID : {id}",
                 "inviteLink": "Copy invite link :"
@@ -177,7 +177,7 @@
         },
         "installations": {
             "installations": "Installations",
-            "description": "Manage your Roblox installation.",
+            "description": "Manage your roblox installation.",
             "customVersion": {
                 "title": "Install a custom Roblox version",
                 "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
