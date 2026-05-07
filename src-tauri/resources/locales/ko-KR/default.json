@@ -41,6 +41,15 @@
             "cancel": "취소",
             "retry": "다시 시도"
         },
+        "serverInfomationPage": {
+            "title": "Server Infomation",
+            "infomationCard": {
+                "description": "Infomation about this server",
+                "uptime": "Uptime : Not fetched",
+                "instanceId": "Server Instance ID : {id}",
+                "inviteLink": "Copy invite link :"
+            }
+        },
         "appearance": {
             "appearance": "외형",
             "description": "Roblox 부트스트래퍼의 모양과 느낌을 커스터마이징합니다.",
@@ -168,6 +177,7 @@
         },
         "installations": {
             "installations": "설치",
+            "description": "Manage your roblox installation.",
             "customVersion": {
                 "title": "맞춤형 Roblox 버전 설치",
                 "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."

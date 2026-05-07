@@ -41,6 +41,15 @@
             "cancel": "Otkaži",
             "retry": "Ponovi"
         },
+        "serverInfomationPage": {
+            "title": "Server Infomation",
+            "infomationCard": {
+                "description": "Infomation about this server",
+                "uptime": "Uptime : Not fetched",
+                "instanceId": "Server Instance ID : {id}",
+                "inviteLink": "Copy invite link :"
+            }
+        },
         "appearance": {
             "appearance": "Izgled",
             "description": "Prilagodite izgled i osećaj Roblox bootstrappera.",
@@ -168,6 +177,7 @@
         },
         "installations": {
             "installations": "Instalacije",
+            "description": "Manage your roblox installation.",
             "customVersion": {
                 "title": "Instalirajte prilagođenu Roblox verziju",
                 "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."

@@ -41,6 +41,15 @@
             "cancel": "Cancel·la",
             "retry": "Tornar a intentar"
         },
+        "serverInfomationPage": {
+            "title": "Server Infomation",
+            "infomationCard": {
+                "description": "Infomation about this server",
+                "uptime": "Uptime : Not fetched",
+                "instanceId": "Server Instance ID : {id}",
+                "inviteLink": "Copy invite link :"
+            }
+        },
         "appearance": {
             "appearance": "Aparença",
             "description": "Personalitza l'aspecte i la sensació del Roblox bootstrapper.",
@@ -168,6 +177,7 @@
         },
         "installations": {
             "installations": "Instalaciones",
+            "description": "Manage your roblox installation.",
             "customVersion": {
                 "title": "Instal·la una versió personalitzada de Roblox",
                 "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
