@@ -1,10 +1,11 @@
 use crate::interactive::{find_windows_by_title, move_window, set_transparency, set_window_title};
 use crate::rd::get_client;
 use crate::rpc::{apply_rpc, apply_rpc_full, kill_rpc, start_rpc, RpcState};
+use crate::tray::{add_menu_item, remove_menu_item};
 use chrono::Utc;
 use dirs_next::data_local_dir;
 use regex::Regex;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::path::Path;
 use std::sync::{
@@ -18,7 +19,7 @@ use std::{
     time::{Duration, Instant},
 };
 use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
-use tauri::{AppHandle, Manager};
+use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
 use windows::Win32::Foundation::HWND;
@@ -76,7 +77,7 @@ struct WatcherState {
 }
 
 impl WatcherState {
-    fn reset_for_new_game(&mut self) {
+    fn reset_for_new_game(&mut self, app: &AppHandle) {
         self.activity = Activity::default();
         self.udmux_handled = false;
         self.pending_server_ip = None;
@@ -85,6 +86,8 @@ impl WatcherState {
         self.bloxstrap_rpc = None;
         self.roblox_hwnd = None;
         self.window_started = false;
+
+        remove_menu_item(app, "serverinfo").ok();
     }
 
     fn reset_fully(&mut self) {
@@ -136,6 +139,14 @@ struct BloxstrapRpcMessage {
     command: String,
     #[serde(default)]
     data: Value,
+}
+
+// emit data type
+
+#[derive(Serialize, Deserialize, Clone)]
+struct EmitServerInfomation {
+    server_id: String,
+    game_id: u64,
 }
 
 // entry
@@ -282,7 +293,7 @@ async fn read_new_lines(
         }
     }
 
-    // save offset but discard the reader — open_reader always creates a fresh handle
+    // save offset but discard the reader open_reader always creates a fresh handle
     state.offset = reader.stream_position().unwrap_or(state.offset);
 }
 
@@ -320,7 +331,7 @@ async fn handle_line(
             }
         }
 
-        state.reset_for_new_game();
+        state.reset_for_new_game(app);
         state.activity.join_initiated = true;
         state.activity.place_id = Some(place_id);
         state.activity.instance_id = Some(instance_id);
@@ -339,7 +350,6 @@ async fn handle_line(
         }
     }
 
-    // UDMUX — fetch location and notify immediately if possible;
     // if not yet in_game, on_joined will call send_location_notification and pick it up
     if let Some(caps) = re_udmux().captures(line) {
         if !state.udmux_handled {
@@ -370,7 +380,7 @@ async fn handle_line(
             }
             state.window_started = false;
         }
-        state.reset_for_new_game();
+        state.reset_for_new_game(app);
         if integration_enabled(store, &["discordRpc", "enable"]) {
             let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
         }
@@ -438,6 +448,11 @@ async fn on_joined(
 
     log::info!("joined game {}", place_id);
     save_game_history(state, store, place_id)?;
+
+    if let Some(id) = state.activity.instance_id.as_deref() {
+        emit_server_info(app, id, place_id);
+        add_menu_item(app, "serverinfo", "Server Infomation").ok();
+    }
 
     // send notification if UDMUX already fired; if not, udmux handler will send it later
     if !state.location_notified {
@@ -523,7 +538,7 @@ async fn on_bloxstrap_rpc(
                 return Ok(());
             }
             let Some(hwnd) = get_or_find_hwnd(state) else {
-                log::warn!("BloxstrapRPC: SetWindow — no HWND");
+                log::warn!("BloxstrapRPC: SetWindow no HWND");
                 return Ok(());
             };
 
@@ -913,6 +928,15 @@ async fn update_discord_rpc(
 }
 
 // helpers
+
+fn emit_server_info(app: &AppHandle, instance_id: &str, game_id: u64) {
+    let payload = EmitServerInfomation {
+        server_id: instance_id.to_string(),
+        game_id: game_id,
+    };
+
+    app.emit("serverInfomation", payload).unwrap()
+}
 
 fn get_transparency_bound(
     store: &tauri_plugin_store::Store<tauri::Wry>,
