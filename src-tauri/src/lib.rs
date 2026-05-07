@@ -1,6 +1,5 @@
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-
 use commands::archive::{extract_files_from_zip, extract_zip};
+use commands::boostrapper_importer::export_boostrapconfig;
 use commands::crush::crush;
 use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
@@ -8,27 +7,27 @@ use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
 use commands::rename::rename;
 use commands::roblox_deployment::{
-    get_best_region, get_download_deployment_urls, get_latest_version_player, get_latest_version_studio
+    get_best_region, get_download_deployment_urls, get_latest_version_player,
+    get_latest_version_studio,
 };
 use commands::watcher::watch_logs;
-use commands::window::{create_or_focus_window, kill_window, set_window_vibrancy, apply_vibrancy_to_window};
-use tauri_plugin_store::StoreExt;
-use commands::boostrapper_importer::export_boostrapconfig;
-use tauri::{
-    menu::{Menu, MenuItem},
-    tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
+use commands::window::{
+    apply_vibrancy_to_window, create_or_focus_window, kill_window, set_window_vibrancy,
 };
 use tauri::{Emitter, Manager};
 use tauri_plugin_deep_link::DeepLinkExt;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use tauri_plugin_store::StoreExt;
 mod commands;
+use crate::rpc::kill_rpc;
 use rpc::RpcState;
 
-use crate::rpc::kill_rpc;
-
+pub mod interactive;
 pub mod rd;
 pub mod rpc;
-pub mod interactive;
+pub mod tray;
+
+use crate::tray::setup_tray;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -112,58 +111,6 @@ fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
     });
 }
 
-fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
-    let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
-    let open_i = MenuItem::with_id(app, "open", "Open", true, None::<&str>)?;
-    let menu = Menu::with_items(app, &[&open_i, &quit_i])?;
-
-    let mut tray_builder = TrayIconBuilder::new();
-
-    if let Some(icon) = app.default_window_icon() {
-        tray_builder = tray_builder.icon(icon.clone());
-    }
-
-    let _tray = tray_builder
-        .menu(&menu)
-        .show_menu_on_left_click(false)
-        .on_menu_event(|app, event| {
-            if event.id.as_ref() == "quit" {
-                app.exit(0);
-            }
-            if event.id.as_ref() == "open" {
-                let window = app
-                    .get_webview_window("CrushMainWindow")
-                    .or_else(|| app.get_webview_window("crushBoostrapChoiceWindow"));
-
-                if let Some(window) = window {
-                    let _ = window.show();
-                    let _ = window.set_focus();
-                }
-            }
-        })
-        .on_tray_icon_event(|tray, event| {
-            if let TrayIconEvent::Click {
-                button: MouseButton::Left,
-                button_state: MouseButtonState::Up,
-                ..
-            } = event
-            {
-                let app = tray.app_handle();
-                let window = app
-                    .get_webview_window("CrushMainWindow")
-                    .or_else(|| app.get_webview_window("crushBoostrapChoiceWindow"));
-
-                if let Some(window) = window {
-                    let _ = window.show();
-                    let _ = window.set_focus();
-                }
-            }
-        })
-        .build(app)?;
-
-    Ok(())
-}
-
 fn print_debug_info() {
     log::info!("Debug Info:");
     log::info!("OS: {}", tauri_plugin_os::platform());
@@ -187,7 +134,10 @@ pub fn run() {
 
             if platform != "windows" {
                 app.dialog()
-                    .message(format!("This app can't work on {}. However, we will have plans for {}.", platform, platform))
+                    .message(format!(
+                        "This app can't work on {}. However, we will have plans for {}.",
+                        platform, platform
+                    ))
                     .kind(tauri_plugin_dialog::MessageDialogKind::Error)
                     .title("Error")
                     .blocking_show();
@@ -198,7 +148,8 @@ pub fn run() {
                 return Err("Failed to find main bootstrap choice window".into());
             };
 
-            let effect = app.get_store("config.json")
+            let effect = app
+                .get_store("config.json")
                 .and_then(|store| store.get("vibrancy"))
                 .and_then(|v| v.as_str().map(|s| s.to_string()))
                 .unwrap_or_else(|| "auto".to_string());
@@ -207,7 +158,7 @@ pub fn run() {
 
             setup_deep_links(app)?;
             spawn_discord_rpc(app.handle().clone());
-            setup_tray(app)?;
+            setup_tray(app)?; // <-- now lives in tray.rs, manages TrayState
 
             Ok(())
         })
