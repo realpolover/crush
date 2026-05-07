@@ -1,25 +1,35 @@
+use crate::interactive::{find_windows_by_title, move_window, set_transparency, set_window_title};
 use crate::rd::get_client;
-use crate::rpc::{RpcState, apply_rpc, apply_rpc_full, kill_rpc, start_rpc};
+use crate::rpc::{apply_rpc, apply_rpc_full, kill_rpc, start_rpc, RpcState};
 use chrono::Utc;
 use dirs_next::data_local_dir;
 use regex::Regex;
 use serde::Deserialize;
-use serde_json::{Value, json};
-use windows::Win32::Foundation::HWND;
+use serde_json::{json, Value};
 use std::path::Path;
-use crate::interactive::{set_transparency, find_windows_by_title, move_window, set_window_title};
-use std::sync::{OnceLock, atomic::{AtomicBool, Ordering}};
-use std::{fs::File, io::{BufRead, BufReader, Seek, SeekFrom}, path::PathBuf, time::{Duration, Instant}};
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    OnceLock,
+};
+use std::{
+    fs::File,
+    io::{BufRead, BufReader, Seek, SeekFrom},
+    path::PathBuf,
+    time::{Duration, Instant},
+};
 use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
+use windows::Win32::Foundation::HWND;
 
 // regex
 
 fn re_join() -> &'static Regex {
     static R: OnceLock<Regex> = OnceLock::new();
-    R.get_or_init(|| Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+) at ([0-9\.]+)").unwrap())
+    R.get_or_init(|| {
+        Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+) at ([0-9\.]+)").unwrap()
+    })
 }
 fn re_joined() -> &'static Regex {
     static R: OnceLock<Regex> = OnceLock::new();
@@ -53,7 +63,6 @@ struct Activity {
 #[derive(Default)]
 struct WatcherState {
     current_file: Option<PathBuf>,
-    reader: Option<BufReader<File>>,
     offset: u64,
     activity: Activity,
     last_rpc: Option<Instant>,
@@ -85,20 +94,41 @@ impl WatcherState {
 
 // API types
 
-#[derive(Deserialize)] struct UniverseResponse { #[serde(alias = "universeId")] universe_id: u64 }
-#[derive(Deserialize)] struct GameData { name: String }
-#[derive(Deserialize)] struct GamesResponse { data: Vec<GameData> }
-#[derive(Deserialize)] struct IpInfo { city: String, region: String }
-#[derive(Deserialize)] struct IconEntry { #[serde(rename = "imageUrl")] image_url: String }
-#[derive(Deserialize)] struct IconResponse { data: Vec<IconEntry> }
+#[derive(Deserialize)]
+struct UniverseResponse {
+    #[serde(alias = "universeId")]
+    universe_id: u64,
+}
+#[derive(Deserialize)]
+struct GameData {
+    name: String,
+}
+#[derive(Deserialize)]
+struct GamesResponse {
+    data: Vec<GameData>,
+}
+#[derive(Deserialize)]
+struct IpInfo {
+    city: String,
+    region: String,
+}
+#[derive(Deserialize)]
+struct IconEntry {
+    #[serde(rename = "imageUrl")]
+    image_url: String,
+}
+#[derive(Deserialize)]
+struct IconResponse {
+    data: Vec<IconEntry>,
+}
 
 // bloxstrap rpc types
 
 #[derive(Debug, Clone, Default, Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct RichPresence {
-    details:     Option<String>,
-    state:       Option<String>,
+    details: Option<String>,
+    state: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -118,12 +148,19 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
         log::warn!("ignoring duplicate watch_logs call");
         return Ok(());
     }
-    
-    tauri::async_runtime::spawn(async move {
-        if let Err(e) = run_watcher(app) {
-            log::error!("watcher error: {}", e);
+
+    std::thread::spawn(move || {
+        let rt = tokio::runtime::Builder::new_current_thread()
+            .enable_all()
+            .build()
+            .expect("failed to build watcher runtime");
+
+        rt.block_on(async move {
+            if let Err(e) = run_watcher(app).await {
+                log::error!("watcher error: {}", e);
+            }
             WATCHER_RUNNING.store(false, Ordering::SeqCst);
-        }
+        });
     });
 
     Ok(())
@@ -131,11 +168,12 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
 
 // loop
 
-fn run_watcher(app: AppHandle) -> Result<(), String> {
+async fn run_watcher(app: AppHandle) -> Result<(), String> {
     let mut state = WatcherState::default();
     let mut system = System::new();
     let mut was_running = false;
     let store = app.store("config.json").map_err(|e| e.to_string())?;
+    log::info!("watcher is now running");
 
     loop {
         let running = is_roblox_running(&mut system);
@@ -147,29 +185,22 @@ fn run_watcher(app: AppHandle) -> Result<(), String> {
                 }
             }
             state.reset_fully();
-
-            tauri::async_runtime::block_on(
-                kill_rpc(&app.state::<RpcState>())
-            ).ok();
+            kill_rpc(&app.state::<RpcState>()).await.ok();
         }
 
         was_running = running;
 
         if running {
             if let Some(path) = get_latest_log() {
-                tauri::async_runtime::block_on(
-                    maybe_switch_log_file(&app, &mut state, path, &store)
-                );
+                maybe_switch_log_file(&app, &mut state, path, &store).await;
             }
 
             if state.current_file.is_some() {
-                tauri::async_runtime::block_on(
-                    read_new_lines(&app, &mut state, &store)
-                );
+                read_new_lines(&app, &mut state, &store).await;
             }
         }
 
-        std::thread::sleep(Duration::from_millis(16));
+        tokio::time::sleep(Duration::from_millis(16)).await;
     }
 }
 
@@ -186,7 +217,11 @@ async fn maybe_switch_log_file(
     }
 
     let initial_offset = std::fs::metadata(&path).map(|m| m.len()).unwrap_or(0);
-    log::info!("New log file: {:?} (skipping {} bytes)", path, initial_offset);
+    log::info!(
+        "Switching to log file: {:?} (skipping {} bytes)",
+        path,
+        initial_offset
+    );
 
     state.reset_fully();
     state.current_file = Some(path);
@@ -204,7 +239,9 @@ async fn read_new_lines(
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) {
-    let Some(path) = state.current_file.as_ref() else { return; };
+    let Some(path) = state.current_file.as_ref() else {
+        return;
+    };
 
     if let Ok(metadata) = std::fs::metadata(path) {
         let file_size = metadata.len();
@@ -221,7 +258,10 @@ async fn read_new_lines(
 
     let mut reader = match open_reader(state) {
         Ok(r) => r,
-        Err(e) => { log::error!("open reader: {}", e); return; }
+        Err(e) => {
+            log::error!("open reader: {}", e);
+            return;
+        }
     };
 
     let mut line = String::new();
@@ -235,18 +275,22 @@ async fn read_new_lines(
                     break;
                 }
             }
-            Err(e) => { log::error!("read_line: {}", e); break; }
+            Err(e) => {
+                log::error!("read_line: {}", e);
+                break;
+            }
         }
     }
 
+    // save offset but discard the reader — open_reader always creates a fresh handle
     state.offset = reader.stream_position().unwrap_or(state.offset);
-    state.reader = Some(reader);
 }
 
 fn open_reader(state: &mut WatcherState) -> Result<BufReader<File>, String> {
     let path = state.current_file.as_ref().ok_or("No current file")?;
     let mut file = File::open(path).map_err(|e| e.to_string())?;
-    file.seek(SeekFrom::Start(state.offset)).map_err(|e| e.to_string())?;
+    file.seek(SeekFrom::Start(state.offset))
+        .map_err(|e| e.to_string())?;
     Ok(BufReader::new(file))
 }
 
@@ -260,8 +304,14 @@ async fn handle_line(
 ) -> Result<(), String> {
     // new join
     if let Some(caps) = re_join().captures(line) {
-        let instance_id = caps.get(1).map(|m| m.as_str().to_string()).unwrap_or_default();
-        let place_id: u64 = caps.get(2).and_then(|m| m.as_str().parse().ok()).unwrap_or(0);
+        let instance_id = caps
+            .get(1)
+            .map(|m| m.as_str().to_string())
+            .unwrap_or_default();
+        let place_id: u64 = caps
+            .get(2)
+            .and_then(|m| m.as_str().parse().ok())
+            .unwrap_or(0);
 
         // stop any previous window session cleanly
         if state.window_started {
@@ -274,24 +324,30 @@ async fn handle_line(
         state.activity.join_initiated = true;
         state.activity.place_id = Some(place_id);
         state.activity.instance_id = Some(instance_id);
-        log::info!("joining place {} instance {}", place_id, state.activity.instance_id.as_deref().unwrap_or("?"));
+        log::info!(
+            "joining place {} instance {}",
+            place_id,
+            state.activity.instance_id.as_deref().unwrap_or("?")
+        );
         return Ok(());
     }
 
-    // BloxstrapRPC (now handles both RPC and window control)
+    // BloxstrapRPC
     if let Some(caps) = re_bloxstrap_rpc().captures(line) {
         if let Some(raw) = caps.get(1) {
             on_bloxstrap_rpc(app, raw.as_str(), state, store).await?;
         }
     }
 
-    // UDMUX
+    // UDMUX — fetch location and notify immediately if possible;
+    // if not yet in_game, on_joined will call send_location_notification and pick it up
     if let Some(caps) = re_udmux().captures(line) {
         if !state.udmux_handled {
             if let Some(ip) = caps.get(1) {
                 fetch_and_store_location(ip.as_str(), state).await?;
                 state.udmux_handled = true;
-                if state.activity.in_game && !state.location_notified {
+                // notify straight away if we're already in-game; otherwise on_joined fires it
+                if !state.location_notified {
                     send_location_notification(app, state, store).await?;
                 }
             }
@@ -330,7 +386,9 @@ async fn on_joined(
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
-    let Some(place_id) = state.activity.place_id else { return Ok(()); };
+    let Some(place_id) = state.activity.place_id else {
+        return Ok(());
+    };
 
     if !state.activity.join_initiated {
         log::warn!("serverId seen without a prior join, stale log?");
@@ -352,7 +410,7 @@ async fn on_joined(
             Ok(uid) => uid,
             Err(e) => {
                 log::warn!("failed to fetch universe ID for PNG: {}", e);
-                place_id // fallback to place_id if fetch fails
+                place_id
             }
         };
 
@@ -363,7 +421,10 @@ async fn on_joined(
             universe_id,
             store_val("moveWindow"),
             store_val("setTitle"),
-            integration_enabled(store, &["interactive", "scopes", "transparencyScopes", "enabled"]),
+            integration_enabled(
+                store,
+                &["interactive", "scopes", "transparencyScopes", "enabled"],
+            ),
             app,
         ) {
             log::warn!("failed to write game permission PNG: {}", e);
@@ -377,7 +438,11 @@ async fn on_joined(
 
     log::info!("joined game {}", place_id);
     save_game_history(state, store, place_id)?;
-    send_location_notification(app, state, store).await?;
+
+    // send notification if UDMUX already fired; if not, udmux handler will send it later
+    if !state.location_notified {
+        send_location_notification(app, state, store).await?;
+    }
 
     if integration_enabled(store, &["discordRpc", "enable"]) {
         update_discord_rpc(app, state, place_id).await?;
@@ -405,7 +470,6 @@ async fn on_bloxstrap_rpc(
     log::info!("BloxstrapRPC command: {}", msg.command);
 
     match msg.command.as_str() {
-        // rich presence
         "SetRichPresence" => {
             if !integration_enabled(store, &["discordRpc", "enable"]) {
                 return Ok(());
@@ -436,7 +500,10 @@ async fn on_bloxstrap_rpc(
                 &rpc_state,
                 rpc.details.as_deref(),
                 rpc.state.as_deref(),
-                None, None, None, None,
+                None,
+                None,
+                None,
+                None,
             )
             .await
             .map_err(|e| format!("BloxstrapRPC apply failed: {}", e))?;
@@ -460,14 +527,29 @@ async fn on_bloxstrap_rpc(
                 return Ok(());
             };
 
-            let x      = msg.data.get("x").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
-            let y      = msg.data.get("y").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
-            let w      = msg.data.get("width").and_then(|v| v.as_i64()).unwrap_or(800) as i32;
-            let h      = msg.data.get("height").and_then(|v| v.as_i64()).unwrap_or(600) as i32;
+            let x = msg.data.get("x").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
+            let y = msg.data.get("y").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
+            let w = msg
+                .data
+                .get("width")
+                .and_then(|v| v.as_i64())
+                .unwrap_or(800) as i32;
+            let h = msg
+                .data
+                .get("height")
+                .and_then(|v| v.as_i64())
+                .unwrap_or(600) as i32;
 
-
-            let scale_w = msg.data.get("scaleWidth").and_then(|v| v.as_f64()).unwrap_or(1920.0);
-            let scale_h = msg.data.get("scaleHeight").and_then(|v| v.as_f64()).unwrap_or(1080.0);
+            let scale_w = msg
+                .data
+                .get("scaleWidth")
+                .and_then(|v| v.as_f64())
+                .unwrap_or(1920.0);
+            let scale_h = msg
+                .data
+                .get("scaleHeight")
+                .and_then(|v| v.as_f64())
+                .unwrap_or(1080.0);
 
             // TODO: replace with actual screen resolution query if available
             let screen_w = 1920.0_f64;
@@ -485,7 +567,9 @@ async fn on_bloxstrap_rpc(
             if !integration_enabled(store, &["interactive", "enable"]) {
                 return Ok(());
             }
-            let Some(hwnd) = get_or_find_hwnd(state) else { return Ok(()); };
+            let Some(hwnd) = get_or_find_hwnd(state) else {
+                return Ok(());
+            };
             let title = msg.data.as_str().unwrap_or("Roblox");
             set_window_title(hwnd, title);
         }
@@ -495,12 +579,18 @@ async fn on_bloxstrap_rpc(
                 return Ok(());
             }
             if !state.window_started {
-                log::warn!("BloxstrapRPC: SetWindowTransparency received before StartWindow, ignoring");
+                log::warn!(
+                    "BloxstrapRPC: SetWindowTransparency received before StartWindow, ignoring"
+                );
                 return Ok(());
             }
-            let Some(hwnd) = get_or_find_hwnd(state) else { return Ok(()); };
+            let Some(hwnd) = get_or_find_hwnd(state) else {
+                return Ok(());
+            };
 
-            let t = msg.data.get("transparency")
+            let t = msg
+                .data
+                .get("transparency")
                 .and_then(|v| v.as_f64())
                 .unwrap_or(1.0)
                 .clamp(0.0, 1.0);
@@ -528,7 +618,6 @@ async fn on_bloxstrap_rpc(
             if !state.window_started {
                 return Ok(());
             }
-
             log::info!("BloxstrapRPC: ResetWindow acknowledged");
         }
 
@@ -548,7 +637,6 @@ fn write_game_permission_png(
     app: &AppHandle,
 ) -> Result<(), String> {
     let data_dir = app.path().app_data_dir().map_err(|e| e.to_string())?;
-
     let versions_dir = data_dir.join("Player").join("Versions");
 
     let version_dir = std::fs::read_dir(&versions_dir)
@@ -581,7 +669,11 @@ fn write_game_permission_png(
 
     let game_png_path = bloxstrap_dir.join(format!("{}.png", game_id));
     let pixel = |on: bool| -> [u8; 4] {
-        if on { [255, 255, 255, 255] } else { [0, 0, 0, 0] }
+        if on {
+            [255, 255, 255, 255]
+        } else {
+            [0, 0, 0, 0]
+        }
     };
 
     let mut pixels: Vec<u8> = Vec::with_capacity(12);
@@ -592,14 +684,17 @@ fn write_game_permission_png(
     write_png_rgba(&game_png_path, 3, 1, &pixels)?;
     log::info!(
         "wrote game permission PNG for {} -> {:?} (control={}, title={}, transparency={})",
-        game_id, game_png_path, allow_control, allow_title, allow_transparency
+        game_id,
+        game_png_path,
+        allow_control,
+        allow_title,
+        allow_transparency
     );
 
     Ok(())
 }
 
 fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(), String> {
-
     fn adler32(data: &[u8]) -> u32 {
         let (mut a, mut b) = (1u32, 0u32);
         for &byte in data {
@@ -616,7 +711,11 @@ fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(
             for (i, val) in t.clone().iter().enumerate() {
                 let mut c = *val;
                 for _ in 0..8 {
-                    c = if c & 1 != 0 { 0xedb88320 ^ (c >> 1) } else { c >> 1 };
+                    c = if c & 1 != 0 {
+                        0xedb88320 ^ (c >> 1)
+                    } else {
+                        c >> 1
+                    };
                 }
                 t[i] = c;
             }
@@ -649,11 +748,11 @@ fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(
     let mut ihdr = Vec::new();
     ihdr.extend_from_slice(&width.to_be_bytes());
     ihdr.extend_from_slice(&height.to_be_bytes());
-    ihdr.push(8);  // bit depth
-    ihdr.push(6);  // colour type: RGBA
-    ihdr.push(0);  // compression
-    ihdr.push(0);  // filter
-    ihdr.push(0);  // interlace
+    ihdr.push(8); // bit depth
+    ihdr.push(6); // colour type: RGBA
+    ihdr.push(0); // compression
+    ihdr.push(0); // filter
+    ihdr.push(0); // interlace
     write_chunk(&mut out, b"IHDR", &ihdr);
 
     let mut raw: Vec<u8> = Vec::new();
@@ -664,29 +763,25 @@ fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(
 
     let mut zlib: Vec<u8> = Vec::new();
     zlib.push(0x78); // CMF
-    zlib.push(0x01); // FLG (no dict, check bits)
+    zlib.push(0x01); // FLG
     zlib.push(0x01); // BFINAL=1, BTYPE=00
 
     let len16 = raw.len() as u16;
     let nlen16 = !len16;
-
     zlib.extend_from_slice(&len16.to_le_bytes());
     zlib.extend_from_slice(&nlen16.to_le_bytes());
     zlib.extend_from_slice(&raw);
-
     zlib.extend_from_slice(&adler32(&raw).to_be_bytes());
 
     write_chunk(&mut out, b"IDAT", &zlib);
-
     write_chunk(&mut out, b"IEND", &[]);
 
     std::fs::write(path, &out).map_err(|e| e.to_string())
 }
 
-
 fn send_bloxstrap_command(_hwnd: HWND, command: &str, data: Value) {
-    let payload = serde_json::to_string(&json!({ "command": command, "data": data }))
-        .unwrap_or_default();
+    let payload =
+        serde_json::to_string(&json!({ "command": command, "data": data })).unwrap_or_default();
     println!("[BloxstrapRPC] {}", payload);
 }
 
@@ -699,8 +794,12 @@ async fn fetch_and_store_location(ip: &str, state: &mut WatcherState) -> Result<
 
     let info: IpInfo = get_client()
         .get(format!("https://ipinfo.io/{}/json", ip))
-        .send().await.map_err(|e| e.to_string())?
-        .json().await.map_err(|e| e.to_string())?;
+        .send()
+        .await
+        .map_err(|e| e.to_string())?
+        .json()
+        .await
+        .map_err(|e| e.to_string())?;
 
     state.pending_server_ip = Some(ip.to_string());
     state.pending_server_location = Some(format!("{}, {}", info.city, info.region));
@@ -718,7 +817,10 @@ async fn send_location_notification(
         return Ok(());
     }
 
-    if let (Some(ip), Some(location)) = (state.pending_server_ip.take(), state.pending_server_location.take()) {
+    if let (Some(ip), Some(location)) = (
+        state.pending_server_ip.take(),
+        state.pending_server_location.take(),
+    ) {
         state.location_notified = true;
         app.notification()
             .builder()
@@ -736,16 +838,30 @@ async fn update_discord_rpc(
     place_id: u64,
 ) -> Result<(), String> {
     let now = Instant::now();
-    if state.last_rpc.is_some_and(|t| now.duration_since(t).as_secs() <= 2) {
+    if state
+        .last_rpc
+        .is_some_and(|t| now.duration_since(t).as_secs() <= 2)
+    {
         return Ok(());
     }
 
-    let Some((name, _)) = fetch_place_info(place_id).await? else { return Ok(()); };
+    let Some((name, _)) = fetch_place_info(place_id).await? else {
+        return Ok(());
+    };
 
     let instance_id = state.activity.instance_id.as_deref().unwrap_or("");
     let buttons = vec![
-        ("Join Server".to_string(), format!("https://deeplink.multicrew.dev?placeId={}&jobId={}", place_id, instance_id)),
-        ("View Game".to_string(), format!("https://www.roblox.com/games/{}", place_id)),
+        (
+            "Join Server".to_string(),
+            format!(
+                "https://deeplink.multicrew.dev?placeId={}&jobId={}",
+                place_id, instance_id
+            ),
+        ),
+        (
+            "View Game".to_string(),
+            format!("https://www.roblox.com/games/{}", place_id),
+        ),
     ];
 
     const CLIENT_ID: &str = "1484521125550620813";
@@ -758,7 +874,17 @@ async fn update_discord_rpc(
         }
     }
 
-    if let Err(e) = apply_rpc_full(&rpc, Some("Crush"), Some("Playing Roblox"), Some(&name), None, None, Some(buttons.clone())).await {
+    if let Err(e) = apply_rpc_full(
+        &rpc,
+        Some("Crush"),
+        Some("Playing Roblox"),
+        Some(&name),
+        None,
+        None,
+        Some(buttons.clone()),
+    )
+    .await
+    {
         log::warn!("RPC failed ({}), reconnecting…", e);
         *rpc.client.lock().await = None;
         *rpc.runner.lock().await = None;
@@ -767,7 +893,17 @@ async fn update_discord_rpc(
             log::error!("RPC reconnect failed: {}", e);
             return Ok(());
         }
-        if let Err(e) = apply_rpc_full(&rpc, Some("Crush"), Some("Playing Roblox"), Some(&name), None, None, Some(buttons)).await {
+        if let Err(e) = apply_rpc_full(
+            &rpc,
+            Some("Crush"),
+            Some("Playing Roblox"),
+            Some(&name),
+            None,
+            None,
+            Some(buttons),
+        )
+        .await
+        {
             log::error!("RPC retry failed: {}", e);
         }
     }
@@ -783,7 +919,9 @@ fn get_transparency_bound(
     key: &str,
     default: u8,
 ) -> u8 {
-    let v = store.get("integrations").or_else(|| store.get("intergrations"));
+    let v = store
+        .get("integrations")
+        .or_else(|| store.get("intergrations"));
     let Some(root) = v else { return default };
     root.get("interactive")
         .and_then(|v| v.get("scopes"))
@@ -806,7 +944,9 @@ fn get_or_find_hwnd(state: &mut WatcherState) -> Option<HWND> {
 }
 
 fn integration_enabled(store: &tauri_plugin_store::Store<tauri::Wry>, path: &[&str]) -> bool {
-    let v = store.get("integrations").or_else(|| store.get("intergrations"));
+    let v = store
+        .get("integrations")
+        .or_else(|| store.get("intergrations"));
     let Some(mut cur) = v else { return false };
     for key in path {
         cur = cur.get(key).cloned().unwrap_or(Value::Null);
@@ -818,16 +958,22 @@ fn is_roblox_running(system: &mut System) -> bool {
     static R: OnceLock<Regex> = OnceLock::new();
     let re = R.get_or_init(|| Regex::new(r"(?i)robloxplayerbeta").unwrap());
     system.refresh_processes_specifics(ProcessesToUpdate::All, true, ProcessRefreshKind::nothing());
-    system.processes().values().any(|p| re.is_match(p.name().to_string_lossy().as_ref()))
+    system
+        .processes()
+        .values()
+        .any(|p| re.is_match(p.name().to_string_lossy().as_ref()))
 }
 
 fn get_latest_log() -> Option<PathBuf> {
     let dir = data_local_dir()?.join("Roblox").join("logs");
-    std::fs::read_dir(dir).ok()?
+    std::fs::read_dir(dir)
+        .ok()?
         .filter_map(|e| {
             let e = e.ok()?;
             let path = e.path();
-            if path.extension()? != "log" { return None; }
+            if path.extension()? != "log" {
+                return None;
+            }
             let meta = e.metadata().ok()?;
             Some((path, meta))
         })
@@ -840,7 +986,8 @@ fn save_game_history(
     store: &tauri_plugin_store::Store<tauri::Wry>,
     place_id: u64,
 ) -> Result<(), String> {
-    let mut history: Vec<Value> = store.get("gameHistory")
+    let mut history: Vec<Value> = store
+        .get("gameHistory")
         .and_then(|v| v.as_array().cloned())
         .unwrap_or_default();
 
@@ -856,9 +1003,16 @@ fn save_game_history(
 
 async fn fetch_universe_id(place_id: u64) -> Result<u64, String> {
     let universe: UniverseResponse = get_client()
-        .get(format!("https://apis.roblox.com/universes/v1/places/{}/universe", place_id))
-        .send().await.map_err(|e| e.to_string())?
-        .json().await.map_err(|e| e.to_string())?;
+        .get(format!(
+            "https://apis.roblox.com/universes/v1/places/{}/universe",
+            place_id
+        ))
+        .send()
+        .await
+        .map_err(|e| e.to_string())?
+        .json()
+        .await
+        .map_err(|e| e.to_string())?;
     Ok(universe.universe_id)
 }
 
@@ -866,9 +1020,16 @@ async fn fetch_place_info(place_id: u64) -> Result<Option<(String, String)>, Str
     let client = get_client();
 
     let universe: UniverseResponse = client
-        .get(format!("https://apis.roblox.com/universes/v1/places/{}/universe", place_id))
-        .send().await.map_err(|e| e.to_string())?
-        .json().await.map_err(|e| e.to_string())?;
+        .get(format!(
+            "https://apis.roblox.com/universes/v1/places/{}/universe",
+            place_id
+        ))
+        .send()
+        .await
+        .map_err(|e| e.to_string())?
+        .json()
+        .await
+        .map_err(|e| e.to_string())?;
 
     let uid = universe.universe_id;
 
@@ -877,14 +1038,26 @@ async fn fetch_place_info(place_id: u64) -> Result<Option<(String, String)>, Str
         client.get(format!("https://thumbnails.roblox.com/v1/games/icons?universeIds={}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false", uid)).send(),
     );
 
-    let name = games_res.map_err(|e| e.to_string())?
-        .json::<GamesResponse>().await.map_err(|e| e.to_string())?
-        .data.into_iter().next().map(|g| g.name)
+    let name = games_res
+        .map_err(|e| e.to_string())?
+        .json::<GamesResponse>()
+        .await
+        .map_err(|e| e.to_string())?
+        .data
+        .into_iter()
+        .next()
+        .map(|g| g.name)
         .unwrap_or_else(|| "Unknown Game".to_string());
 
-    let image_url = icon_res.map_err(|e| e.to_string())?
-        .json::<IconResponse>().await.map_err(|e| e.to_string())?
-        .data.into_iter().next().map(|i| i.image_url)
+    let image_url = icon_res
+        .map_err(|e| e.to_string())?
+        .json::<IconResponse>()
+        .await
+        .map_err(|e| e.to_string())?
+        .data
+        .into_iter()
+        .next()
+        .map(|i| i.image_url)
         .unwrap_or_default();
 
     Ok(Some((name, image_url)))
