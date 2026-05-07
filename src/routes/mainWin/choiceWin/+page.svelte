@@ -94,6 +94,23 @@
             getCurrentWindow().close()
         }, 100)
     }
+    async function larp() {
+        await invoke('create_or_focus_window', {
+            // temp
+            label: 'CrushHello',
+            url: 'mainWin/other/serverInfo',
+            title: 'Welcome',
+            width: 600,
+            height: 500,
+            minWidth: 600,
+            minHeight: 500,
+        })
+
+        setTimeout(() => {
+            // wait before killing to prevent crash
+            getCurrentWindow().close()
+        }, 100)
+    }
 
     async function openDiscordServer() {
         openUrl('https://discord.gg/ER64xhvQkw')
@@ -208,6 +225,14 @@
             >
                 <Wrench class="size-5" />
                 {$_('pages.choiceWin.config')}
+            </button>
+
+            <button
+                on:click={larp}
+                class="w-1/2 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm"
+            >
+                <Wrench class="size-5" />
+                larp
             </button>
 
             <button

@@ -186,7 +186,13 @@ export interface LoadResult {
 
 export type AppType = 'player' | 'studio'
 
+//
+export type ServerInfoFromBackend = {
+    game_id : number,
+    server_id : string
+}
 
+//
 
 export type BoostrapConfigs = { // bloxstrap, froststrap
     // general forks (from bloxstrap)

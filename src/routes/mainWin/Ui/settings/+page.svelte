@@ -13,6 +13,7 @@
     import { derived } from 'svelte/store'
     import { load } from '@tauri-apps/plugin-store'
     import Switch from '$lib/components/atoms/Switch.svelte'
+    import { goto } from '$app/navigation'
 
     const Arona = '/Arona.png'
 
