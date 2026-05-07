@@ -12,7 +12,9 @@ pub struct BloxstrapConfig {
 }
 
 #[tauri::command]
-pub async fn export_boostrapconfig(boostrap_config_path: String) -> Result<BloxstrapConfig, String> {
+pub async fn export_boostrapconfig(
+    boostrap_config_path: String,
+) -> Result<BloxstrapConfig, String> {
     let base = PathBuf::from(&boostrap_config_path);
 
     let path = if base.join("Settings.json").exists() {
@@ -23,10 +25,9 @@ pub async fn export_boostrapconfig(boostrap_config_path: String) -> Result<Bloxs
         return Err("config not found".to_string());
     };
 
-    let data = fs::read_to_string(&path)
-        .map_err(|e: std::io::Error| e.to_string())?;
-    let config: BloxstrapConfig = serde_json::from_str(&data)
-        .map_err(|e: serde_json::Error| e.to_string())?;
-    
+    let data = fs::read_to_string(&path).map_err(|e: std::io::Error| e.to_string())?;
+    let config: BloxstrapConfig =
+        serde_json::from_str(&data).map_err(|e: serde_json::Error| e.to_string())?;
+
     Ok(config)
 }

@@ -2,7 +2,7 @@ use crate::rd::{best_region, get_download_urls, latest_version_player, latest_ve
 
 #[tauri::command]
 pub async fn get_download_deployment_urls(
-    player : bool,
+    player: bool,
     region: Option<&str>,
     version: Option<&str>,
 ) -> Result<Vec<String>, String> {

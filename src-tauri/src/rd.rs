@@ -86,7 +86,6 @@ const STUDIO_FILES: &[&str] = &[
     "studiocontent-textures.zip",
 ];
 
-
 async fn ping_url(client: &reqwest::Client, url: &'static str) -> (&'static str, u128) {
     log::info!("[BACKEND] testing : {}", url);
     let start = Instant::now();

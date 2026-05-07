@@ -1,6 +1,6 @@
-use tauri::{command, AppHandle, Manager, WebviewUrl, WebviewWindowBuilder, WebviewWindow};
-use window_vibrancy::{apply_blur, apply_mica, apply_acrylic};
+use tauri::{command, AppHandle, Manager, WebviewUrl, WebviewWindow, WebviewWindowBuilder};
 use tauri_plugin_store::StoreExt;
+use window_vibrancy::{apply_acrylic, apply_blur, apply_mica};
 
 pub fn apply_vibrancy_to_window(window: &WebviewWindow, effect: &str) {
     #[cfg(target_os = "windows")]
@@ -51,7 +51,8 @@ pub async fn create_or_focus_window(
         window.show().map_err(|e| e.to_string())?;
         window.set_focus().map_err(|e| e.to_string())?;
 
-        let effect = app.get_store("config.json")
+        let effect = app
+            .get_store("config.json")
             .and_then(|store| store.get("vibrancy"))
             .and_then(|v| v.as_str().map(|s| s.to_string()))
             .unwrap_or_else(|| "auto".to_string());
@@ -77,7 +78,8 @@ pub async fn create_or_focus_window(
 
     let window = builder.build().map_err(|e| e.to_string())?;
 
-    let effect = app.get_store("config.json")
+    let effect = app
+        .get_store("config.json")
         .and_then(|store| store.get("vibrancy"))
         .and_then(|v| v.as_str().map(|s| s.to_string()))
         .unwrap_or_else(|| "auto".to_string());

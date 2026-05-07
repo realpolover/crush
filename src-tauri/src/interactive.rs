@@ -1,20 +1,15 @@
 use windows::{
-    core::{PCSTR},
+    core::PCSTR,
     Win32::Foundation::{COLORREF, HWND, LPARAM, RECT},
     Win32::UI::WindowsAndMessaging::{
-        EnumWindows, GetWindowTextA, GetWindowRect, IsWindowVisible,
-        SetForegroundWindow, SetWindowPos, ShowWindow,
-        GetWindowLongA, SetWindowLongA,
-        SetLayeredWindowAttributes, SetWindowTextA,
-        LAYERED_WINDOW_ATTRIBUTES_FLAGS,
-        SWP_NOZORDER, SWP_NOACTIVATE, SWP_FRAMECHANGED,
-        SW_MINIMIZE, SW_MAXIMIZE, SW_RESTORE,
-        GWL_STYLE, GWL_EXSTYLE,
+        EnumWindows, GetWindowLongA, GetWindowRect, GetWindowTextA, IsWindowVisible,
+        SetForegroundWindow, SetLayeredWindowAttributes, SetWindowLongA, SetWindowPos,
+        SetWindowTextA, ShowWindow, GWL_EXSTYLE, GWL_STYLE, LAYERED_WINDOW_ATTRIBUTES_FLAGS,
+        SWP_FRAMECHANGED, SWP_NOACTIVATE, SWP_NOZORDER, SW_MAXIMIZE, SW_MINIMIZE, SW_RESTORE,
     },
 };
 
 // https://github.com/DawndreamerStudios/funkstrap/blob/main/Bloxstrap/Integrations/WindowController.cs
-
 
 const WS_CAPTION: i32 = 0x00C00000;
 const WS_THICKFRAME: i32 = 0x00040000;
@@ -31,7 +26,7 @@ pub fn find_windows_by_title(keyword: &str) -> Vec<HWND> {
         results: *mut Vec<HWND>,
     }
 
-    unsafe extern "system" fn enum_windows(hwnd: HWND, lparam: LPARAM) ->  windows_result::BOOL {
+    unsafe extern "system" fn enum_windows(hwnd: HWND, lparam: LPARAM) -> windows_result::BOOL {
         let data = &mut *(lparam.0 as *mut SearchData);
 
         if !IsWindowVisible(hwnd).as_bool() {
@@ -40,7 +35,7 @@ pub fn find_windows_by_title(keyword: &str) -> Vec<HWND> {
 
         let mut buffer = [0u8; 512];
         let len = GetWindowTextA(hwnd, &mut buffer);
-        
+
         if len > 0 {
             let title = String::from_utf8_lossy(&buffer[..len as usize]);
             if title.to_lowercase().contains(&data.keyword) {
@@ -59,10 +54,7 @@ pub fn find_windows_by_title(keyword: &str) -> Vec<HWND> {
     };
 
     unsafe {
-        let _ = EnumWindows(
-            Some(enum_windows),
-            LPARAM(&mut data as *mut _ as isize),
-        );
+        let _ = EnumWindows(Some(enum_windows), LPARAM(&mut data as *mut _ as isize));
     }
 
     results
@@ -149,7 +141,7 @@ pub fn set_borderless(hwnd: HWND, enabled: bool) {
 
         let _ = SetWindowPos(
             hwnd,
-                Some(HWND(std::ptr::null_mut())),
+            Some(HWND(std::ptr::null_mut())),
             0,
             0,
             0,
@@ -159,11 +151,10 @@ pub fn set_borderless(hwnd: HWND, enabled: bool) {
     }
 }
 
-
 pub fn set_transparency(hwnd: HWND, alpha: u8) {
     unsafe {
         let ex_style = GetWindowLongA(hwnd, GWL_EXSTYLE);
-        
+
         if (ex_style & WS_EX_LAYERED) == 0 {
             SetWindowLongA(hwnd, GWL_EXSTYLE, ex_style | WS_EX_LAYERED);
         }
