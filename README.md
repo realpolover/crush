@@ -12,7 +12,7 @@
 
 Crush is a Roblox bootstrapper written from scratch, inspired by many other bootstrappers.
 
-<img src="./demo.gif" />
+<video src="./demo.mp4" width="80%" controls></video>
 
 *Recorded using [openscreen](https://github.com/siddharthvaddem/openscreen).*
 
