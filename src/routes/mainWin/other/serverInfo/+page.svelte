@@ -46,7 +46,7 @@
         return details
     }
 
-    async function copyToClipboard(url) {
+    async function copyToClipboard(url: any) {
         await writeText(url);
     }
 
@@ -81,7 +81,7 @@
         isOpen={true}
     >
         <div class="flex flex-col gap-3 p-4">
-            <p>Uptime : 1 hours</p>
+            <p>Uptime : Not fetched</p>
             <p>Server Instance ID : {serverInstanceId}</p>
             <p class="flex items-center gap-2">
                 Copy invite link : <Button variant="secondary" on:click={async () => { await copyToClipboard(serverInviteLink)}} >Copy to clipboard</Button>
