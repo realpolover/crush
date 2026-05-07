@@ -1,39 +1,55 @@
-use tauri::{AppHandle, Manager};
-use tauri::tray::TrayIconId;
+use std::sync::Mutex;
 use tauri::menu::{Menu, MenuItem};
+use tauri::tray::TrayIconId;
+use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
+use tauri::{AppHandle, Manager};
 
 pub struct TrayState {
     pub id: TrayIconId,
+    pub dynamic_items: Mutex<Vec<(String, String)>>,
 }
 
 impl TrayState {
+    pub fn new(id: TrayIconId) -> Self {
+        Self {
+            id,
+            dynamic_items: Mutex::new(vec![]),
+        }
+    }
+
     pub fn get_tray(app: &AppHandle) -> Option<tauri::tray::TrayIcon> {
         let state = app.state::<TrayState>();
         app.tray_by_id(&state.id)
     }
 }
 
-pub fn add_menu_item(app: &AppHandle, id: &str, label: &str) -> Result<(), Box<dyn std::error::Error>> {
-    let Some(tray) = TrayState::get_tray(app) else {
-        return Ok(());
-    };
-
-    let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
+fn build_menu(
+    app: &AppHandle,
+    extra_items: &[(&str, &str)],
+) -> Result<Menu<tauri::Wry>, Box<dyn std::error::Error>> {
     let open_i = MenuItem::with_id(app, "open", "Open", true, None::<&str>)?;
-    let new_i = MenuItem::with_id(app, id, label, true, None::<&str>)?;
+    let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
 
-    let menu = Menu::with_items(app, &[&open_i, &new_i, &quit_i])?;
-    tray.set_menu(Some(menu))?;
+    let mut items: Vec<Box<dyn tauri::menu::IsMenuItem<tauri::Wry>>> = vec![Box::new(open_i)];
 
-    Ok(())
+    for (id, label) in extra_items {
+        let item = MenuItem::with_id(app, *id, *label, true, None::<&str>)?;
+        items.push(Box::new(item));
+    }
+
+    items.push(Box::new(quit_i));
+
+    let item_refs: Vec<&dyn tauri::menu::IsMenuItem<tauri::Wry>> =
+        items.iter().map(|i| i.as_ref()).collect();
+    let menu = Menu::with_items(app, &item_refs)?;
+
+    Ok(menu)
 }
 
 pub fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
-    let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
-    let open_i = MenuItem::with_id(app, "open", "Open", true, None::<&str>)?;
-    let menu = Menu::with_items(app, &[&open_i, &quit_i])?;
+    let menu = build_menu(app.handle(), &[])?;
 
-    let mut tray_builder = tauri::tray::TrayIconBuilder::new();
+    let mut tray_builder = TrayIconBuilder::new();
 
     if let Some(icon) = app.default_window_icon() {
         tray_builder = tray_builder.icon(icon.clone());
@@ -42,11 +58,9 @@ pub fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     let tray = tray_builder
         .menu(&menu)
         .show_menu_on_left_click(false)
-        .on_menu_event(|app, event| {
-            if event.id.as_ref() == "quit" {
-                app.exit(0);
-            }
-            if event.id.as_ref() == "open" {
+        .on_menu_event(|app, event| match event.id.as_ref() {
+            "quit" => app.exit(0),
+            "open" => {
                 let window = app
                     .get_webview_window("CrushMainWindow")
                     .or_else(|| app.get_webview_window("crushBoostrapChoiceWindow"));
@@ -56,10 +70,12 @@ pub fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
                     let _ = window.set_focus();
                 }
             }
+            "serverinfo" => {
+                log::info!("this do notthing yet")
+            }
+            _ => {}
         })
         .on_tray_icon_event(|tray, event| {
-            use tauri::tray::{MouseButton, MouseButtonState, TrayIconEvent};
-
             if let TrayIconEvent::Click {
                 button: MouseButton::Left,
                 button_state: MouseButtonState::Up,
@@ -79,8 +95,62 @@ pub fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
         })
         .build(app)?;
 
-    // Store the tray ID so we can retrieve it anywhere
-    app.manage(TrayState { id: tray.id().clone() });
+    app.manage(TrayState::new(tray.id().clone()));
+
+    Ok(())
+}
+
+pub fn add_menu_item(
+    app: &AppHandle,
+    id: &str,
+    label: &str,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let Some(tray) = TrayState::get_tray(app) else {
+        return Ok(());
+    };
+
+    {
+        let state = app.state::<TrayState>();
+        let mut items = state.dynamic_items.lock().unwrap();
+        // avoid duplicates
+        if !items.iter().any(|(i, _)| i == id) {
+            items.push((id.to_string(), label.to_string()));
+        }
+    }
+
+    let state = app.state::<TrayState>();
+    let items = state.dynamic_items.lock().unwrap();
+    let as_refs: Vec<(&str, &str)> = items
+        .iter()
+        .map(|(i, l)| (i.as_str(), l.as_str()))
+        .collect();
+
+    let menu = build_menu(app, &as_refs)?;
+    tray.set_menu(Some(menu))?;
+
+    Ok(())
+}
+
+pub fn remove_menu_item(app: &AppHandle, id: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let Some(tray) = TrayState::get_tray(app) else {
+        return Ok(());
+    };
+
+    {
+        let state = app.state::<TrayState>();
+        let mut items = state.dynamic_items.lock().unwrap();
+        items.retain(|(i, _)| i != id);
+    }
+
+    let state = app.state::<TrayState>();
+    let items = state.dynamic_items.lock().unwrap();
+    let as_refs: Vec<(&str, &str)> = items
+        .iter()
+        .map(|(i, l)| (i.as_str(), l.as_str()))
+        .collect();
+
+    let menu = build_menu(app, &as_refs)?;
+    tray.set_menu(Some(menu))?;
 
     Ok(())
 }
