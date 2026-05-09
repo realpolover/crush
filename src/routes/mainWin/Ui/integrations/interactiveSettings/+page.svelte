@@ -164,12 +164,6 @@
                 <Switch slot="action" bind:checked={moveWindowValue} disabled={!interactAPIValue} on:change={handleChanges}/>
             </SettingCard>
 
-            <SettingCard
-                title={$_("pages.integrations.windowManipulation.advanced.scopes.moveWindowCard.title")}
-                description={$_("pages.integrations.windowManipulation.advanced.scopes.moveWindowCard.description")}
-            >
-                <Switch slot="action" bind:checked={restoreValue} disabled={!interactAPIValue} on:change={handleChanges}/>
-            </SettingCard>
 
             <SettingCard
                 title={$_("pages.integrations.windowManipulation.advanced.scopes.setWindowTitleCard.title")}
