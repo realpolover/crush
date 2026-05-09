@@ -150,7 +150,7 @@ async function downloadAssetFile(assetUrl: string): Promise<string> {
     const res = await fetch(assetUrl)
     if (!res.ok) {
         info(`error url : ${assetUrl}`)
-        throw new Error(`HTTP ${res.status}`)
+        throw new Error(`HTTP ${res.status}: ${res.statusText} ${assetUrl}`)
     }
     const buffer = await res.arrayBuffer()
     await writeFile(fileName, new Uint8Array(buffer), {
@@ -169,19 +169,30 @@ async function downloadAssets(
     const total = uniqueUrls.length
     let completed = 0
     let currentIndex = 0
+    let aborted = false
+    let firstError: Error | null = null
 
     const workers = Array.from({ length: limit }, async () => {
         while (currentIndex < total) {
+            if (aborted) return
             const index = currentIndex++
             const assetUrl = uniqueUrls[index]
             if (!assetUrl) break
 
-            const fileName = await downloadAssetFile(assetUrl)
-            onProgress({ type: 'download', file: fileName, done: ++completed, total })
+            try {
+                const fileName = await downloadAssetFile(assetUrl)
+                if (!aborted)
+                    onProgress({ type: 'download', file: fileName, done: ++completed, total })
+            } catch (err) {
+                aborted = true
+                firstError = err instanceof Error ? err : new Error(String(err))
+                return
+            }
         }
     })
 
     await Promise.all(workers)
+    if (firstError) throw firstError
 }
 
 async function extractIndividualZip(
@@ -371,7 +382,7 @@ export async function downloadRoblox(
     const actualVersions = await reindexVersions(appType)
     const storedVersions = (await versionStore.get<string[]>('versions')) ?? []
 
-    if (actualVersions.length !== storedVersions.length || 
+    if (actualVersions.length !== storedVersions.length ||
         actualVersions.some(v => !storedVersions.includes(v))) {
         info(`Version list mismatch, reindexing. Stored: ${storedVersions}, Actual: ${actualVersions}`)
         await versionStore.set('versions', actualVersions)
