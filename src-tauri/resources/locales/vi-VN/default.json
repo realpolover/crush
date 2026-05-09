@@ -1,16 +1,16 @@
 {
     "rpc": {
         "general": "Một trình khởi động Roblox được viết từ đầu",
-        "integrations": "In Integrations Route",
-        "installation": "Đang trong lộ trình lắp đặt",
-        "fastflag": "In Fast Flags Route",
-        "mod": "Trong lộ trình Mod",
-        "appearance": "Trong lộ trình xuất hiện",
+        "integrations": "Đang trong lộ trình Tích hợp",
+        "installation": "Đang trong lộ trình Cài đặt",
+        "fastflag": "Đang trong lộ trình Fast Flag",
+        "mod": "Đang trong lộ trình Mod",
+        "appearance": "Đang trong lộ trình Giao diện",
         "rust": {
             "watcher": {
                 "general": "Đang chơi Roblox",
                 "idle": "Không có trong trò chơi",
-                "playing": "In game"
+                "playing": "Trong trò chơi"
             }
         }
     },
@@ -42,37 +42,37 @@
             "retry": "Thử lại"
         },
         "serverInfomationPage": {
-            "title": "Server Information",
+            "title": "Thông tin máy chủ",
             "infomationCard": {
-                "description": "Server information about this server",
-                "uptime": "Uptime : Not fetched",
+                "description": "Thông tin về máy chủ này.",
+                "uptime": "Thời gian hoạt động : Không rõ",
                 "instanceId": "ID máy chủ: {id}",
                 "inviteLink": "Sao chép liên kết lời mời"
             }
         },
         "appearance": {
             "appearance": "Giao diện",
-            "description": "Tùy chỉnh giao diện của Roblox bootstrapper.",
+            "description": "Tùy chỉnh giao diện của trình khởi động Roblox.",
             "bootstrapThemeCard": {
                 "title": "Chủ đề trình khởi động",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "description": "Chọn giữa giao diện Crush mặc định hoặc giao diện XML tùy chỉnh.",
                 "dropdown": {
                     "default": "Mặc định (Crush)",
                     "custom": "Tùy chỉnh"
                 },
                 "customDropDownContents": {
                     "importNew": "Nhập mới",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "noThemes": "Chưa có chủ đề tùy chỉnh nào được nhập.",
+                    "missingAssets": "Thiếu các thành phần chủ đề"
                 }
             }
         },
         "integrations": {
             "integrations": "Tích hợp",
-            "description": "Configure integrations outside Roblox.",
+            "description": "Cấu hình các tích hợp bên ngoài Roblox.",
             "serverNotifierCard": {
                 "title": "Thông báo vị trí máy chủ",
-                "description": "Get notified when the client connects to a server."
+                "description": "Nhận thông báo khi client kết nối tới server."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
@@ -86,20 +86,20 @@
                 "button": "Xem"
             },
             "windowManipulationCard": {
-                "title": "Window Manipulation (Previously Interactive API)",
-                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
+                "title": "Thao tác cửa sổ (Trước đây là API tương tác)",
+                "description": "Cho phép trò chơi được hỗ trợ di chuyển cửa sổ, thay đổi kích thước, thông báo và tương tác với phần cứng của bạn. Chỉ hỗ trợ các trò chơi có thao tác trên cửa sổ - không phải tất cả trò chơi đều hoạt động. Lấy cảm hứng từ cách BloxstrapRPC & Funkstrap hoạt động.",
                 "button": "Mở"
             },
             "roValraCard": {
-                "title": "Better Matchmaking with RoValra",
-                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
+                "title": "Ghép trận tốt hơn với RoValra",
+                "description": "Crush có tính năng ghép trận tích hợp sẵn. Có áp dụng Chính sách bảo mật của RoValra.",
                 "button": "Mở"
             },
             "roValra": {
                 "description": "Cấu hình",
                 "joinServerForYouCard": {
                     "title": "Để Crush tham gia máy chủ cho bạn",
-                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
+                    "description": "Thay vì sử dụng hệ thống ghép trận của Roblox, chúng tôi sẽ sử dụng API của RoValra để tìm máy chủ tốt nhất."
                 }
             },
             "gameHistory": {
@@ -113,63 +113,63 @@
                     "titleUnknown": "Trò chơi không xác định",
                     "lastPlayed": "Chơi gần đây nhất",
                     "play": "Chơi",
-                    "deeplink": "Sao chép DeepLink"
+                    "deeplink": "Sao chép liên kết"
                 }
             },
             "windowManipulation": {
-                "title": "Window Manipulation Settings",
-                "description": "Configure how Window Manipulation should behave.",
+                "title": "Cài đặt thao tác cửa sổ",
+                "description": "Cấu hình cách thao tác cửa sổ sẽ hoạt động.",
                 "enableCard": {
                     "title": "Bật",
-                    "description": "Choose whether or not to enable Window Manipulation."
+                    "description": "Chọn xem có bật tính năng thao tác cửa sổ hay không."
                 },
                 "advanced": {
                     "title": "Nâng cao",
-                    "description": "Deeply configure Window Manipulation.",
+                    "description": "Cấu hình thao tác cửa sổ sâu hơn.",
                     "scopes": {
-                        "title": "Scopes",
+                        "title": "Phạm vi",
                         "minimizeCard": {
-                            "title": "Minimize",
-                            "description": "Whether or not to enable minimize control via Window Manipulation."
+                            "title": "Ẩn",
+                            "description": "Có nên bật ẩn cửa sổ thông qua thao tác cửa sổ hay không."
                         },
                         "maximizeCard": {
-                            "title": "Maximize",
-                            "description": "Whether or not to enable maximize control via Window Manipulation."
+                            "title": "Phóng to",
+                            "description": "Có nên bật phóng to cửa sổ thông qua thao tác cửa sổ hay không."
                         },
                         "focusCard": {
-                            "title": "Focus",
-                            "description": "Whether or not to enable focus control via Window Manipulation."
+                            "title": "Tập trung",
+                            "description": "Có nên bật tập trung cửa sổ thông qua thao tác cửa sổ hay không."
                         },
                         "moveWindowCard": {
-                            "title": "Move Window",
-                            "description": "Whether or not to enable move window control via Window Manipulation."
+                            "title": "Di chuyển cửa sổ",
+                            "description": "Có nên bật di chuyển cửa sổ thông qua thao tác cửa sổ hay không."
                         },
                         "restoreCard": {
-                            "title": "Restore",
-                            "description": "Whether or not to enable restore control via Window Manipulation."
+                            "title": "Thu nhỏ",
+                            "description": "Có nên bật thu nhỏ cửa sổ thông qua thao tác cửa sổ hay không."
                         },
                         "setWindowTitleCard": {
-                            "title": "Set window title",
-                            "description": "Whether or not to enable set window title control via Window Manipulation."
+                            "title": "Đặt tiêu đề cửa sổ",
+                            "description": "Có nên đặt tiêu đề cửa sổ thông qua thao tác cửa sổ hay không."
                         },
                         "setBorderless": {
-                            "title": "Set borderless",
-                            "description": "Whether or not to enable borderless window control via Window Manipulation."
+                            "title": "Đặt cửa sổ không viền",
+                            "description": "Có nên đặt cửa sổ không viền thông qua thao tác cửa sổ hay không."
                         }
                     },
                     "transparencySettings": {
-                        "title": "Transparency Settings",
+                        "title": "Cài đặt trong suốt",
                         "enableCard": {
-                            "title": "Enable",
-                            "description": "Whether or not to enable transparency control via the Interactive API."
+                            "title": "Bật",
+                            "description": "Có nên bật tính năng kiểm soát độ trong suốt của cửa sổ thông qua API tương tác hay không."
                         },
                         "minTransparency": {
-                            "title": "Min transparency",
-                            "description": "The minimum transparency level your window can reach."
+                            "title": "Độ trong suốt tối thiểu",
+                            "description": "Mức độ trong suốt tối thiểu mà cửa sổ của bạn có thể đạt tới."
                         },
                         "maxTransparency": {
-                            "title": "Max transparency",
-                            "description": "The maximum transparency level your window can reach."
+                            "title": "Độ trong suốt tối đa",
+                            "description": "Mức độ trong suốt tối đa mà cửa sổ của bạn có thể đạt tới."
                         }
                     }
                 }
@@ -177,14 +177,14 @@
         },
         "installations": {
             "installations": "Cài đặt",
-            "description": "Manage your Roblox installation.",
+            "description": "Quản lý trình cài đặt Roblox của bạn.",
             "customVersion": {
                 "title": "Cài đặt phiên bản Roblox tùy chỉnh",
-                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
+                "description": "Bỏ qua bước kiểm tra cập nhật và tải xuống phiên bản cụ thể. Giá trị mặc định là phiên bản mới nhất. Phiên bản không hợp lệ sẽ không được tải xuống và hệ thống sẽ chọn phiên bản mới nhất."
             },
             "parallelDownloadingCard": {
-                "title": "Parallel Downloading",
-                "description": "Download multiple assets instead of one at a time. Default is 4."
+                "title": "Tải xuống song song",
+                "description": "Tải xuống nhiều tệp tin cùng một lúc thay vì từng cái một. Mặc định là 4."
             },
             "forceReinstallCard": {
                 "title": "Bắt buộc cài đặt lại Roblox",
@@ -196,30 +196,30 @@
             }
         },
         "fastflag": {
-            "fastflag": "Cờ nhanh",
+            "fastflag": "Fast Flags",
             "description": "Thêm/Xóa Fast Flags Roblox và cấu hình.",
             "generalBack": "Quay lại Fast Flags",
             "selectScreeen": {
                 "title": "Vui lòng chọn một hành động.",
                 "editCard": {
                     "title": "Chỉnh sửa",
-                    "description": "Cờ tính năng"
+                    "description": "Chỉnh sửa tính năng của flag"
                 },
                 "presetCard": {
-                    "title": "Đặt trước",
+                    "title": "Có sẵn",
                     "description": "Use Feature Flag presets built into Crush."
                 }
             },
             "editor": {
                 "flagTable": {
-                    "texboxFlagName": "Tên cờ",
+                    "texboxFlagName": "Tên flag",
                     "texboxFlagValue": "Giá trị",
                     "buttonAdd": "Thêm",
-                    "search": "Tìm kiếm tất cả fast flags...",
-                    "searchNotFound": "Không tìm thấy cờ nào phù hợp với tìm kiếm của bạn.",
+                    "search": "Tìm kiếm tất cả fast flag...",
+                    "searchNotFound": "Không tìm thấy flag nào phù hợp với tìm kiếm của bạn.",
                     "flagCol": {
-                        "deleteNote": "Xóa cờ",
-                        "name": "tên cờ",
+                        "deleteNote": "Xóa flag",
+                        "name": "tên flag",
                         "type": "kiểu",
                         "value": "giá trị"
                     }
@@ -227,18 +227,18 @@
             },
             "preset": {
                 "preset": "Có sẵn",
-                "description": "Use our built-in fast flag presets.",
+                "description": "Sử dụng các thiết lập fast flag có sẵn của chúng tôi.",
                 "msaaCard": {
-                    "title": "Chất lượng chống răng cưa (MSAA)",
+                    "title": "Chất lượng khử răng cưa (MSAA)",
                     "description": "Làm mịn các cạnh lởm chởm. Các giá trị cao hơn trông đẹp hơn nhưng có thể làm giảm hiệu suất."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "title": "Dừng ánh sáng voxel",
+                    "description": "Dừng xử lí ánh sáng voxel để cải thiện hiệu năng."
                 },
                 "grassAnimationCard": {
                     "title": "Hoạt ảnh vẫy cỏ",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
+                    "description": "Điều chỉnh cường độ chuyển động của cỏ. (0 là không giảm, 999 hoặc bất kỳ số nào cao hơn sẽ làm cỏ đứng yên, 0 và 1 làm giảm chuyển động nhẹ và các giá trị lớn hơn 1 làm giảm chuyển động mạnh, gần như đứng yên)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Ghi đè mức chất lượng kết cấu",
@@ -313,7 +313,7 @@
             },
             "onBoardCard": {
                 "title": "Crush xin chào",
-                "description": "Force the onboarding flow to run again.",
+                "description": "Buộc quy trình cài đặt phải chạy lại.",
                 "button": "Cài đặt lại"
             },
             "languageCard": {
@@ -325,8 +325,8 @@
                 "description": "Chọn hiệu ứng mờ nền cho cửa sổ ứng dụng."
             },
             "enableCrushRpcCard": {
-                "title": "Crush Discord RPC",
-                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+                "title": "Trạng thái hoạt động Discord của Crush",
+                "description": "Bật/tắt hiển thị hoạt động của bạn qua Discord RPC. Nên khởi động lại ứng dụng."
             },
             "donateCard": {
                 "title": "Ủng hộ",
