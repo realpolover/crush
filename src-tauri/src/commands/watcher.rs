@@ -451,7 +451,8 @@ async fn on_joined(
     save_game_history(state, store, place_id)?;
 
     if let Some(id) = state.activity.instance_id.as_deref() {
-        emit_server_info(app, id, place_id, &state.pending_server_location.clone().unwrap());
+        let location = state.pending_server_location.clone().unwrap_or_default();
+        emit_server_info(app, id, place_id, &location);
         add_menu_item(app, "serverinfo", "Server Infomation").ok();
     }
 
