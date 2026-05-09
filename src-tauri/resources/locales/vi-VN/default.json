@@ -47,7 +47,6 @@
                 "serverRegion": "Vùng : {region}",
                 "description": "Thông tin về máy chủ này.",
                 "uptime": "Thời gian hoạt động : Không rõ",
-
                 "instanceId": "ID máy chủ: {id}",
                 "inviteLink": "Sao chép liên kết lời mời"
             }
@@ -198,7 +197,7 @@
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
+            "fastflag": "Cờ nhanh",
             "description": "Thêm/Xóa Fast Flags Roblox và cấu hình.",
             "generalBack": "Quay lại Fast Flags",
             "selectScreeen": {
