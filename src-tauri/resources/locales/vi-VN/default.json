@@ -47,6 +47,7 @@
                 "serverRegion": "Vùng : {region}",
                 "description": "Thông tin về máy chủ này.",
                 "uptime": "Thời gian hoạt động : Không rõ",
+
                 "instanceId": "ID máy chủ: {id}",
                 "inviteLink": "Sao chép liên kết lời mời"
             }
