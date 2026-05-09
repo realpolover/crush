@@ -44,6 +44,7 @@
         "serverInfomationPage": {
             "title": "Server Information",
             "infomationCard": {
+                "serverRegion": "Region : {region}",
                 "description": "Server information about this server",
                 "uptime": "Uptime : Not fetched",
                 "instanceId": "Server Instance ID : {id}",
