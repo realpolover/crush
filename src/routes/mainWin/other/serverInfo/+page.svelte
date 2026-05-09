@@ -4,14 +4,15 @@
     import type { ServerInfoFromBackend } from '$lib/types'
     import { listen } from '@tauri-apps/api/event'
     import { getMessageFormatter } from 'svelte-i18n'
-    import { writeText } from '@tauri-apps/plugin-clipboard-manager';
-    import { fetch } from '@tauri-apps/plugin-http';
-    import { _} from 'svelte-i18n'
+    import { writeText } from '@tauri-apps/plugin-clipboard-manager'
+    import { fetch } from '@tauri-apps/plugin-http'
+    import { _ } from 'svelte-i18n'
 
     let serverInstanceId: string = 'Unkown'
     let gameId: number = 1234
+    let gameRegion: string = 'Unkown'
     let serverInviteLink: string
-    let gameName: string = "Unkown game"
+    let gameName: string = 'Unkown game'
 
     async function getUniverse(
         placeId: number
@@ -28,7 +29,9 @@
         universeId: number
     ): Promise<{ name: string; imageUrl: string | null }> {
         const [nameRes, iconRes] = await Promise.all([
-            await fetch(`https://games.roblox.com/v1/games?universeIds=${universeId}`)
+            await fetch(
+                `https://games.roblox.com/v1/games?universeIds=${universeId}`
+            )
                 .then((r) => r.json())
                 .catch(() => null),
             await fetch(
@@ -47,12 +50,13 @@
     }
 
     async function copyToClipboard(url: any) {
-        await writeText(url);
+        await writeText(url)
     }
 
     listen<ServerInfoFromBackend>('serverInfomation', async (event) => {
         serverInstanceId = event.payload.server_id
         gameId = event.payload.game_id
+        gameRegion = event.payload.region_info
 
         serverInviteLink = `https://deeplink.multicrew.dev?placeId=${gameId}&jobId=${serverInstanceId}`
 
@@ -63,10 +67,7 @@
             return
         }
 
-        const details = await getGameDetails(
-            gameId,
-            universeData.universeId
-        )
+        const details = await getGameDetails(gameId, universeData.universeId)
 
         gameName = details.name
     })
@@ -81,10 +82,23 @@
         isOpen={true}
     >
         <div class="flex flex-col gap-3 p-4">
-            <p>{$_("pages.serverInfomationPage.infomationCard.uptime")}</p>
-            <p>{$_("pages.serverInfomationPage.infomationCard.instanceId", { values: { id: serverInstanceId} })}</p>
+            <p>
+                {($_('pages.serverInfomationPage.infomationCard.serverRegion'),
+                { values: { region: gameRegion } })}
+            </p>
+            <p>{$_('pages.serverInfomationPage.infomationCard.uptime')}</p>
+            <p>
+                {$_('pages.serverInfomationPage.infomationCard.instanceId', {
+                    values: { id: serverInstanceId },
+                })}
+            </p>
             <p class="flex items-center gap-2">
-                {$_("pages.serverInfomationPage.infomationCard.inviteLink")}d <Button variant="secondary" on:click={async () => { await copyToClipboard(serverInviteLink)}} >Copy to clipboard</Button>
+                {$_('pages.serverInfomationPage.infomationCard.inviteLink')}d <Button
+                    variant="secondary"
+                    on:click={async () => {
+                        await copyToClipboard(serverInviteLink)
+                    }}>Copy to clipboard</Button
+                >
             </p>
         </div>
     </ExpandableSettingCard>

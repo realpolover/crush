@@ -147,6 +147,7 @@ struct BloxstrapRpcMessage {
 struct EmitServerInfomation {
     server_id: String,
     game_id: u64,
+    region_info: String,
 }
 
 // entry
@@ -450,7 +451,7 @@ async fn on_joined(
     save_game_history(state, store, place_id)?;
 
     if let Some(id) = state.activity.instance_id.as_deref() {
-        emit_server_info(app, id, place_id);
+        emit_server_info(app, id, place_id, &state.pending_server_location.clone().unwrap());
         add_menu_item(app, "serverinfo", "Server Infomation").ok();
     }
 
@@ -929,10 +930,11 @@ async fn update_discord_rpc(
 
 // helpers
 
-fn emit_server_info(app: &AppHandle, instance_id: &str, game_id: u64) {
+fn emit_server_info(app: &AppHandle, instance_id: &str, game_id: u64, region_info: &str) {
     let payload = EmitServerInfomation {
         server_id: instance_id.to_string(),
         game_id: game_id,
+        region_info: region_info.to_string(),
     };
 
     app.emit("serverInfomation", payload).unwrap()

@@ -188,6 +188,7 @@ export type AppType = 'player' | 'studio'
 
 //
 export type ServerInfoFromBackend = {
+    region_info: string
     game_id : number,
     server_id : string
 }
