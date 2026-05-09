@@ -1,24 +1,24 @@
 {
     "rpc": {
-        "general": "A Roblox bootstrapper written from scratch",
-        "integrations": "In Integrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fast Flags Route",
-        "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "general": "Un bootstrapper de Roblox escrito desde cero",
+        "integrations": "En Ruta de Integraciones",
+        "installation": "En Ruta de instalaciones",
+        "fastflag": "En Ruta de Fast Flags",
+        "mod": "En Ruta de Mods",
+        "appearance": "En Ruta de Apariencia",
         "rust": {
             "watcher": {
-                "general": "Playing Roblox",
-                "idle": "Not in a game",
-                "playing": "In game"
+                "general": "Jugando Roblox",
+                "idle": "No en un juego",
+                "playing": "Jugando"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
+            "updateChecking": "Buscando Actualizaciones",
+            "findingBestRegion": "Buscando la mejor region de descarga...",
+            "preparingForDownload": "Preparando para descargar",
             "fetchingUrls": "Fetching asset URLs...",
             "downloadingAssets": "Downloading assets...",
             "extractingFiles": "Extracting files...",
