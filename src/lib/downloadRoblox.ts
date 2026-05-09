@@ -2,7 +2,7 @@ import { fetch } from '@tauri-apps/plugin-http'
 import { invoke } from '@tauri-apps/api/core'
 import { load, Store } from '@tauri-apps/plugin-store'
 import { info } from '@tauri-apps/plugin-log'
-import { exists, BaseDirectory, writeFile, mkdir } from '@tauri-apps/plugin-fs'
+import { exists, BaseDirectory, writeFile, mkdir, readDir, remove } from '@tauri-apps/plugin-fs'
 import { appCacheDir, appDataDir, join } from '@tauri-apps/api/path'
 import { get } from 'svelte/store'
 import { _ } from 'svelte-i18n'
@@ -99,6 +99,39 @@ const sortedExtractRoots = Object.entries(playerExtractRoots).sort(
 )
 
 import type { ProgressEvent, ProgressCallback, Installation, Versions } from './types'
+
+async function reindexVersions(appType: AppType = 'player'): Promise<string[]> {
+    const dataDir = await appDataDir()
+    const appFolder = appType === 'studio' ? 'Studio' : 'Player'
+    const versionsDir = await join(dataDir, appFolder, 'Versions')
+    const exeName = appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
+
+    const dirExists = await exists(versionsDir)
+    if (!dirExists) return []
+
+    const entries = await readDir(versionsDir)
+    const validVersions: string[] = []
+
+    for (const entry of entries) {
+        if (!entry.isDirectory) continue
+        // test if its look like a version name thing
+        if (!entry.name?.startsWith('version-')) continue
+
+        const exePath = await join(versionsDir, entry.name, exeName)
+        const appSettingsPath = await join(versionsDir, entry.name, 'AppSettings.xml')
+
+        const isComplete = await exists(exePath) && await exists(appSettingsPath)
+        if (isComplete) {
+            validVersions.push(entry.name)
+        } else {
+            // clean up
+            info(`Removing incomplete installation: ${entry.name}`)
+            await remove(await join(versionsDir, entry.name), { recursive: true })
+        }
+    }
+
+    return validVersions
+}
 
 async function ensureDir(path: string) {
     const existsDir = await exists(path)
@@ -333,12 +366,23 @@ export async function downloadRoblox(
     const config = await load('config.json')
     const storeKey = appType === 'studio' ? 'studio-versions.json' : 'versions.json'
     const versionStore = await load(storeKey)
-    const versionList = (await versionStore.get<string[]>('versions')) ?? []
+
+    // reindex
+    const actualVersions = await reindexVersions(appType)
+    const storedVersions = (await versionStore.get<string[]>('versions')) ?? []
+
+    if (actualVersions.length !== storedVersions.length || 
+        actualVersions.some(v => !storedVersions.includes(v))) {
+        info(`Version list mismatch, reindexing. Stored: ${storedVersions}, Actual: ${actualVersions}`)
+        await versionStore.set('versions', actualVersions)
+        await versionStore.save()
+    }
+
+    const versionList = actualVersions
     const savedInstallation = await config.get<Installation>('installation')
 
     if (savedInstallation?.dontUpdate) {
-        const existing = versionList.at(-1) ?? ''
-        return existing
+        return versionList.at(-1) ?? ''
     }
 
     if (version) {
