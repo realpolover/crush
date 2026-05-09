@@ -208,8 +208,14 @@ export type BoostrapConfigs = { // bloxstrap, froststrap
     EnableBetterMatchmaking: boolean,
     ShowUsingFroststrapRPC: boolean,
 
-    UpdateRoblox : boolean, // frost & void???
+    UpdateRoblox : boolean, // frost & void??? (ps : fish)
 
     // voidstrap only
     VoidRPC: boolean,
+
+    // funkstrap
+    UseWindowControl: boolean
+    MoveWindowAllowed: boolean
+    TitleControlAllowed: boolean
+    WindowTransparencyAllowed: boolean
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
     import Button from '$lib/components/atoms/Button.svelte'
     import Textbox from '$lib/components/atoms/Textbox.svelte'
-    import type { BoostrapConfigs, Installation, Integrations, RoValra } from '$lib/types'
+    import type { BoostrapConfigs, Installation, Integrations, interactiveAPI, RoValra } from '$lib/types'
     import { invoke } from '@tauri-apps/api/core'
     import { load } from '@tauri-apps/plugin-store'
 
@@ -20,7 +20,29 @@
                 joinServerForYouValue: boostraperConfig.EnableBetterMatchmaking ?? false
             }
             
+            const windowManipulation: interactiveAPI = {
+                enable: boostraperConfig.UseWindowControl ?? false,
+                scopes: {
+                    transparencyScopes: {
+                        enabled: boostraperConfig.WindowTransparencyAllowed ?? true,
+
+                        minTransparency: 0,
+
+                        maxTransparency: 255
+                    },
+
+                    setTitle : boostraperConfig.TitleControlAllowed ?? true, // what the FUCK am i doing
+                    focus: boostraperConfig.MoveWindowAllowed ?? true,
+                    moveWindow: boostraperConfig.MoveWindowAllowed ?? true,
+                    maximize: boostraperConfig.MoveWindowAllowed ?? true,
+                    minimize: boostraperConfig.MoveWindowAllowed ?? true,
+                    restore: boostraperConfig.MoveWindowAllowed ?? true,
+                    setBorderless: boostraperConfig.MoveWindowAllowed ?? true
+                }
+            }
+            
             const newIntegrations: Integrations = {
+                interactive: windowManipulation,
                 discordRpc: integrations?.discordRpc ?? {
                     enable: boostraperConfig.UseDiscordRichPresence ?? false,
                     displayAccount: boostraperConfig.ShowAccountOnRichPresence ?? false,
@@ -58,7 +80,7 @@
 
 <div class="flex flex-col h-full">
     <div class="flex flex-col gap-2 flex-1 overflow-y-auto min-h-0">
-        <p class="text-stone-300 text-base">Export other boostraper configs that based on Bloxstrap to crush. (Tested : Bloxstrap, Frostrap, Voidstrap)</p>
+        <p class="text-stone-300 text-base">Export other boostraper configs that based on Bloxstrap to crush. (Tested : Bloxstrap, Frostrap, Voidstrap, Funkstrap)</p>
         <Textbox placeholder="C:\Users\Mally\AppData\Local\Bloxstrap" bind:value={userBasePath}/>
         <Button on:click={() => importConfigs(userBasePath)}>
             Export
