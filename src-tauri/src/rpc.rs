@@ -36,7 +36,11 @@ pub async fn start_rpc(state: &RpcState, client_id: &str) -> Result<(), String> 
 pub async fn apply_rpc(state: &RpcState, details: &str, state_text: &str) -> Result<(), String> {
     let lock = state.client.lock().await;
     if let Some(client) = lock.as_ref() {
-        let activity = Activity::new().details(details).state(state_text).build();
+        let activity = Activity::new()
+            .details(details)
+            .state(state_text)
+            .build()
+            .map_err(|e| e.to_string())?;
         client
             .set_activity(activity)
             .await
@@ -88,7 +92,7 @@ pub async fn apply_rpc_full(
         }
 
         client
-            .set_activity(builder.build())
+            .set_activity(builder.build().map_err(|e| e.to_string())?)  // ← unwrap here
             .await
             .map_err(|e| e.to_string())?;
         Ok(())
@@ -100,7 +104,7 @@ pub async fn apply_rpc_full(
 pub async fn set_name(state: &RpcState, name: &str) -> Result<(), String> {
     let lock = state.client.lock().await;
     if let Some(client) = lock.as_ref() {
-        let activity = Activity::new().name(name).build();
+        let activity = Activity::new().name(name).build().map_err(|e| e.to_string())?;  // ← unwrap
         client
             .set_activity(activity)
             .await
@@ -116,7 +120,10 @@ pub async fn set_activity_type(
 ) -> Result<(), String> {
     let lock = state.client.lock().await;
     if let Some(client) = lock.as_ref() {
-        let activity = Activity::new().activity_type(activity_type).build();
+        let activity = Activity::new()
+            .activity_type(activity_type)
+            .build()
+            .map_err(|e| e.to_string())?;
         client
             .set_activity(activity)
             .await
@@ -132,7 +139,10 @@ pub async fn set_status_display_type(
 ) -> Result<(), String> {
     let lock = state.client.lock().await;
     if let Some(client) = lock.as_ref() {
-        let activity = Activity::new().status_display_type(display_type).build();
+        let activity = Activity::new()
+            .status_display_type(display_type)
+            .build()
+            .map_err(|e| e.to_string())?;
         client
             .set_activity(activity)
             .await
@@ -153,7 +163,7 @@ pub async fn set_buttons(state: &RpcState, buttons: Vec<(&str, &str)>) -> Result
             builder = builder.add_button(label, url);
         }
         client
-            .set_activity(builder.build())
+            .set_activity(builder.build().map_err(|e| e.to_string())?)  // ← unwrap
             .await
             .map_err(|e| e.to_string())
     } else {
