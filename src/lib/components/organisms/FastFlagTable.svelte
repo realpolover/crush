@@ -30,9 +30,9 @@
     )
 
     const typeBadge: Record<FlagType, string> = {
-        bool: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-        int: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
-        string: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+        bool: 'text-purple-400',
+        int: 'text-yellow-400',
+        string: 'text-emerald-400',
     }
 
     function handleSearch() {
@@ -80,6 +80,7 @@
                 for (const [k, v] of Object.entries(parsed)) {
                     imported[k] = String(v)
                 }
+                console.log(imported)
                 dispatch('import', imported)
             } catch {
                 addError = 'Invalid JSON file.'
@@ -114,7 +115,7 @@
             />
             {#if newValueType}
                 <span
-                    class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded border {typeBadge[newValueType]}"
+                    class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] {typeBadge[newValueType]}"
                 >
                     {newValueType}
                 </span>
@@ -131,10 +132,8 @@
             <span class="font-semibold text-sm">{$_('pages.fastflag.editor.flagTable.buttonAdd')}</span>
         </Button>
 
-        <!-- Divider -->
         <div class="w-px h-6 bg-stone-800/60 shrink-0"></div>
 
-        <!-- Import from JSON -->
         <input
             type="file"
             accept=".json,application/json"
@@ -178,7 +177,7 @@
             class="flex flex-col rounded-2xl border border-stone-800/20 bg-anthracite/40 backdrop-blur-sm overflow-hidden"
         >
             <div
-                class="flex items-center px-6 py-3 text-[11px] font-bold uppercase tracking-widest text-stone-500 border-b border-stone-800/20 bg-stone-900/60"
+                class="flex items-center px-6 py-3 text-[11px] tracking-widest text-stone-500 border-b border-stone-800/20 bg-stone-900/60"
             >
                 <div class="flex-[2]">{$_('pages.fastflag.editor.flagTable.flagCol.name')}</div>
                 <div class="w-20">{$_('pages.fastflag.editor.flagTable.flagCol.type')}</div>
@@ -204,11 +203,7 @@
                                 {name}
                             </div>
                             <div class="w-20">
-                                <span
-                                    class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded border {typeBadge[
-                                        type
-                                    ]}"
-                                >
+                                <span class="text-[10px] {typeBadge[type]}">
                                     {type}
                                 </span>
                             </div>

@@ -1,7 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import FastFlagTable from '$lib/components/organisms/FastFlagTable.svelte'
-    import { getLatestVersion, getCurrentInstallation } from '$lib/downloadRoblox'
+    import {
+        getLatestVersion,
+        getCurrentInstallation,
+    } from '$lib/downloadRoblox'
     import {
         getFastFlags,
         saveFastFlags,
@@ -20,14 +23,17 @@
 
     onMount(async () => {
         appType = (get(launchAppType) as AppType) || 'player'
-        
+
         const installation = await getCurrentInstallation(appType)
         if (installation && installation.exists) {
             version = installation.version
             console.log('[Editor] Detected installed version:', version)
         } else {
             version = await getLatestVersion(appType)
-            console.log('[Editor] No verified installation, falling back to latest in store:', version)
+            console.log(
+                '[Editor] No verified installation, falling back to latest in store:',
+                version
+            )
         }
 
         flags = await getFastFlags(version, appType)
@@ -38,7 +44,6 @@
             details: $_('rpc.general'),
             stateText: $_('rpc.fastflag'),
         })
-
     })
 
     async function handleDelete(event: CustomEvent<string>) {
@@ -95,5 +100,10 @@
         on:add={handleAdd}
         on:update={handleUpdate}
         on:search={handleSearch}
+        on:import={async (e) => {
+            const latestFlags = await getFastFlags(version, appType)
+            flags = { ...latestFlags, ...e.detail }
+            await saveFastFlags(version, flags, appType)
+        }}
     />
 </div>
