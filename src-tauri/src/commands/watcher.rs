@@ -1,4 +1,8 @@
-use crate::interactive::{find_windows_by_title, move_window, set_transparency, set_window_title};
+use crate::interactive::{
+    find_windows_by_title, get_monitor_info, get_primary_screen_size, get_virtual_screen_size,
+    get_window_rect, move_window, reset_layered, set_borderless, set_layered_transparency,
+    set_window_color, set_window_title, LWA_ALPHA, LWA_COLORKEY,
+};
 use crate::rd::get_client;
 use crate::rpc::{apply_rpc, apply_rpc_full, kill_rpc, start_rpc, RpcState};
 use crate::tray::{add_menu_item, remove_menu_item};
@@ -42,7 +46,9 @@ fn re_leave() -> &'static Regex {
 }
 fn re_udmux() -> &'static Regex {
     static R: OnceLock<Regex> = OnceLock::new();
-    R.get_or_init(|| Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap())
+    R.get_or_init(|| {
+        Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap()
+    })
 }
 fn re_bloxstrap_rpc() -> &'static Regex {
     static R: OnceLock<Regex> = OnceLock::new();
@@ -61,7 +67,6 @@ struct Activity {
     join_initiated: bool,
 }
 
-#[derive(Default)]
 struct WatcherState {
     current_file: Option<PathBuf>,
     offset: u64,
@@ -74,6 +79,67 @@ struct WatcherState {
     bloxstrap_rpc: Option<RichPresence>,
     roblox_hwnd: Option<HWND>,
     window_started: bool,
+
+    // window geometry saved at StartWindow
+    starting_x: i32,
+    starting_y: i32,
+    starting_width: i32,
+    starting_height: i32,
+
+    // last applied geometry (updated by SetWindow)
+    last_x: i32,
+    last_y: i32,
+    last_width: i32,
+    last_height: i32,
+
+    // scale reference resolution (updated by scaleWidth/scaleHeight fields)
+    last_sc_width: f64,
+    last_sc_height: f64,
+
+    // transparency state
+    last_transparency: u8,
+    last_window_color: u32,
+    last_transparency_mode: u32,
+
+    // misc window state
+    borderless: bool,
+}
+
+impl Default for WatcherState {
+    fn default() -> Self {
+        Self {
+            current_file: None,
+            offset: 0,
+            activity: Activity::default(),
+            last_rpc: None,
+            udmux_handled: false,
+            pending_server_ip: None,
+            pending_server_location: None,
+            location_notified: false,
+            bloxstrap_rpc: None,
+            roblox_hwnd: None,
+            window_started: false,
+
+            starting_x: 0,
+            starting_y: 0,
+            starting_width: 0,
+            starting_height: 0,
+
+            last_x: 0,
+            last_y: 0,
+            last_width: 0,
+            last_height: 0,
+
+            last_sc_width: 1280.0,
+            last_sc_height: 720.0,
+
+            last_transparency: 255,
+            last_window_color: 0,
+            last_transparency_mode: LWA_COLORKEY,
+
+            borderless: false,
+        }
+    }
 }
 
 impl WatcherState {
@@ -86,6 +152,7 @@ impl WatcherState {
         self.bloxstrap_rpc = None;
         self.roblox_hwnd = None;
         self.window_started = false;
+        self.borderless = false;
 
         remove_menu_item(app, "serverinfo").ok();
     }
@@ -162,7 +229,7 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
     }
 
     std::thread::spawn(move || {
-        let rt = tokio::runtime::Builder::new_current_thread()
+        let rt = tokio::runtime::Builder::new_multi_thread()
             .enable_all()
             .build()
             .expect("failed to build watcher runtime");
@@ -294,7 +361,6 @@ async fn read_new_lines(
         }
     }
 
-    // save offset but discard the reader open_reader always creates a fresh handle
     state.offset = reader.stream_position().unwrap_or(state.offset);
 }
 
@@ -314,7 +380,8 @@ async fn handle_line(
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
-    // new join
+
+    log::info!("LINE: {}", line);
     if let Some(caps) = re_join().captures(line) {
         let instance_id = caps
             .get(1)
@@ -325,7 +392,6 @@ async fn handle_line(
             .and_then(|m| m.as_str().parse().ok())
             .unwrap_or(0);
 
-        // stop any previous window session cleanly
         if state.window_started {
             if let Some(hwnd) = state.roblox_hwnd {
                 send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
@@ -344,20 +410,17 @@ async fn handle_line(
         return Ok(());
     }
 
-    // BloxstrapRPC
     if let Some(caps) = re_bloxstrap_rpc().captures(line) {
         if let Some(raw) = caps.get(1) {
             on_bloxstrap_rpc(app, raw.as_str(), state, store).await?;
         }
     }
 
-    // if not yet in_game, on_joined will call send_location_notification and pick it up
     if let Some(caps) = re_udmux().captures(line) {
         if !state.udmux_handled {
             if let Some(ip) = caps.get(1) {
                 fetch_and_store_location(ip.as_str(), state).await?;
                 state.udmux_handled = true;
-                // notify straight away if we're already in-game; otherwise on_joined fires it
                 if !state.location_notified {
                     send_location_notification(app, state, store).await?;
                 }
@@ -366,13 +429,11 @@ async fn handle_line(
         return Ok(());
     }
 
-    // fully joined
     if re_joined().is_match(line) {
         on_joined(app, state, store).await?;
         return Ok(());
     }
 
-    // left
     if state.activity.in_game && re_leave().is_match(line) {
         log::info!("left game");
         if state.window_started {
@@ -441,6 +502,7 @@ async fn on_joined(
             log::warn!("failed to write game permission PNG: {}", e);
         }
 
+        save_window_geometry(state);
         send_bloxstrap_command(hwnd, "StartWindow", Value::Null);
         state.window_started = true;
     } else {
@@ -456,7 +518,6 @@ async fn on_joined(
         add_menu_item(app, "serverinfo", "Server Infomation").ok();
     }
 
-    // send notification if UDMUX already fired; if not, udmux handler will send it later
     if !state.location_notified {
         send_location_notification(app, state, store).await?;
     }
@@ -503,85 +564,160 @@ async fn on_bloxstrap_rpc(
             log::info!("BloxstrapRPC SetRichPresence: {:?}", rpc);
             state.bloxstrap_rpc = Some(rpc.clone());
 
-            let rpc_state = app.state::<RpcState>();
-            const CLIENT_ID: &str = "1484521125550620813";
+            let app_c = app.clone();
+            tauri::async_runtime::spawn(async move {
+                let rpc_state = app_c.state::<RpcState>();
+                const CLIENT_ID: &str = "1484521125550620813";
 
-            if rpc_state.client.lock().await.is_none() {
-                if let Err(e) = start_rpc(&rpc_state, CLIENT_ID).await {
-                    log::error!("RPC start failed: {}", e);
-                    return Ok(());
+                if rpc_state.client.lock().await.is_none() {
+                    if let Err(e) = start_rpc(&rpc_state, CLIENT_ID).await {
+                        log::error!("RPC start failed: {}", e);
+                        return;
+                    }
                 }
-            }
 
-            apply_rpc_full(
-                &rpc_state,
-                rpc.details.as_deref(),
-                rpc.state.as_deref(),
-                None,
-                None,
-                None,
-                None,
-            )
-            .await
-            .map_err(|e| format!("BloxstrapRPC apply failed: {}", e))?;
+                let res = tokio::time::timeout(
+                    Duration::from_secs(5),
+                    apply_rpc_full(
+                        &rpc_state,
+                        rpc.details.as_deref(),
+                        rpc.state.as_deref(),
+                        None,
+                        None,
+                        None,
+                        None,
+                    ),
+                )
+                .await;
+
+                match res {
+                    Ok(Ok(_)) => {}
+                    Ok(Err(e)) => log::error!("BloxstrapRPC apply failed: {}", e),
+                    Err(_) => log::error!("BloxstrapRPC apply timed out"),
+                }
+            });
         }
 
         "RequestWindowPermission" => {
-            log::info!("BloxstrapRPC: RequestWindowPermission received (handled via PNG)");
+            log::info!("BloxstrapRPC: RequestWindowPermission (handled via PNG)");
+        }
+
+        "StartWindow" => {
+            if state.window_started {
+                return Ok(());
+            }
+            if get_or_find_hwnd(state).is_some() {
+                save_window_geometry(state);
+                state.window_started = true;
+                log::info!("BloxstrapRPC: StartWindow – geometry saved");
+            } else {
+                log::warn!("BloxstrapRPC: StartWindow – no HWND");
+            }
+        }
+
+        "StopWindow" => {
+            if !state.window_started {
+                return Ok(());
+            }
+            if let Some(hwnd) = state.roblox_hwnd {
+                do_reset_window(hwnd, state);
+            }
+            state.window_started = false;
+            log::info!("BloxstrapRPC: StopWindow");
+        }
+
+        "ResetWindow" => {
+            if !state.window_started {
+                return Ok(());
+            }
+            let Some(hwnd) = get_or_find_hwnd(state) else {
+                return Ok(());
+            };
+            do_reset_window(hwnd, state);
+            log::info!("BloxstrapRPC: ResetWindow");
         }
 
         "SetWindow" => {
             if !integration_enabled(store, &["interactive", "enable"]) {
-                log::info!("BloxstrapRPC: SetWindow ignored, interactive disabled");
+                return Ok(());
+            }
+            if !integration_enabled(store, &["interactive", "scopes", "moveWindow"]) {
+                log::info!("BloxstrapRPC: SetWindow – moveWindow scope disabled");
                 return Ok(());
             }
             if !state.window_started {
-                log::warn!("BloxstrapRPC: SetWindow received before StartWindow, ignoring");
+                log::warn!("BloxstrapRPC: SetWindow before StartWindow, ignoring");
                 return Ok(());
             }
             let Some(hwnd) = get_or_find_hwnd(state) else {
-                log::warn!("BloxstrapRPC: SetWindow no HWND");
+                log::warn!("BloxstrapRPC: SetWindow – no HWND");
                 return Ok(());
             };
 
-            let x = msg.data.get("x").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
-            let y = msg.data.get("y").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
-            let w = msg
+            if msg
                 .data
-                .get("width")
-                .and_then(|v| v.as_i64())
-                .unwrap_or(800) as i32;
-            let h = msg
-                .data
-                .get("height")
-                .and_then(|v| v.as_i64())
-                .unwrap_or(600) as i32;
+                .get("reset")
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false)
+            {
+                do_reset_window(hwnd, state);
+                return Ok(());
+            }
 
-            let scale_w = msg
-                .data
-                .get("scaleWidth")
-                .and_then(|v| v.as_f64())
-                .unwrap_or(1920.0);
-            let scale_h = msg
-                .data
-                .get("scaleHeight")
-                .and_then(|v| v.as_f64())
-                .unwrap_or(1080.0);
+            let (mon_x, mon_y, mon_w, mon_h) = get_monitor_info(hwnd);
+            let screen_w = mon_w as f64;
+            let screen_h = mon_h as f64;
 
-            // TODO: replace with actual screen resolution query if available
-            let screen_w = 1920.0_f64;
-            let screen_h = 1080.0_f64;
+            if let Some(v) = msg.data.get("scaleWidth").and_then(|v| v.as_f64()) {
+                state.last_sc_width = v;
+            }
+            if let Some(v) = msg.data.get("scaleHeight").and_then(|v| v.as_f64()) {
+                state.last_sc_height = v;
+            }
 
-            let sx = (x as f64 * screen_w / scale_w).round() as i32;
-            let sy = (y as f64 * screen_h / scale_h).round() as i32;
-            let sw = (w as f64 * screen_w / scale_w).round() as i32;
-            let sh = (h as f64 * screen_h / scale_h).round() as i32;
+            let scale_x = screen_w / state.last_sc_width;
+            let scale_y = screen_h / state.last_sc_height;
 
-            move_window(hwnd, sx, sy, sw, sh);
+            if let Some(v) = msg.data.get("width").and_then(|v| v.as_f64()) {
+                state.last_width = (v * scale_x).round() as i32;
+            }
+            if let Some(v) = msg.data.get("height").and_then(|v| v.as_f64()) {
+                state.last_height = (v * scale_y).round() as i32;
+            }
+
+            let (primary_w, primary_h) = get_primary_screen_size();
+            let (virtual_w, virtual_h) = get_virtual_screen_size();
+            let width_mult = primary_w as f64 / virtual_w as f64;
+            let height_mult = primary_h as f64 / virtual_h as f64;
+
+            if let Some(v) = msg.data.get("x").and_then(|v| v.as_f64()) {
+                let fake_width_fix =
+                    (state.last_width as f64 - state.last_width as f64 * width_mult) / 2.0;
+                state.last_x = (v * scale_x + fake_width_fix).round() as i32;
+            }
+            if let Some(v) = msg.data.get("y").and_then(|v| v.as_f64()) {
+                let fake_height_fix =
+                    (state.last_height as f64 - state.last_height as f64 * height_mult) / 2.0;
+                state.last_y = (v * scale_y + fake_height_fix).round() as i32;
+            }
+
+            let final_x = state.last_x + mon_x;
+            let final_y = state.last_y + mon_y;
+            let final_w = (state.last_width as f64 * width_mult).round() as i32;
+            let final_h = (state.last_height as f64 * height_mult).round() as i32;
+
+            move_window(hwnd, final_x, final_y, final_w, final_h);
+            log::info!(
+                "SetWindow → screen({screen_w}x{screen_h}) mon({mon_x},{mon_y}) \
+                 → move({final_x},{final_y},{final_w},{final_h})"
+            );
         }
 
         "SetWindowTitle" => {
             if !integration_enabled(store, &["interactive", "enable"]) {
+                return Ok(());
+            }
+            if !integration_enabled(store, &["interactive", "scopes", "setTitle"]) {
                 return Ok(());
             }
             let Some(hwnd) = get_or_find_hwnd(state) else {
@@ -595,47 +731,129 @@ async fn on_bloxstrap_rpc(
             if !integration_enabled(store, &["interactive", "enable"]) {
                 return Ok(());
             }
+            if !integration_enabled(
+                store,
+                &["interactive", "scopes", "transparencyScopes", "enabled"],
+            ) {
+                return Ok(());
+            }
             if !state.window_started {
-                log::warn!(
-                    "BloxstrapRPC: SetWindowTransparency received before StartWindow, ignoring"
-                );
+                log::warn!("BloxstrapRPC: SetWindowTransparency before StartWindow, ignoring");
                 return Ok(());
             }
             let Some(hwnd) = get_or_find_hwnd(state) else {
                 return Ok(());
             };
 
-            let t = msg
-                .data
-                .get("transparency")
-                .and_then(|v| v.as_f64())
-                .unwrap_or(1.0)
-                .clamp(0.0, 1.0);
-
-            let alpha = (t * 255.0).round() as u8;
+            if let Some(t) = msg.data.get("transparency").and_then(|v| v.as_f64()) {
+                state.last_transparency = (t.clamp(0.0, 1.0) * 255.0).round() as u8;
+            }
+            if let Some(c) = msg.data.get("color").and_then(|v| v.as_str()) {
+                state.last_window_color = u32::from_str_radix(c, 16).unwrap_or(0);
+            }
+            if let Some(use_alpha) = msg.data.get("useAlpha").and_then(|v| v.as_bool()) {
+                state.last_transparency_mode = if use_alpha { LWA_ALPHA } else { LWA_COLORKEY };
+            }
 
             let min = get_transparency_bound(store, "minTransparency", 0);
             let max = get_transparency_bound(store, "maxTransparency", 255);
-            set_transparency(hwnd, alpha.clamp(min, max));
-        }
+            let clamped = state.last_transparency.clamp(min, max);
 
-        "StartWindow" => {
-            if let Some(_hwnd) = get_or_find_hwnd(state) {
-                state.window_started = true;
-                log::info!("BloxstrapRPC: StartWindow acknowledged");
+            if clamped == 255 {
+                reset_layered(hwnd);
+            } else {
+                set_layered_transparency(
+                    hwnd,
+                    state.last_window_color,
+                    clamped,
+                    state.last_transparency_mode,
+                );
             }
         }
 
-        "StopWindow" => {
-            state.window_started = false;
-            log::info!("BloxstrapRPC: StopWindow acknowledged");
-        }
-
-        "ResetWindow" => {
-            if !state.window_started {
+        "SetWindowBorderless" => {
+            if !integration_enabled(store, &["interactive", "enable"]) {
                 return Ok(());
             }
-            log::info!("BloxstrapRPC: ResetWindow acknowledged");
+            if !integration_enabled(store, &["interactive", "scopes", "moveWindow"]) {
+                return Ok(());
+            }
+            let Some(hwnd) = get_or_find_hwnd(state) else {
+                return Ok(());
+            };
+            let enabled = msg
+                .data
+                .get("enabled")
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false);
+            set_borderless(hwnd, enabled);
+            state.borderless = enabled;
+            log::info!("BloxstrapRPC: SetWindowBorderless = {}", enabled);
+        }
+
+        "SetWindowColor" => {
+            if !integration_enabled(store, &["interactive", "enable"]) {
+                return Ok(());
+            }
+            let Some(hwnd) = get_or_find_hwnd(state) else {
+                return Ok(());
+            };
+
+            let reset = msg
+                .data
+                .get("reset")
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false);
+
+            let (caption, border) = if reset {
+                (Some(0x1F1F1Fu32), Some(0x1F1F1Fu32))
+            } else {
+                let caption = msg
+                    .data
+                    .get("caption")
+                    .and_then(|v| v.as_str())
+                    .and_then(|s| u32::from_str_radix(s, 16).ok());
+                let border = msg
+                    .data
+                    .get("border")
+                    .and_then(|v| v.as_str())
+                    .and_then(|s| u32::from_str_radix(s, 16).ok());
+                (caption, border)
+            };
+
+            set_window_color(hwnd, caption, border);
+            log::info!(
+                "BloxstrapRPC: SetWindowColor caption={:?} border={:?}",
+                caption,
+                border
+            );
+        }
+
+        "SendNotification" => {
+            let title = msg
+                .data
+                .get("title")
+                .and_then(|v| v.as_str())
+                .unwrap_or("[[MISSING TITLE]]");
+            let caption = msg
+                .data
+                .get("caption")
+                .and_then(|v| v.as_str())
+                .unwrap_or("[[MISSING CAPTION]]");
+            let _duration = msg
+                .data
+                .get("duration")
+                .and_then(|v| v.as_u64())
+                .unwrap_or(5);
+
+            app.notification()
+                .builder()
+                .title(title)
+                .body(caption)
+                .show()
+                .map_err(|e| e.to_string())?;
+
+            log::info!("BloxstrapRPC: SendNotification '{}' '{}'", title, caption);
         }
 
         other => {
@@ -644,6 +862,77 @@ async fn on_bloxstrap_rpc(
     }
 
     Ok(())
+}
+
+// some helpers
+
+fn save_window_geometry(state: &mut WatcherState) {
+    let Some(hwnd) = state.roblox_hwnd else {
+        return;
+    };
+    if let Some((x, y, w, h)) = get_window_rect(hwnd) {
+        state.starting_x = x;
+        state.starting_y = y;
+        state.starting_width = w;
+        state.starting_height = h;
+        state.last_x = x;
+        state.last_y = y;
+        state.last_width = w;
+        state.last_height = h;
+    }
+    state.last_sc_width = 1280.0;
+    state.last_sc_height = 720.0;
+}
+
+fn do_reset_window(hwnd: HWND, state: &mut WatcherState) {
+    state.last_x = state.starting_x;
+    state.last_y = state.starting_y;
+    state.last_width = state.starting_width;
+    state.last_height = state.starting_height;
+    state.last_transparency = 255;
+    state.last_window_color = 0x000000;
+    state.last_transparency_mode = LWA_COLORKEY;
+
+    move_window(
+        hwnd,
+        state.starting_x,
+        state.starting_y,
+        state.starting_width,
+        state.starting_height,
+    );
+    reset_layered(hwnd);
+    set_borderless(hwnd, false);
+    set_window_title(hwnd, "Roblox");
+    state.borderless = false;
+}
+
+fn get_or_find_hwnd(state: &mut WatcherState) -> Option<HWND> {
+    if let Some(hwnd) = state.roblox_hwnd {
+        return Some(hwnd);
+    }
+    let hwnd = find_windows_by_title("Roblox").into_iter().next();
+    if hwnd.is_some() {
+        state.roblox_hwnd = hwnd;
+    }
+    hwnd
+}
+
+fn get_transparency_bound(
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+    key: &str,
+    default: u8,
+) -> u8 {
+    let v = store
+        .get("integrations")
+        .or_else(|| store.get("intergrations"));
+    let Some(root) = v else { return default };
+    root.get("interactive")
+        .and_then(|v| v.get("scopes"))
+        .and_then(|v| v.get("transparencyScopes"))
+        .and_then(|v| v.get(key))
+        .and_then(|v| v.as_u64())
+        .map(|v| v.clamp(0, 255) as u8)
+        .unwrap_or(default)
 }
 
 fn write_game_permission_png(
@@ -725,8 +1014,8 @@ fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(
         static TABLE: OnceLock<[u32; 256]> = OnceLock::new();
         let table = TABLE.get_or_init(|| {
             let mut t = [0u32; 256];
-            for (i, val) in t.clone().iter().enumerate() {
-                let mut c = *val;
+            for (i, _) in t.clone().iter().enumerate() {
+                let mut c = i as u32;
                 for _ in 0..8 {
                     c = if c & 1 != 0 {
                         0xedb88320 ^ (c >> 1)
@@ -758,30 +1047,28 @@ fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(
 
     let mut out: Vec<u8> = Vec::new();
 
-    // PNG signature
     out.extend_from_slice(&[137, 80, 78, 71, 13, 10, 26, 10]);
 
-    // IHDR
     let mut ihdr = Vec::new();
     ihdr.extend_from_slice(&width.to_be_bytes());
     ihdr.extend_from_slice(&height.to_be_bytes());
-    ihdr.push(8); // bit depth
-    ihdr.push(6); // colour type: RGBA
-    ihdr.push(0); // compression
-    ihdr.push(0); // filter
-    ihdr.push(0); // interlace
+    ihdr.push(8);
+    ihdr.push(6);
+    ihdr.push(0);
+    ihdr.push(0);
+    ihdr.push(0);
     write_chunk(&mut out, b"IHDR", &ihdr);
 
     let mut raw: Vec<u8> = Vec::new();
     for row in 0..height as usize {
-        raw.push(0); // filter type None
+        raw.push(0);
         raw.extend_from_slice(&rgba[row * width as usize * 4..(row + 1) * width as usize * 4]);
     }
 
     let mut zlib: Vec<u8> = Vec::new();
-    zlib.push(0x78); // CMF
-    zlib.push(0x01); // FLG
-    zlib.push(0x01); // BFINAL=1, BTYPE=00
+    zlib.push(0x78);
+    zlib.push(0x01);
+    zlib.push(0x01);
 
     let len16 = raw.len() as u16;
     let nlen16 = !len16;
@@ -796,10 +1083,12 @@ fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(
     std::fs::write(path, &out).map_err(|e| e.to_string())
 }
 
+// others
+
 fn send_bloxstrap_command(_hwnd: HWND, command: &str, data: Value) {
     let payload =
         serde_json::to_string(&json!({ "command": command, "data": data })).unwrap_or_default();
-    println!("[BloxstrapRPC] {}", payload);
+    log::info!("Sending Bloxstrap command: {}", payload);
 }
 
 async fn fetch_and_store_location(ip: &str, state: &mut WatcherState) -> Result<(), String> {
@@ -809,13 +1098,21 @@ async fn fetch_and_store_location(ip: &str, state: &mut WatcherState) -> Result<
     }
     log::info!("UDMUX IP: {}", ip);
 
-    let info: IpInfo = get_client()
-        .get(format!("https://ipinfo.io/{}/json", ip))
-        .send()
+    let res = tokio::time::timeout(
+        Duration::from_secs(5),
+        get_client().get(format!("https://ipinfo.io/{}/json", ip)).send(),
+    )
+    .await;
+
+    let response = match res {
+        Ok(Ok(r)) => r,
+        Ok(Err(e)) => return Err(e.to_string()),
+        Err(_) => return Err("ipinfo.io request timed out".to_string()),
+    };
+
+    let info: IpInfo = tokio::time::timeout(Duration::from_secs(5), response.json())
         .await
-        .map_err(|e| e.to_string())?
-        .json()
-        .await
+        .map_err(|_| "ipinfo.io json parse timed out".to_string())?
         .map_err(|e| e.to_string())?;
 
     state.pending_server_ip = Some(ip.to_string());
@@ -862,115 +1159,95 @@ async fn update_discord_rpc(
         return Ok(());
     }
 
-    let Some((name, _)) = fetch_place_info(place_id).await? else {
-        return Ok(());
-    };
-
-    let instance_id = state.activity.instance_id.as_deref().unwrap_or("");
-    let buttons = vec![
-        (
-            "Join Server".to_string(),
-            format!(
-                "https://deeplink.multicrew.dev?placeId={}&jobId={}",
-                place_id, instance_id
-            ),
-        ),
-        (
-            "View Game".to_string(),
-            format!("https://www.roblox.com/games/{}", place_id),
-        ),
-    ];
-
-    const CLIENT_ID: &str = "1484521125550620813";
-    let rpc = app.state::<RpcState>();
-
-    if rpc.client.lock().await.is_none() {
-        if let Err(e) = start_rpc(&rpc, CLIENT_ID).await {
-            log::error!("RPC start failed: {}", e);
-            return Ok(());
-        }
-    }
-
-    if let Err(e) = apply_rpc_full(
-        &rpc,
-        Some("Crush"),
-        Some("Playing Roblox"),
-        Some(&name),
-        None,
-        None,
-        Some(buttons.clone()),
-    )
-    .await
-    {
-        log::warn!("RPC failed ({}), reconnecting…", e);
-        *rpc.client.lock().await = None;
-        *rpc.runner.lock().await = None;
-
-        if let Err(e) = start_rpc(&rpc, CLIENT_ID).await {
-            log::error!("RPC reconnect failed: {}", e);
-            return Ok(());
-        }
-        if let Err(e) = apply_rpc_full(
-            &rpc,
-            Some("Crush"),
-            Some("Playing Roblox"),
-            Some(&name),
-            None,
-            None,
-            Some(buttons),
-        )
-        .await
-        {
-            log::error!("RPC retry failed: {}", e);
-        }
-    }
-
     state.last_rpc = Some(now);
+    let instance_id = state.activity.instance_id.clone().unwrap_or_default();
+    let app_c = app.clone();
+
+    tauri::async_runtime::spawn(async move {
+        let (name, _image) = match fetch_place_info(place_id).await {
+            Ok(Some(v)) => v,
+            _ => ("Roblox".to_string(), String::new()),
+        };
+
+        let buttons = vec![
+            (
+                "Join Server".to_string(),
+                format!(
+                    "https://deeplink.multicrew.dev?placeId={}&jobId={}",
+                    place_id, instance_id
+                ),
+            ),
+            (
+                "View Game".to_string(),
+                format!("https://www.roblox.com/games/{}", place_id),
+            ),
+        ];
+
+        const CLIENT_ID: &str = "1484521125550620813";
+        let rpc = app_c.state::<RpcState>();
+
+        if rpc.client.lock().await.is_none() {
+            if let Err(e) = start_rpc(&rpc, CLIENT_ID).await {
+                log::error!("RPC start failed: {}", e);
+                return;
+            }
+        }
+
+        let res = tokio::time::timeout(
+            Duration::from_secs(5),
+            apply_rpc_full(
+                &rpc,
+                Some("Crush"),
+                Some("Playing Roblox"),
+                Some(&name),
+                None,
+                None,
+                Some(buttons.clone()),
+            ),
+        )
+        .await;
+
+        if let Ok(Err(e)) = res {
+            log::warn!("RPC failed ({}), reconnecting…", e);
+            *rpc.client.lock().await = None;
+            *rpc.runner.lock().await = None;
+
+            if let Err(e) = start_rpc(&rpc, CLIENT_ID).await {
+                log::error!("RPC reconnect failed: {}", e);
+                return;
+            }
+
+            let _ = tokio::time::timeout(
+                Duration::from_secs(5),
+                apply_rpc_full(
+                    &rpc,
+                    Some("Crush"),
+                    Some("Playing Roblox"),
+                    Some(&name),
+                    None,
+                    None,
+                    Some(buttons),
+                ),
+            )
+            .await;
+        } else if let Err(_) = res {
+            log::error!("RPC apply timed out");
+        }
+    });
+
     Ok(())
 }
-
-// helpers
 
 fn emit_server_info(app: &AppHandle, instance_id: &str, game_id: u64, region_info: &str) {
     let payload = EmitServerInfomation {
         server_id: instance_id.to_string(),
-        game_id: game_id,
+        game_id,
         region_info: region_info.to_string(),
     };
-
-    app.emit("serverInfomation", payload).unwrap()
+    app.emit("serverInfomation", payload).unwrap();
 }
 
-fn get_transparency_bound(
-    store: &tauri_plugin_store::Store<tauri::Wry>,
-    key: &str,
-    default: u8,
-) -> u8 {
-    let v = store
-        .get("integrations")
-        .or_else(|| store.get("intergrations"));
-    let Some(root) = v else { return default };
-    root.get("interactive")
-        .and_then(|v| v.get("scopes"))
-        .and_then(|v| v.get("transparencyScopes"))
-        .and_then(|v| v.get(key))
-        .and_then(|v| v.as_u64())
-        .map(|v| v.clamp(0, 255) as u8)
-        .unwrap_or(default)
-}
-
-fn get_or_find_hwnd(state: &mut WatcherState) -> Option<HWND> {
-    if let Some(hwnd) = state.roblox_hwnd {
-        return Some(hwnd);
-    }
-    let hwnd = find_windows_by_title("Roblox").into_iter().next();
-    if hwnd.is_some() {
-        state.roblox_hwnd = hwnd;
-    }
-    hwnd
-}
-
-fn integration_enabled(store: &tauri_plugin_store::Store<tauri::Wry>, path: &[&str]) -> bool {
+pub fn integration_enabled(store: &tauri_plugin_store::Store<tauri::Wry>, path: &[&str]) -> bool {
     let v = store
         .get("integrations")
         .or_else(|| store.get("intergrations"));
@@ -1029,46 +1306,72 @@ fn save_game_history(
 }
 
 async fn fetch_universe_id(place_id: u64) -> Result<u64, String> {
-    let universe: UniverseResponse = get_client()
-        .get(format!(
-            "https://apis.roblox.com/universes/v1/places/{}/universe",
-            place_id
-        ))
-        .send()
+    let res = tokio::time::timeout(
+        Duration::from_secs(5),
+        get_client()
+            .get(format!(
+                "https://apis.roblox.com/universes/v1/places/{}/universe",
+                place_id
+            ))
+            .send(),
+    )
+    .await;
+
+    let response = match res {
+        Ok(Ok(r)) => r,
+        Ok(Err(e)) => return Err(e.to_string()),
+        Err(_) => return Err("apis.roblox.com request timed out".to_string()),
+    };
+
+    let universe: UniverseResponse = tokio::time::timeout(Duration::from_secs(5), response.json())
         .await
-        .map_err(|e| e.to_string())?
-        .json()
-        .await
+        .map_err(|_| "apis.roblox.com json parse timed out".to_string())?
         .map_err(|e| e.to_string())?;
+
     Ok(universe.universe_id)
 }
 
 async fn fetch_place_info(place_id: u64) -> Result<Option<(String, String)>, String> {
     let client = get_client();
 
-    let universe: UniverseResponse = client
-        .get(format!(
-            "https://apis.roblox.com/universes/v1/places/{}/universe",
-            place_id
-        ))
-        .send()
-        .await
-        .map_err(|e| e.to_string())?
-        .json()
-        .await
-        .map_err(|e| e.to_string())?;
-
-    let uid = universe.universe_id;
+    let universe_id = fetch_universe_id(place_id).await?;
 
     let (games_res, icon_res) = tokio::join!(
-        client.get(format!("https://games.roblox.com/v1/games?universeIds={}", uid)).send(),
-        client.get(format!("https://thumbnails.roblox.com/v1/games/icons?universeIds={}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false", uid)).send(),
+        tokio::time::timeout(
+            Duration::from_secs(5),
+            client
+                .get(format!(
+                    "https://games.roblox.com/v1/games?universeIds={}",
+                    universe_id
+                ))
+                .send()
+        ),
+        tokio::time::timeout(
+            Duration::from_secs(5),
+            client
+                .get(format!(
+                    "https://thumbnails.roblox.com/v1/games/icons?universeIds={}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false",
+                    universe_id
+                ))
+                .send()
+        ),
     );
 
-    let name = games_res
-        .map_err(|e| e.to_string())?
-        .json::<GamesResponse>()
-        .await
+    let games_response = games_res
+        .map_err(|_| "games.roblox.com request timed out".to_string())?
+        .map_err(|e| e.to_string())?;
+
+    let icon_response = icon_res
+        .map_err(|_| "thumbnails.roblox.com request timed out".to_string())?
+        .map_err(|e| e.to_string())?;
+
+    let (games_data, icon_data) = tokio::join!(
+        tokio::time::timeout(Duration::from_secs(5), games_response.json::<GamesResponse>()),
+        tokio::time::timeout(Duration::from_secs(5), icon_response.json::<IconResponse>()),
+    );
+
+    let name = games_data
+        .map_err(|_| "games.roblox.com json parse timed out".to_string())?
         .map_err(|e| e.to_string())?
         .data
         .into_iter()
@@ -1076,10 +1379,8 @@ async fn fetch_place_info(place_id: u64) -> Result<Option<(String, String)>, Str
         .map(|g| g.name)
         .unwrap_or_else(|| "Unknown Game".to_string());
 
-    let image_url = icon_res
-        .map_err(|e| e.to_string())?
-        .json::<IconResponse>()
-        .await
+    let image_url = icon_data
+        .map_err(|_| "thumbnails.roblox.com json parse timed out".to_string())?
         .map_err(|e| e.to_string())?
         .data
         .into_iter()
