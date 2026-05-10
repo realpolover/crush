@@ -8,7 +8,7 @@ use windows::{
             IsWindowVisible, SetForegroundWindow, SetLayeredWindowAttributes, SetWindowLongW,
             SetWindowPos, SetWindowTextW, ShowWindow, LAYERED_WINDOW_ATTRIBUTES_FLAGS,
             SET_WINDOW_POS_FLAGS, SM_CXSCREEN, SM_CXVIRTUALSCREEN, SM_CYSCREEN,
-            SM_CYVIRTUALSCREEN, SWP_FRAMECHANGED, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+            SM_CYVIRTUALSCREEN, SWP_ASYNCWINDOWPOS, SWP_FRAMECHANGED, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
             SWP_NOZORDER, SW_MAXIMIZE, SW_MINIMIZE, SW_RESTORE, WINDOW_LONG_PTR_INDEX,
         },
     },
@@ -130,7 +130,7 @@ pub fn move_window(hwnd: HWND, x: i32, y: i32, width: i32, height: i32) {
             y,
             width,
             height,
-            swp(SWP_NOZORDER.0 | SWP_NOACTIVATE.0),
+            swp(SWP_NOZORDER.0 | SWP_NOACTIVATE.0 | SWP_ASYNCWINDOWPOS.0),
         );
     }
 }
@@ -185,7 +185,7 @@ pub fn set_borderless(hwnd: HWND, borderless: bool) {
             0,
             0,
             0,
-            swp(SWP_NOMOVE.0 | SWP_NOSIZE.0 | SWP_NOZORDER.0 | SWP_FRAMECHANGED.0),
+            swp(SWP_NOMOVE.0 | SWP_NOSIZE.0 | SWP_NOZORDER.0 | SWP_FRAMECHANGED.0 | SWP_ASYNCWINDOWPOS.0 | SWP_NOACTIVATE.0),
         );
     }
 }
