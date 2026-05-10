@@ -197,9 +197,9 @@
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Thêm/Xóa Fast Flags Roblox và cấu hình.",
-            "generalBack": "Quay lại Fast Flags",
+            "fastflag": "Fast Flag",
+            "description": "Thêm/Xóa Fast Flag Roblox và cấu hình.",
+            "generalBack": "Quay lại Fast Flag",
             "selectScreeen": {
                 "title": "Vui lòng chọn một hành động.",
                 "editCard": {
@@ -216,7 +216,7 @@
                     "texboxFlagName": "Tên flag",
                     "texboxFlagValue": "Giá trị",
                     "buttonAdd": "Thêm",
-                    "search": "Tìm kiếm tất cả fast flag...",
+                    "search": "Tìm kiếm tất cả Fast Flag...",
                     "searchNotFound": "Không tìm thấy flag nào phù hợp với tìm kiếm của bạn.",
                     "flagCol": {
                         "deleteNote": "Xóa flag",
@@ -228,7 +228,7 @@
             },
             "preset": {
                 "preset": "Có sẵn",
-                "description": "Sử dụng các thiết lập fast flag có sẵn của chúng tôi.",
+                "description": "Sử dụng các thiết lập Fast Flag có sẵn của chúng tôi.",
                 "msaaCard": {
                     "title": "Chất lượng khử răng cưa (MSAA)",
                     "description": "Làm mịn các cạnh lởm chởm. Các giá trị cao hơn trông đẹp hơn nhưng có thể làm giảm hiệu suất."
