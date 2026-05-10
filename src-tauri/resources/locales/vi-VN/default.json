@@ -177,7 +177,7 @@
             }
         },
         "installations": {
-            "installations": "Cài đặt",
+            "installations": "Thiết lập cài đặt Roblox",
             "description": "Quản lý trình cài đặt Roblox của bạn.",
             "customVersion": {
                 "title": "Cài đặt phiên bản Roblox tùy chỉnh",
